@@ -1,35 +1,39 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-type MyProps = {
-  handleAddExpense: () => void
+interface MyProps {
+  handleAddExpense: () => void,
+  handleInputExpense: (e:React.ChangeEvent<HTMLFormElement>) => void
 }
 
-function ExpenseCard ({handleAddExpense}:MyProps ){
+function ExpenseCard ({handleAddExpense, handleInputExpense}:MyProps ){
   return (
     <Card>
       <Card.Body>
         <Card.Title>Add Expense</Card.Title>
-        <div>
-          <label>Title</label>
-          <input />
-        </div>
-        <div>
-          <label>Price</label>
-          <input />
-        </div>
-        <div>
-          <label>Categories</label>
+        <form onSubmit={handleInputExpense}>
           <div>
-
+            <label>Title</label>
+            <input name="title"/>
           </div>
-        </div>
-        <div>
-          <label>Color</label>
-          <input type="color"/>
-        </div>
-        <Button variant="primary" onClick={handleAddExpense}>Save</Button>
-      </Card.Body></Card>
+          <div>
+            <label>Price</label>
+            <input name="price"/>
+          </div>
+          <div>
+            <label>Categories</label>
+            <div>
+
+            </div>
+          </div>
+          <div>
+            <label>Color</label>
+            <input type="color" name="color"/>
+          </div>
+          <Button variant="primary" onClick={handleAddExpense} type="submit">Save</Button>
+        </form>
+      </Card.Body>
+      </Card>
   )
 }
 
