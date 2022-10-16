@@ -17,6 +17,36 @@
       "price": "gfh",
       "color": "#d1a8a8",
       "id": 3
+    },
+    {
+      "title": "gf",
+      "price": "fd",
+      "color": "#fbacac",
+      "id": 4
+    },
+    {
+      "title": "sdfsdf",
+      "price": "dsfsdf",
+      "color": "",
+      "id": 5
+    },
+    {
+      "title": "linh",
+      "price": "le",
+      "color": "#bc4949",
+      "id": 6
+    },
+    {
+      "title": "trung",
+      "price": "nguyen",
+      "color": "#c06d6d",
+      "id": 7
+    },
+    {
+      "title": "lap",
+      "price": "top",
+      "color": "#d68080",
+      "id": 8
     }
   ]
 }

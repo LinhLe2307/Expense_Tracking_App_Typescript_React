@@ -20,8 +20,6 @@ function ExpenseCard ({handleAddExpense}: MyProps ){
         color: ""
     })
 
- 
-
     const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement> ): void => {
         setInputExpense({
             ...inputExpense,
@@ -31,9 +29,12 @@ function ExpenseCard ({handleAddExpense}: MyProps ){
 
     const addSubmitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault()
+        handleAddExpense()
         axios.post("http://localhost:3010/notes", inputExpense)
             .then(res => console.log(res))
             .catch(err => console.log(err))
+        
+        window.location.reload()
     }
 
   return (
@@ -56,7 +57,7 @@ function ExpenseCard ({handleAddExpense}: MyProps ){
             <label>Color</label>
             <input required type="color" name="color" onChange={handleInputExpense}/>
           </div>
-          <button onClick={handleAddExpense} type="submit">Save</button>
+          <button type="submit">Save</button>
         </form>
       </Card.Body>
       </Card>

@@ -34,7 +34,7 @@ const HomePage = () => {
             <SingleCard expense={expense} key={expense.id}/>
         )}
         
-        <ExpenseCard handleAddExpense={handleAddExpense}/> 
+        {addExpense && <ExpenseCard handleAddExpense={handleAddExpense} />} 
         
     </div>
   )
