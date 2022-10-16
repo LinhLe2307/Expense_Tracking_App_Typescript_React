@@ -1,52 +1,16 @@
 {
   "notes": [
     {
-      "title": "jgh",
-      "price": "hj",
-      "color": "#ac9191",
+      "title": "Linh",
+      "price": "34",
+      "color": "#8c6969",
       "id": 1
     },
     {
-      "title": "xcv",
-      "price": "xcvc",
-      "color": "#e4b4b4",
+      "title": "red",
+      "price": "red",
+      "color": "#c58181",
       "id": 2
-    },
-    {
-      "title": "ghg",
-      "price": "gfh",
-      "color": "#d1a8a8",
-      "id": 3
-    },
-    {
-      "title": "gf",
-      "price": "fd",
-      "color": "#fbacac",
-      "id": 4
-    },
-    {
-      "title": "sdfsdf",
-      "price": "dsfsdf",
-      "color": "",
-      "id": 5
-    },
-    {
-      "title": "linh",
-      "price": "le",
-      "color": "#bc4949",
-      "id": 6
-    },
-    {
-      "title": "trung",
-      "price": "nguyen",
-      "color": "#c06d6d",
-      "id": 7
-    },
-    {
-      "title": "lap",
-      "price": "top",
-      "color": "#d68080",
-      "id": 8
     }
   ]
 }
