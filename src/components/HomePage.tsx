@@ -2,6 +2,7 @@ import SingleCard from "./Card/SingleCard";
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import ExpenseCard from "./Card/ExpenseCard";
+import axios from "axios"
 
 interface InputExpense {
     title: string,
@@ -21,23 +22,35 @@ const HomePage = () => {
         setAddExpense(prev => !prev)
     }
 
-    const handleInputExpense = (e: React.ChangeEvent<HTMLFormElement> ): void => {
-        setInputExpense({
+    const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement> ): void => {
+        setInputExpense(()=> {
+            return {
             ...inputExpense,
             [e.target.name] : e.target.value
-        })
-        console.log(inputExpense.title)
+        }})
+    }
+
+    const addSubmitHandler = (e: React.ChangeEvent<HTMLFormElement>):void => {
+        e.preventDefault()
+        axios.post("http://localhost:3010/notes", inputExpense)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 
   return (
     <div>
-        <div>{inputExpense.title}</div>
-        <div>{inputExpense.color}</div>
         {/* <SingleCard /> */}
         <Button variant="primary" onClick={handleAddExpense}>+</Button>
-        {addExpense && <ExpenseCard handleAddExpense={handleAddExpense}
-        handleInputExpense={handleInputExpense}
-        />}
+        <div>{inputExpense.title}</div>
+        <div>{inputExpense.color}</div>
+        <div>{inputExpense.price}</div>
+        {addExpense && 
+            <ExpenseCard 
+                handleAddExpense={handleAddExpense}
+                handleInputExpense={handleInputExpense}
+                addSubmitHandler={addSubmitHandler}
+            />
+        }
     </div>
   )
 }
