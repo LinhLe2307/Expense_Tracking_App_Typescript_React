@@ -1,34 +1,38 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import {ExpenseModel, ExpenseArrayModel} from "../models/reduxModels"
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import {ExpenseModel} from "../models/reduxModels";
 import { initializeExpense } from "../features/expense/expenseSlice";
-import ExpenseCard from "./Card/ExpenseForm";
+import {handleOpenAddExpense} from "../features/expense/expenseSlice";
+import ExpenseForm from "./Card/ExpenseForm";
 import SingleCard from './Card/SingleCard';
 
-
 const HomePage = () => {
-    const dispatch = useDispatch();
-    const openAddExpense = useSelector<ExpenseArrayModel, boolean>((state) => state.openAddExpense);
-    const openEditExpense = useSelector<ExpenseArrayModel, boolean>((state) => state.openEditExpense);
-    const expenseLists = useSelector<ExpenseArrayModel>((state) => state.expenseLists);
+    const dispatch = useAppDispatch();
+    const openAddExpense = useAppSelector((state) => state.expense.openAddExpense);
+    const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
+    const expenseLists = useAppSelector((state) => state.expense.expenseLists);
 
-    useEffect(()=> {
-        initializeExpense();
-    }, [dispatch])
+    useEffect(() => {
+    dispatch(initializeExpense());
+  }, [dispatch]);
 
+    useEffect(() => {
+        console.log(expenseLists)
+    })
   return (
     <div>
         
-        <Button type="button">+</Button> 
+        <Button type="button" onClick={() => dispatch(handleOpenAddExpense())}>+</Button> 
 
-        {expenseLists.map((expense: ExpenseModel) => 
+        {!openAddExpense && <ExpenseForm />} 
+        { expenseLists.map((expense: ExpenseModel) => 
             <SingleCard expense={expense} key={expense.id}/>
-        )}
         
-        {openAddExpense && <ExpenseCard />} 
+        )}
+   
 
-        {openEditExpense && <ExpenseCard />}
+        {/* {openEditExpense && <ExpenseCard />} */}
         
     </div>
   )

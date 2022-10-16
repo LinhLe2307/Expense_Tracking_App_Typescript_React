@@ -9,7 +9,7 @@ const initialExpenseState: ExpenseArrayModel = {
     openEditExpense: false
 }
 
-export const expeseSlice = createSlice({
+export const expenseSlice = createSlice({
     name: "expense",
     initialState: initialExpenseState,
     reducers: {
@@ -17,23 +17,23 @@ export const expeseSlice = createSlice({
             state.expenseLists = action.payload
         },
 
-        handleAddExpense: (state, action:PayloadAction<boolean>) => {
-            state.openAddExpense = action.payload
+        handleOpenAddExpense: (state) => {
+            state.openAddExpense = !state.openAddExpense
         },
 
-        handleEditExpense: (state, action: PayloadAction<boolean>) => {
-            state.openEditExpense = action.payload
+        handleOpenEditExpense: (state) => {
+            state.openEditExpense = !state.openEditExpense
         }
 
     }
 });
 
-export const initializeExpense = () : ThunkAction<void,RootState,unknown,AnyAction> => {
+export const initializeExpense = () : ThunkAction<void,RootState,never,AnyAction> => {
     return async (dispatch) => {
-        const expenseLists:ExpenseModel[] = await expenseServices.getAll();
-        dispatch(getExpenseList(expenseLists))
+        const expense:ExpenseModel[] = await expenseServices.getAll();
+        dispatch(getExpenseList(expense))
     }
 }
 
-export const {getExpenseList, handleAddExpense, handleEditExpense} = expeseSlice.actions;
-export default expeseSlice.reducer;
+export const {getExpenseList, handleOpenAddExpense, handleOpenEditExpense} = expenseSlice.actions;
+export default expenseSlice.reducer;

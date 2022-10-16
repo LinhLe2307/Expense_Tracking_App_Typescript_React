@@ -9,7 +9,7 @@ interface InputExpense {
     color: string
 }
 
-function ExpenseForm ({}){
+function ExpenseForm (){
 
     const [inputExpense, setInputExpense] = useState<InputExpense>({
         title: "",
