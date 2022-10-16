@@ -11,7 +11,7 @@ import SingleCard from './Card/SingleCard';
 const HomePage = () => {
     const dispatch = useAppDispatch();
     const openAddExpense = useAppSelector((state) => state.expense.openAddExpense);
-    const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
+     const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
     const expenseLists = useAppSelector((state) => state.expense.expenseLists);
 
     useEffect(() => {
@@ -23,14 +23,13 @@ const HomePage = () => {
             
             <Button type="button" onClick={() => dispatch(handleOpenAddExpense())}>+</Button> 
 
-            {openAddExpense && <ExpenseForm />} 
+            {openAddExpense && <ExpenseForm typeForm="add"/>} 
             { expenseLists.map((expense: ExpenseModel) => 
                 <SingleCard expense={expense} key={nanoid()}/>
             
             )}
-    
 
-            {/* {openEditExpense && <ExpenseCard />} */}
+            {openEditExpense && <ExpenseForm typeForm="edit"/>}
             
         </div>
   )

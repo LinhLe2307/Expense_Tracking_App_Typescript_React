@@ -23,6 +23,10 @@ export const expenseSlice = createSlice({
             expenseServices.postAll(action.payload)
         },
 
+        editExpense:(state, action) => {
+            state.expenseLists = action.payload
+        },
+
         handleOpenAddExpense: (state) => {
             state.openAddExpense = !state.openAddExpense
         },
@@ -41,5 +45,5 @@ export const initializeExpense = () => {
     }
 }
 
-export const {getExpenseList, addNewExpense, handleOpenAddExpense, handleOpenEditExpense} = expenseSlice.actions;
+export const {getExpenseList, addNewExpense, editExpense, handleOpenAddExpense, handleOpenEditExpense} = expenseSlice.actions;
 export default expenseSlice.reducer;
