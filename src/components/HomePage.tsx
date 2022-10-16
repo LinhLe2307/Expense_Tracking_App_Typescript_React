@@ -30,7 +30,7 @@ const HomePage = () => {
         }})
     }
 
-    const addSubmitHandler = (e: React.ChangeEvent<HTMLFormElement>):void => {
+    const addSubmitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault()
         axios.post("http://localhost:3010/notes", inputExpense)
             .then(res => console.log(res))

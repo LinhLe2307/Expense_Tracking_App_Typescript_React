@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 interface MyProps {
   handleAddExpense: () => void,
   handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void
-  addSubmitHandler: (e: React.ChangeEvent<HTMLFormElement>)=>void
+  addSubmitHandler: (e: React.FormEvent<HTMLFormElement>)=>void
 }
 
 function ExpenseCard ({handleAddExpense, handleInputExpense, addSubmitHandler}:MyProps ){
