@@ -1,11 +1,20 @@
 import Card from 'react-bootstrap/Card';
 
-const SingleCard = () => {
+
+interface MyProps {
+    expense: {
+    title: string,
+    price: number,
+    color: string
+}
+}
+
+const SingleCard = ({expense}: MyProps) => {
   return (
     <Card>
         <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>-$86</Card.Text>
+            <Card.Title>Title {expense.title}</Card.Title>
+            <Card.Text>Price {expense.price}</Card.Text>
         </Card.Body>
     </Card>
   )

@@ -1,5 +1,22 @@
 {
   "notes": [
-    
+    {
+      "title": "jgh",
+      "price": "hj",
+      "color": "#ac9191",
+      "id": 1
+    },
+    {
+      "title": "xcv",
+      "price": "xcvc",
+      "color": "#e4b4b4",
+      "id": 2
+    },
+    {
+      "title": "ghg",
+      "price": "gfh",
+      "color": "#d1a8a8",
+      "id": 3
+    }
   ]
 }

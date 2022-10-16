@@ -1,18 +1,46 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import { useEffect, useState } from "react";
+import axios from "axios"
 interface MyProps {
   handleAddExpense: () => void,
-  handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void
-  addSubmitHandler: (e: React.FormEvent<HTMLFormElement>)=>void
 }
 
-function ExpenseCard ({handleAddExpense, handleInputExpense, addSubmitHandler}:MyProps ){
+interface InputExpense {
+    title: string,
+    price: number,
+    color: string
+}
+
+function ExpenseCard ({handleAddExpense}: MyProps ){
+
+    const [inputExpense, setInputExpense] = useState<InputExpense>({
+        title: "",
+        price: 0,
+        color: ""
+    })
+
+ 
+
+    const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement> ): void => {
+        setInputExpense({
+            ...inputExpense,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const addSubmitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
+        e.preventDefault()
+        axios.post("http://localhost:3010/notes", inputExpense)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+    }
+
   return (
     <Card>
       <Card.Body>
         <Card.Title>Add Expense</Card.Title>
-        <form onSubmit={addSubmitHandler}>
+        <form onSubmit={(e) => addSubmitHandler(e)}>
           <div>
             <label>Title</label>
             <input required name="title" type="text" onChange={handleInputExpense}/>
@@ -28,7 +56,7 @@ function ExpenseCard ({handleAddExpense, handleInputExpense, addSubmitHandler}:M
             <label>Color</label>
             <input required type="color" name="color" onChange={handleInputExpense}/>
           </div>
-          <Button variant="primary" onClick={handleAddExpense} type="submit">Save</Button>
+          <button onClick={handleAddExpense} type="submit">Save</button>
         </form>
       </Card.Body>
       </Card>
