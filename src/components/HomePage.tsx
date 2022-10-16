@@ -1,34 +1,17 @@
 import Button from 'react-bootstrap/Button';
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import {ExpenseModel, ExpenseArrayModel} from "../models/reduxModels"
 import { initializeExpense } from "../features/expense/expenseSlice";
 import ExpenseCard from "./Card/ExpenseForm";
 import SingleCard from './Card/SingleCard';
-import { useDispatch } from 'react-redux';
 
-interface ExpenseList {
-    title: string,
-    price: number,
-    color: string,
-    id: number
-}
 
 const HomePage = () => {
-    const [addExpense, setAddExpense] = useState(false);
-    const [editExpense, setEditExpense] = useState(false);
-
-    const dispatch = useDispatch()
-
-    const [expenseLists, setExpenseLists] = useState<ExpenseList[]>([]);
-
-    const handleAddExpense = ():void => {
-        setAddExpense(prev => !prev)
-    }
-
-    const handleEditExpense = () => {
-        setEditExpense(prev => !prev)
-    }
-
+    const dispatch = useDispatch();
+    const openAddExpense = useSelector<ExpenseArrayModel, boolean>((state) => state.openAddExpense);
+    const openEditExpense = useSelector<ExpenseArrayModel, boolean>((state) => state.openEditExpense);
+    const expenseLists = useSelector<ExpenseArrayModel>((state) => state.expenseLists);
 
     useEffect(()=> {
         initializeExpense();
@@ -37,15 +20,15 @@ const HomePage = () => {
   return (
     <div>
         
-        <Button type="button" onClick={handleAddExpense}>+</Button> 
+        <Button type="button">+</Button> 
 
-        {expenseLists.map((expense) => 
-            <SingleCard expense={expense} key={expense.id} handleEditExpense={handleEditExpense}/>
+        {expenseLists.map((expense: ExpenseModel) => 
+            <SingleCard expense={expense} key={expense.id}/>
         )}
         
-        {addExpense && <ExpenseCard handleAddExpense={handleAddExpense} />} 
+        {openAddExpense && <ExpenseCard />} 
 
-        {editExpense && <ExpenseCard handleAddExpense={handleAddExpense} />}
+        {openEditExpense && <ExpenseCard />}
         
     </div>
   )

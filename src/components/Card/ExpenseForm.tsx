@@ -2,9 +2,6 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import axios from "axios"
-interface MyProps {
-  handleAddExpense: () => void,
-}
 
 interface InputExpense {
     title: string,
@@ -12,7 +9,7 @@ interface InputExpense {
     color: string
 }
 
-function ExpenseForm ({handleAddExpense}: MyProps ){
+function ExpenseForm ({}){
 
     const [inputExpense, setInputExpense] = useState<InputExpense>({
         title: "",
@@ -29,7 +26,6 @@ function ExpenseForm ({handleAddExpense}: MyProps ){
 
     const addSubmitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault()
-        handleAddExpense()
         axios.post("http://localhost:3010/notes", inputExpense)
             .then(res => console.log(res))
             .catch(err => console.log(err))
