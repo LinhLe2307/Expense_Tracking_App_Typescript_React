@@ -12,7 +12,7 @@ interface InputExpense {
     color: string
 }
 
-function ExpenseCard ({handleAddExpense}: MyProps ){
+function ExpenseForm ({handleAddExpense}: MyProps ){
 
     const [inputExpense, setInputExpense] = useState<InputExpense>({
         title: "",
@@ -40,7 +40,7 @@ function ExpenseCard ({handleAddExpense}: MyProps ){
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Add Expense</Card.Title>
+        <Card.Title>Add/Edit Expense</Card.Title>
         <form onSubmit={(e) => addSubmitHandler(e)}>
           <div>
             <label>Title</label>
@@ -57,11 +57,11 @@ function ExpenseCard ({handleAddExpense}: MyProps ){
             <label>Color</label>
             <input required type="color" name="color" onChange={handleInputExpense}/>
           </div>
-          <button type="submit">Save</button>
+          <Button type="submit">Save</Button>
         </form>
       </Card.Body>
       </Card>
   )
 }
 
-export default ExpenseCard
+export default ExpenseForm
