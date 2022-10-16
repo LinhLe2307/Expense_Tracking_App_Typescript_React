@@ -14,27 +14,24 @@ const HomePage = () => {
     const expenseLists = useAppSelector((state) => state.expense.expenseLists);
 
     useEffect(() => {
-    dispatch(initializeExpense());
-  }, [dispatch]);
+        dispatch(initializeExpense());
+    }, [dispatch]);
 
-    useEffect(() => {
-        console.log(expenseLists)
-    })
-  return (
-    <div>
-        
-        <Button type="button" onClick={() => dispatch(handleOpenAddExpense())}>+</Button> 
+    return (
+        <div>
+            
+            <Button type="button" onClick={() => dispatch(handleOpenAddExpense())}>+</Button> 
 
-        {!openAddExpense && <ExpenseForm />} 
-        { expenseLists.map((expense: ExpenseModel) => 
-            <SingleCard expense={expense} key={expense.id}/>
-        
-        )}
-   
+            {!openAddExpense && <ExpenseForm />} 
+            { expenseLists.map((expense: ExpenseModel) => 
+                <SingleCard expense={expense} key={expense.id}/>
+            
+            )}
+    
 
-        {/* {openEditExpense && <ExpenseCard />} */}
-        
-    </div>
+            {/* {openEditExpense && <ExpenseCard />} */}
+            
+        </div>
   )
 }
 

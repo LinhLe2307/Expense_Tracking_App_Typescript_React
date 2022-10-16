@@ -1,4 +1,5 @@
 import {createSlice, ThunkAction, AnyAction, PayloadAction} from "@reduxjs/toolkit";
+import {ThunkDispatch as Dispatch} from 'redux-thunk';
 import { RootState } from "../../app/store";
 import expenseServices from "../../services/expenseAPI";
 import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
@@ -28,8 +29,8 @@ export const expenseSlice = createSlice({
     }
 });
 
-export const initializeExpense = () : ThunkAction<void,RootState,never,AnyAction> => {
-    return async (dispatch) => {
+export const initializeExpense = () => {
+    return async (dispatch: Dispatch<any, any, any>) => {
         const expense:ExpenseModel[] = await expenseServices.getAll();
         dispatch(getExpenseList(expense))
     }
