@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
+import { nanoid } from 'nanoid'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {ExpenseModel} from "../models/reduxModels";
 import { initializeExpense } from "../features/expense/expenseSlice";
@@ -22,9 +23,9 @@ const HomePage = () => {
             
             <Button type="button" onClick={() => dispatch(handleOpenAddExpense())}>+</Button> 
 
-            {!openAddExpense && <ExpenseForm />} 
+            {openAddExpense && <ExpenseForm />} 
             { expenseLists.map((expense: ExpenseModel) => 
-                <SingleCard expense={expense} key={expense.id}/>
+                <SingleCard expense={expense} key={nanoid()}/>
             
             )}
     

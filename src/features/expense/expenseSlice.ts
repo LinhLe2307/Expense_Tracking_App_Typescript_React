@@ -1,6 +1,5 @@
-import {createSlice, ThunkAction, AnyAction, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
-import { RootState } from "../../app/store";
 import expenseServices from "../../services/expenseAPI";
 import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
 
@@ -16,6 +15,12 @@ export const expenseSlice = createSlice({
     reducers: {
         getExpenseList: (state, action: PayloadAction<ExpenseModel[]>) => {
             state.expenseLists = action.payload
+        },
+
+        addNewExpense : (state, action: PayloadAction<ExpenseModel>) => {
+            state.expenseLists = state.expenseLists.concat(action.payload);
+
+            expenseServices.postAll(action.payload)
         },
 
         handleOpenAddExpense: (state) => {
@@ -36,5 +41,5 @@ export const initializeExpense = () => {
     }
 }
 
-export const {getExpenseList, handleOpenAddExpense, handleOpenEditExpense} = expenseSlice.actions;
+export const {getExpenseList, addNewExpense, handleOpenAddExpense, handleOpenEditExpense} = expenseSlice.actions;
 export default expenseSlice.reducer;

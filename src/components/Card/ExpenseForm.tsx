@@ -1,7 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { useEffect, useState } from "react";
-import axios from "axios"
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { addNewExpense } from '../../features/expense/expenseSlice';
 
 interface InputExpense {
     title: string,
@@ -10,6 +11,8 @@ interface InputExpense {
 }
 
 function ExpenseForm (){
+    const openAddExpense = useAppSelector((state) => state.expense.openAddExpense);
+    const dispatch = useAppDispatch()
 
     const [inputExpense, setInputExpense] = useState<InputExpense>({
         title: "",
@@ -25,12 +28,9 @@ function ExpenseForm (){
     }
 
     const addSubmitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
-        e.preventDefault()
-        axios.post("http://localhost:3010/notes", inputExpense)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        e.preventDefault();
+        dispatch(addNewExpense(inputExpense))
         
-        window.location.reload()
     }
 
   return (
@@ -44,7 +44,7 @@ function ExpenseForm (){
           </div>
           <div>
             <label>Price</label>
-            <input required name="price"  type="text" onChange={handleInputExpense}/>
+            <input required name="price"  type="number" onChange={handleInputExpense}/>
           </div>
           <div>
             <label>Categories</label>
