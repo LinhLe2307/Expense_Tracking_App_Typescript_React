@@ -1,6 +1,7 @@
 export interface ExpenseModel {
     title: string,
     price: number,
+    description: string,
     categories: string[],
     color: string,
     id?: number

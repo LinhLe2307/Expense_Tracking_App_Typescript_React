@@ -35,7 +35,7 @@ export const expenseSlice = createSlice({
         },
 
         deleteExpense: (state) => {
-            state.expenseLists = state.expenseLists.filter(expense => expense.id !== state.editId)
+            state.expenseLists = state.expenseLists.filter(expense => expense.id === state.editId)
             
             expenseServices.deleteAxios(state.editId)
         },

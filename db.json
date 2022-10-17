@@ -1,23 +1,32 @@
 {
   "notes": [
     {
-      "title": "2",
-      "price": "2",
-      "categories": [
-        "Fuel"
-      ],
-      "color": "#6d3abb",
+      "title": "3",
+      "price": "3",
+      "description": "",
+      "categories": [],
+      "color": "#8168a6",
       "id": 1
     },
     {
-      "title": "books",
-      "price": "1",
+      "title": "6",
+      "price": "6",
+      "description": "",
       "categories": [
-        "Communication",
-        "Education"
+        "Accomodation"
       ],
-      "color": "#9373c4",
+      "color": "#6d38bc",
       "id": 2
+    },
+    {
+      "title": "5",
+      "price": "5",
+      "description": "",
+      "categories": [
+        "Communication"
+      ],
+      "color": "#8a4ee4",
+      "id": 3
     }
   ]
 }

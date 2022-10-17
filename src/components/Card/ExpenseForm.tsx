@@ -1,16 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useState } from "react";
 import { useAppDispatch } from '../../app/hooks';
 import { addNewExpense, editExpense, deleteExpense } from '../../features/expense/expenseSlice';
 import {ExpenseModel} from "../../models/reduxModels";
-import { Container, Dropdown, Form, Navbar, NavDropdown } from 'react-bootstrap';
+import { Dropdown, Form } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
-
-import Nav from 'react-bootstrap/Nav';
 
 interface MyProps {
   typeForm: string,
@@ -26,6 +23,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const [inputExpense, setInputExpense] = useState<ExpenseModel>({
         title: "",
         price: 0,
+        description: "", 
         categories: [],
         color: ""
     })
@@ -98,6 +96,22 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
             </Form.Group>
 
             <Form.Group className="mb-3">
+              <InputGroup className="mb-3">
+                <FloatingLabel
+                  controlId="descriptionInput"
+                  label="Enter description"
+                >
+                  <Form.Control 
+                    as="textarea"
+                    name="description"  
+                    type="text" 
+                    placeholder="Enter Price"
+                    onChange={handleInputExpense}/>
+                </FloatingLabel>
+                </InputGroup>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
               <Form.Label>Categories</Form.Label>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -118,10 +132,6 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
                   </Dropdown.Menu>
                 
               </Dropdown>
-              {/* <ButtonGroup aria-label="Basic example">
-                {["Communication", "Education", "Accomodation", "Fuel"]
-                .map(item => <Button variant="secondary" key={item}>{item}</Button>)} 
-              </ButtonGroup>               */}
             </Form.Group>
               {selectedCategories.map(category => category)}
             <Form.Group className="mb-3">
@@ -136,26 +146,14 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
             </Form.Group>
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={()=>{
-                handleClose();
-                window.location.reload()
-              }} type="button">
+              <Button variant="secondary" onClick={()=>handleClose()
+              } type="button">
                 Close
               </Button>
               <Button variant="primary" type="submit">Submit</Button>
             </Modal.Footer>
             </Row>
           </Form>
-            {
-              typeForm === "edit" 
-              ? <Button variant="secondary" onClick={()=>{
-                    dispatch(deleteExpense());
-                    window.location.reload()
-                  }} type="button">
-                Delete
-              </Button>
-              : ""
-            }  
         </Modal.Body>
       </Modal>
     </>
