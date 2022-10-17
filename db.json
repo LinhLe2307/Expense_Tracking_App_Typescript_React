@@ -1,15 +1,22 @@
 {
   "notes": [
     {
-      "title": "r4",
-      "price": "4",
-      "color": "#bb8b8b",
+      "title": "2",
+      "price": "2",
+      "categories": [
+        "Fuel"
+      ],
+      "color": "#6d3abb",
       "id": 1
     },
     {
-      "title": "2",
-      "price": "2",
-      "color": "#b27676",
+      "title": "books",
+      "price": "1",
+      "categories": [
+        "Communication",
+        "Education"
+      ],
+      "color": "#9373c4",
       "id": 2
     }
   ]

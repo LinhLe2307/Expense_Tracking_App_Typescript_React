@@ -1,6 +1,7 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useState } from "react";
 import { useAppDispatch } from '../../app/hooks';
 import { addNewExpense, editExpense, deleteExpense } from '../../features/expense/expenseSlice';
@@ -25,13 +26,15 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const [inputExpense, setInputExpense] = useState<ExpenseModel>({
         title: "",
         price: 0,
+        categories: [],
         color: ""
     })
 
     const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
         setInputExpense({
             ...inputExpense,
-            [e.target.name] : e.target.value
+            [e.target.name] : e.target.value,
+            categories: selectedCategories
         })
     }
 
@@ -63,38 +66,57 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
           <Form onSubmit={(e) => submitHandler(e, typeForm)}>
              <Row className="mb-3">
             <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
-              <Form.Control 
-                required 
-                name="title" 
-                type="text" 
-                placeholder="Please input title"
-                onChange={handleInputExpense}/>
+              <FloatingLabel
+                controlId="titleInput"
+                label="Enter title"
+              >
+                <Form.Control 
+                  required 
+                  name="title" 
+                  type="text" 
+                  placeholder="Enter Title"
+                  onChange={handleInputExpense}/>
+              </FloatingLabel>
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Price</Form.Label>
-              <InputGroup.Text>$</InputGroup.Text>
-              <Form.Control 
-                required 
-                name="price"  
-                type="number" 
-                placeholder="Enter Price"
-                onChange={handleInputExpense}/>
-              <InputGroup.Text>.00</InputGroup.Text>
+              <InputGroup className="mb-3">
+                <InputGroup.Text>$</InputGroup.Text>
+              <FloatingLabel
+                controlId="priceInput"
+                label="Enter Price"
+              >
+                <Form.Control 
+                  required 
+                  name="price"  
+                  type="number" 
+                  placeholder="Enter Price"
+                  onChange={handleInputExpense}/>
+              </FloatingLabel>
+                <InputGroup.Text>.00</InputGroup.Text>
+              </InputGroup>
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Categories</Form.Label>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Dropdown Button
+                  Choose category
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu >
                   {["Communication", "Education", "Accomodation", "Fuel"]
-                .map(item => <Dropdown.Item onClick={()=> handleSelectedCategories(item)}>{item}</Dropdown.Item>)} 
-                </Dropdown.Menu>
+                    .map(item => (
+                        <Dropdown.Item 
+                          onClick={()=> handleSelectedCategories(item)}
+                          eventKey={item}
+                          key={item}
+                        >
+                          {item}
+                        </Dropdown.Item>
+                  ))} 
+                  </Dropdown.Menu>
+                
               </Dropdown>
               {/* <ButtonGroup aria-label="Basic example">
                 {["Communication", "Education", "Accomodation", "Fuel"]
@@ -114,7 +136,10 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
             </Form.Group>
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose} type="button">
+              <Button variant="secondary" onClick={()=>{
+                handleClose();
+                window.location.reload()
+              }} type="button">
                 Close
               </Button>
               <Button variant="primary" type="submit">Submit</Button>
@@ -123,7 +148,10 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
           </Form>
             {
               typeForm === "edit" 
-              ? <Button variant="secondary" onClick={()=>dispatch(deleteExpense())} type="button">
+              ? <Button variant="secondary" onClick={()=>{
+                    dispatch(deleteExpense());
+                    window.location.reload()
+                  }} type="button">
                 Delete
               </Button>
               : ""
