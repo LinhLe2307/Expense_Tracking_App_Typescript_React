@@ -12,4 +12,10 @@ const postAll = (inputExpense:ExpenseModel) => {
     .catch(err => console.log(err))
 }
 
-export default {getAll, postAll}
+const putExpense = (id:number, editExpense:ExpenseModel) => {
+    axios.put(`http://localhost:3010/notes/${id}`, editExpense)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
+
+export default {getAll, postAll, putExpense}

@@ -18,7 +18,7 @@ const SingleCard = ({expense}: MyProps) => {
             <Card.Title>Title {expense.title}</Card.Title>
             <Card.Text>Price {expense.price}</Card.Text>
             <Card.Text>id {expense.id}</Card.Text>
-            <Button onClick={()=>dispatch(handleOpenEditExpense())}>...</Button>
+            <Button onClick={()=>dispatch(handleOpenEditExpense(expense.id))}>...</Button>
         </Card.Body>
     </Card>
   )

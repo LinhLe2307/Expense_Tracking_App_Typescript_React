@@ -26,13 +26,14 @@ function ExpenseForm ({typeForm}: MyProps){
         })
     }
 
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>, type: string):void => {
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>, typeForm: string):void => {
         e.preventDefault();
-        if(type==="add") {
+        if(typeForm==="add") {
           dispatch(addNewExpense(inputExpense))
         } else {
           dispatch(editExpense(inputExpense))
         }
+        window.location.reload()
     }
 
   return (

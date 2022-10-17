@@ -8,7 +8,8 @@ export interface ExpenseModel {
 export interface ExpenseArrayModel {
     expenseLists: ExpenseModel[],
     openAddExpense: boolean,
-    openEditExpense: boolean
+    openEditExpense: boolean,
+    editId: number
 }
 
 export interface ExpenseFormType {

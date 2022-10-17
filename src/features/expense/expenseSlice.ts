@@ -6,7 +6,8 @@ import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
 const initialExpenseState: ExpenseArrayModel = {
     expenseLists: [],
     openAddExpense: false,
-    openEditExpense: false
+    openEditExpense: false,
+    editId: 0,
 }
 
 export const expenseSlice = createSlice({
@@ -18,20 +19,28 @@ export const expenseSlice = createSlice({
         },
 
         addNewExpense : (state, action: PayloadAction<ExpenseModel>) => {
-            state.expenseLists = state.expenseLists.concat(action.payload);
-
-            expenseServices.postAll(action.payload)
+            expenseServices.postAll(action.payload);
+            state.expenseLists = state.expenseLists.concat(action.payload)
         },
 
         editExpense:(state, action) => {
-            state.expenseLists = action.payload
+            const editExense = action.payload;
+            const findIndex = state.expenseLists.find(expense => expense.id === state.editId)
+            if(findIndex !== undefined) {
+                const indexElement = state.expenseLists.indexOf(findIndex);
+                state.expenseLists.splice(indexElement, 0, editExense);
+                state.expenseLists =  state.expenseLists
+
+            }
+            expenseServices.putExpense(state.editId, editExense)
         },
 
         handleOpenAddExpense: (state) => {
             state.openAddExpense = !state.openAddExpense
         },
 
-        handleOpenEditExpense: (state) => {
+        handleOpenEditExpense: (state, action) => {
+            state.editId = action.payload
             state.openEditExpense = !state.openEditExpense
         }
 
