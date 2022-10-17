@@ -18,4 +18,11 @@ const putExpense = (id:number, editExpense:ExpenseModel) => {
     .catch(err => console.log(err))
 }
 
-export default {getAll, postAll, putExpense}
+
+const deleteAxios = (id:number) => {
+    axios.delete(`http://localhost:3010/notes/${id}`)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
+
+export default {getAll, postAll, putExpense, deleteAxios}

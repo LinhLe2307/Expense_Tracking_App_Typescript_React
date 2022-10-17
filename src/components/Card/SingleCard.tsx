@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ExpenseModel } from '../../models/reduxModels';
@@ -13,11 +13,11 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
   const dispatch = useAppDispatch();
   const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
   return (
-    <Card>
+    <Card className="mb-2">
         <Card.Body>
             <div style={{backgroundColor: `${expense.color}`, width: "5rem", height: "5rem"}}></div>
             <Card.Title>Title {expense.title}</Card.Title>
-            <Card.Text>Price {expense.price}</Card.Text>
+            <Card.Text>${expense.price}</Card.Text>
             <Card.Text>id {expense.id}</Card.Text>
             <Button onClick={()=> {
               dispatch(handleOpenEditExpense(expense.id));

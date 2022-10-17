@@ -22,7 +22,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="dark" onClick={handleShow} type="button">
             +
             </Button>
 
