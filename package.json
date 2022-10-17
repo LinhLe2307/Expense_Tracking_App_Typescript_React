@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-calendar": "^3.5.3",
     "json-server": "^0.17.0"
   }
 }

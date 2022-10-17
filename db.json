@@ -7,22 +7,10 @@
       "categories": [
         "Communication",
         "Accomodation",
-        "Education"
-      ],
-      "color": "#813fe4",
-      "id": 1
-    },
-    {
-      "title": "5",
-      "price": "5",
-      "description": "5",
-      "categories": [
-        "Communication",
-        "Accomodation",
         "Fuel"
       ],
-      "color": "#f35353",
-      "id": 2
+      "color": "#dda6a6",
+      "id": 1
     }
   ]
 }
