@@ -7,7 +7,6 @@ export interface ExpenseModel {
 
 export interface ExpenseArrayModel {
     expenseLists: ExpenseModel[],
-    openAddExpense: boolean,
     openEditExpense: boolean,
     editId: number
 }

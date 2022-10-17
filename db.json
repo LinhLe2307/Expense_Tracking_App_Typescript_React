@@ -1,4 +1,22 @@
 {
   "notes": [
+    {
+      "title": "Linh",
+      "price": "23",
+      "color": "#d75656",
+      "id": 1
+    },
+    {
+      "title": "linh",
+      "price": "1",
+      "color": "#543030",
+      "id": 2
+    },
+    {
+      "title": "linh",
+      "price": "34",
+      "color": "",
+      "id": 3
+    }
   ]
 }

@@ -1,18 +1,20 @@
 import Button from 'react-bootstrap/Button';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from 'nanoid'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {ExpenseModel} from "../models/reduxModels";
 import { initializeExpense } from "../features/expense/expenseSlice";
-import {handleOpenAddExpense} from "../features/expense/expenseSlice";
 import ExpenseForm from "./Card/ExpenseForm";
 import SingleCard from './Card/SingleCard';
 
 const HomePage = () => {
     const dispatch = useAppDispatch();
-    const openAddExpense = useAppSelector((state) => state.expense.openAddExpense);
      const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
     const expenseLists = useAppSelector((state) => state.expense.expenseLists);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         dispatch(initializeExpense());
@@ -20,16 +22,26 @@ const HomePage = () => {
 
     return (
         <div>
-            
-            <Button type="button" onClick={() => dispatch(handleOpenAddExpense())}>+</Button> 
+            <Button variant="primary" onClick={handleShow}>
+            +
+            </Button>
 
-            {openAddExpense && <ExpenseForm typeForm="add"/>} 
             { expenseLists.map((expense: ExpenseModel) => 
-                <SingleCard expense={expense} key={nanoid()}/>
-            
+                <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}/>
             )}
 
-            {openEditExpense && <ExpenseForm typeForm="edit"/>}
+            {openEditExpense ?
+                <ExpenseForm 
+                    typeForm="edit"
+                    handleClose={handleClose}
+                    show={show}
+                />
+                : <ExpenseForm 
+                    typeForm="add" 
+                    handleClose={handleClose}
+                    show={show}
+                />
+            }
             
         </div>
   )

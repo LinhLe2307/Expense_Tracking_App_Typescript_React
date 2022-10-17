@@ -5,7 +5,6 @@ import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
 
 const initialExpenseState: ExpenseArrayModel = {
     expenseLists: [],
-    openAddExpense: false,
     openEditExpense: false,
     editId: 0,
 }
@@ -35,10 +34,6 @@ export const expenseSlice = createSlice({
             expenseServices.putExpense(state.editId, editExense)
         },
 
-        handleOpenAddExpense: (state) => {
-            state.openAddExpense = !state.openAddExpense
-        },
-
         handleOpenEditExpense: (state, action) => {
             state.editId = action.payload
             state.openEditExpense = !state.openEditExpense
@@ -54,5 +49,5 @@ export const initializeExpense = () => {
     }
 }
 
-export const {getExpenseList, addNewExpense, editExpense, handleOpenAddExpense, handleOpenEditExpense} = expenseSlice.actions;
+export const {getExpenseList, addNewExpense, editExpense, handleOpenEditExpense} = expenseSlice.actions;
 export default expenseSlice.reducer;

@@ -5,10 +5,11 @@ import { ExpenseModel } from '../../models/reduxModels';
 import {handleOpenEditExpense} from "../../features/expense/expenseSlice";
 
 interface MyProps {
-  expense: ExpenseModel
+  expense: ExpenseModel,
+  handleShow: ()=>void
 }
  
-const SingleCard = ({expense}: MyProps) => {
+const SingleCard = ({expense, handleShow}: MyProps) => {
   const dispatch = useAppDispatch();
   const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
   return (
@@ -18,7 +19,10 @@ const SingleCard = ({expense}: MyProps) => {
             <Card.Title>Title {expense.title}</Card.Title>
             <Card.Text>Price {expense.price}</Card.Text>
             <Card.Text>id {expense.id}</Card.Text>
-            <Button onClick={()=>dispatch(handleOpenEditExpense(expense.id))}>...</Button>
+            <Button onClick={()=> {
+              dispatch(handleOpenEditExpense(expense.id));
+              handleShow()
+            }}>...</Button>
         </Card.Body>
     </Card>
   )
