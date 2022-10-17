@@ -34,10 +34,11 @@ export const expenseSlice = createSlice({
             expenseServices.putExpense(state.editId, editExense)
         },
 
-        deleteExpense: (state) => {
-            state.expenseLists = state.expenseLists.filter(expense => expense.id === state.editId)
+        deleteExpense: (state, action) => {
+            const deleteId = action.payload;
+            state.expenseLists = state.expenseLists.filter(expense => expense.id !== deleteId)
             
-            expenseServices.deleteAxios(state.editId)
+            expenseServices.deleteAxios(deleteId)
         },
 
         handleOpenEditExpense: (state, action) => {

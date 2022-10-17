@@ -1,13 +1,17 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAppDispatch } from '../../app/hooks';
-import { addNewExpense, editExpense, deleteExpense } from '../../features/expense/expenseSlice';
+import { addNewExpense, editExpense } from '../../features/expense/expenseSlice';
 import {ExpenseModel} from "../../models/reduxModels";
 import { Dropdown, Form } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import CloseButton from 'react-bootstrap/CloseButton';
+import { nanoid } from 'nanoid';
 
 interface MyProps {
   typeForm: string,
@@ -26,7 +30,17 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
         description: "", 
         categories: [],
         color: ""
-    })
+    });
+
+    const deleteCategory = (deleteItem: string) => {
+      setSelectedCategories(prev => prev.filter(category => category !== deleteItem))
+    }
+
+    const handleSelectedCategories = (category: string) => {
+      if(selectedCategories.indexOf(category) === -1) {
+        setSelectedCategories(prev => prev.concat(category))
+      }
+    }
 
     const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
         setInputExpense({
@@ -36,9 +50,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
         })
     }
 
-    const handleSelectedCategories = (category: string) => {
-      setSelectedCategories(prev => prev.concat(category))
-    }
+
     const submitHandler = (e: React.FormEvent<HTMLFormElement>, typeForm: string):void => {
         e.preventDefault();
         if(typeForm === "add") {
@@ -61,8 +73,8 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
           <Modal.Title>Modal title</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={(e) => submitHandler(e, typeForm)}>
-             <Row className="mb-3">
+          <Form onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitHandler(e, typeForm)}>
+            <Row className="mb-3">
             <Form.Group className="mb-3">
               <FloatingLabel
                 controlId="titleInput"
@@ -133,7 +145,15 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
                 
               </Dropdown>
             </Form.Group>
-              {selectedCategories.map(category => category)}
+            
+            {selectedCategories.map((category) => 
+              <div key={category}>{category}
+                <CloseButton 
+                  onClick={()=>deleteCategory(category)}
+                />
+              </div>
+            )}
+
             <Form.Group className="mb-3">
               <Form.Label>Color</Form.Label>
               <Form.Control 
@@ -141,13 +161,15 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
                 type="color" 
                 name="color" 
                 title="Choose your color"
-                defaultValue="#563d7c"
                 onChange={handleInputExpense}/>
             </Form.Group>
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={()=>handleClose()
-              } type="button">
+              <Button 
+                variant="secondary"
+                onClick={()=>handleClose()} 
+                type="button"
+              >
                 Close
               </Button>
               <Button variant="primary" type="submit">Submit</Button>

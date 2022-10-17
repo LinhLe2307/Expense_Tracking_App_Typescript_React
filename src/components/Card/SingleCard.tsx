@@ -22,19 +22,19 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
               {expense.categories.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
             </ButtonGroup>
             <Card.Text>{expense.description}</Card.Text>
+            <Card.Text>id {expense.id}</Card.Text>
             <Card.Title>${expense.price}</Card.Title>
               <Dropdown>
-                <Dropdown.Toggle variant="light" id="dropdown-basic"
+                <Dropdown.Toggle 
+                  variant="light" 
+                  id="dropdown-basic"
                 >
                   ...
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu >
                   <Dropdown.Item
-                    onClick={()=>{
-                    dispatch(deleteExpense());
-                    // window.location.reload()
-                  }}
+                    onClick={()=>dispatch(deleteExpense(expense.id))}
                   >
                     Delete
                   </Dropdown.Item>
