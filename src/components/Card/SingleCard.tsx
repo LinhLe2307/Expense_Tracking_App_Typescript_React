@@ -45,8 +45,15 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
                 <Dropdown.Menu >
                   <Dropdown.Item
                     onClick={()=> {
-                      dispatch(deleteExpense(expense.id));
-                      // dispatch(removeTransaction(expense.categories));
+                      Promise.all([
+                        dispatch(deleteExpense(expense.id)),
+                        dispatch(removeTransaction(
+                          {
+                            selectedCategories: expense.categories,
+                            inputPrice: expense.price,
+                          }
+                        ))
+                      ])
                     }}
                   >
                     Delete

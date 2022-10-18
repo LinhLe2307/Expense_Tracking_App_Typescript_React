@@ -11,7 +11,7 @@ const categoryTransactions = (
     const selectedCategories = action.payload.selectedCategories;
 
     const inputPrice = +action.payload.inputPrice;
-        selectedCategories.forEach(
+        Promise.all(selectedCategories.map(
             category => {
                 const findIndex = state.categoriesList.find(categoryItem => categoryItem.categoryTitle.indexOf(category) !== -1); 
                     if(findIndex !== undefined) {
@@ -25,7 +25,7 @@ const categoryTransactions = (
                         }
                         categoriesServices.putAxios(transactions.id, transactions);
             }
-    })
+    }))
 };
 
 export {categoryTransactions}

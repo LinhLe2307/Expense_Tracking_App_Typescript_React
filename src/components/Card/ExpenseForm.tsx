@@ -56,18 +56,20 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const submitHandler = (e: React.FormEvent<HTMLFormElement>, typeForm: string):void => {
         e.preventDefault();
         if(typeForm === "add") {
-          dispatch(addNewExpense(inputExpense))
+          Promise.all([
+            dispatch(addNewExpense(inputExpense)),
+            dispatch(addNewTransaction(
+            {
+              selectedCategories: selectedCategories,
+              inputPrice: inputExpense.price,
+            }
+            ))
+          ])
           
         } else {
-          dispatch(editExpense(inputExpense))
+            dispatch(editExpense(inputExpense))
         }
 
-        dispatch(addNewTransaction(
-        {
-          selectedCategories: selectedCategories,
-          inputPrice: inputExpense.price,
-        }
-        ));
         
         window.location.reload()
     }
