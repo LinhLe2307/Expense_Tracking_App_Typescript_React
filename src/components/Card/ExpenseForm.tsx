@@ -41,8 +41,6 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
       const inputCategory = category.categoryTitle;
       if(selectedCategories.indexOf(inputCategory) === -1) {
         setSelectedCategories(prev => prev.concat(category.categoryTitle))
-
-        dispatch(addNewTransaction(inputCategory))
       }
     }
 
@@ -59,10 +57,13 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
         e.preventDefault();
         if(typeForm === "add") {
           dispatch(addNewExpense(inputExpense))
+          
         } else {
           dispatch(editExpense(inputExpense))
         }
-        // window.location.reload()
+
+        selectedCategories.map(category => dispatch(addNewTransaction(category)))
+        window.location.reload()
     }
 
     useEffect(()=>{

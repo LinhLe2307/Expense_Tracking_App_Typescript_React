@@ -31,6 +31,21 @@ export const categoriesSlice = createSlice({
                 transactions.categoryTransactions++;        
                 categoriesServices.putAxios(transactions.id, transactions);
             }
+        },
+
+        deleteTransaction: (state, action: PayloadAction<string[]>):void => {
+            const inputTransactions = action.payload;
+            inputTransactions.forEach(
+                category => {
+                    const findIndex = state.categoriesList.find(transactionItem => transactionItem.categoryTitle.indexOf(category) !== -1); 
+                    if(findIndex !== undefined) {
+                        let transaction = JSON.parse(JSON.stringify(findIndex));
+                        transaction.categoryTransactions--;        
+                        categoriesServices.putAxios(transaction.id, transaction);
+                    }
+                }
+            )
+            
         }
     } 
 });
@@ -42,5 +57,5 @@ export const initializeCategories = () => {
     }
 }
 
-export const {getCategoriesList, addNewCategory, addNewTransaction} = categoriesSlice.actions;
+export const {getCategoriesList, addNewCategory, addNewTransaction, deleteTransaction} = categoriesSlice.actions;
 export default categoriesSlice.reducer;

@@ -1,16 +1,5 @@
 {
-  "notes": [
-    {
-      "title": "first",
-      "price": "123",
-      "description": "",
-      "categories": [
-        "Accommodation"
-      ],
-      "color": "#d87d7d",
-      "id": 1
-    }
-  ],
+  "notes": [],
   "income": [
     {
       "typeIncome": "accommodation",
