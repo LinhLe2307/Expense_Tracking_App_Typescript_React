@@ -6,14 +6,14 @@ const getAll = async () => {
     return response.data
 }
 
-const postAll = (inputExpense:IncomeModel) => {
-    axios.post("http://localhost:3010/income", inputExpense)
+const postAll = (inputIncome:IncomeModel) => {
+    axios.post("http://localhost:3010/income", inputIncome)
     .then(res => console.log(res))
     .catch(err => console.log(err))
 }
 
-const putExpense = (id:number, editExpense:IncomeModel) => {
-    axios.put(`http://localhost:3010/income/${id}`, editExpense)
+const putExpense = (id:number, editIncome:IncomeModel) => {
+    axios.put(`http://localhost:3010/income/${id}`, editIncome)
     .then(res => console.log(res))
     .catch(err => console.log(err))
 }

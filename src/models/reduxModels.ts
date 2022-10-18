@@ -27,3 +27,13 @@ export interface IncomeModel {
 export interface IncomeArrayModel {
     incomeList : IncomeModel[]
 }
+
+export interface CategoriesModel {
+    categoryTitle: string,
+    categoryDescription: string,
+    categoryColor: string,
+    id ?: number
+}
+export interface CategoriesModelArray {
+    categoriesList: CategoriesModel[]
+}

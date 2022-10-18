@@ -1,15 +1,14 @@
 {
   "notes": [
     {
-      "title": "1",
-      "price": "1",
-      "description": "1",
+      "title": "First one",
+      "price": "56",
+      "description": "",
       "categories": [
         "Communication",
-        "Accomodation",
-        "Fuel"
+        "Accomodation"
       ],
-      "color": "#dda6a6",
+      "color": "#de7c7c",
       "id": 1
     },
     {
@@ -40,5 +39,7 @@
       "id": 3
     }
   ],
-  "categoriesLists": []
+  "categories": [
+    
+  ]
 }

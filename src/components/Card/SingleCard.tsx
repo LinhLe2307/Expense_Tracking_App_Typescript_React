@@ -16,17 +16,24 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
   const dispatch = useAppDispatch();
   return (
     <Card className="mb-2">
-        <Card.Body>   
-            <Link to={`${expense.id}`}>
-              <div style={{backgroundColor: `${expense.color}`, width: "5rem", height: "5rem"}}></div>
-            </Link>
-            <Card.Text>{expense.title}</Card.Text>
-            <ButtonGroup  className="me-2" aria-label="Basic example">
-              {expense.categories?.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
-            </ButtonGroup>
-            <Card.Text>{expense.description}</Card.Text>
-            <Card.Text>id {expense.id}</Card.Text>
-            <Card.Title>${expense.price}</Card.Title>
+        <Card.Body style={{display:"flex", justifyContent:"space-between", alignItems: "center"}}>
+            <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
+              <Link 
+                to={`${expense.id}`} 
+                state={{ expenseDetails: expense}}
+              >
+                <div style={{backgroundColor: `${expense.color}`, width: "5rem", height: "5rem"}}></div>
+              </Link>
+            <div>
+              <Card.Text>{expense.title}</Card.Text>
+              <ButtonGroup  className="me-2" aria-label="Basic example">
+                {expense.categories?.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
+              </ButtonGroup>
+            </div>
+            </div>
+            <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
+            {/* <Card.Text>{expense.description}</Card.Text> */}
+            <Card.Title>-€{expense.price}</Card.Title>
               <Dropdown>
                 <Dropdown.Toggle 
                   variant="light" 
@@ -51,6 +58,7 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+            </div>
         </Card.Body>
     </Card>
   )

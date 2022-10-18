@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import { useState } from "react";
 import { nanoid } from 'nanoid';
 
@@ -17,28 +17,58 @@ const Expense = () => {
 
     return (
     <>
-        <Button variant="dark" onClick={handleShow} type="button">
+        <Button 
+            variant="dark" 
+            onClick={handleShow} 
+            type="button" 
+            style={{
+                position:"absolute",
+                bottom: "3rem",
+                right: "3rem",
+                borderRadius: "50%"
+            }}
+        >
             +
-            </Button>
+        </Button>
 
             {/* <Calendar onChange={onChange} value={value} /> */}
+        
+        <h1> €{expenseLists.reduce((prev, curr) => prev + (+curr.price), 0)} spent today</h1>
 
-            { expenseLists.map((expense: ExpenseModel) => 
-                <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}/>
-            )}
+        <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Default View
+            </Dropdown.Toggle>
 
-            {openEditExpense ?
-                <ExpenseForm 
-                    typeForm="edit"
-                    handleClose={handleClose}
-                    show={show}
-                />
-                : <ExpenseForm 
-                    typeForm="add" 
-                    handleClose={handleClose}
-                    show={show}
-                />
-            }
+            <Dropdown.Menu>
+                {["Communication", "Education", "Accomodation", "Fuel"]
+                    .map(item => (
+                        <Dropdown.Item
+                            eventKey={item}
+                            key={item}
+                        >
+                            {item}
+                        </Dropdown.Item>
+                ))} 
+            </Dropdown.Menu>
+        </Dropdown>
+
+        { expenseLists.map((expense: ExpenseModel) => 
+            <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}/>
+        )}
+
+        {openEditExpense ?
+            <ExpenseForm 
+                typeForm="edit"
+                handleClose={handleClose}
+                show={show}
+            />
+            : <ExpenseForm 
+                typeForm="add" 
+                handleClose={handleClose}
+                show={show}
+            />
+        }
     </>
   )
 }
