@@ -1,14 +1,16 @@
+import React, { useState, useEffect } from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import React, { useState } from "react";
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { addNewExpense, editExpense } from '../../features/expense/expenseSlice';
 import {ExpenseModel} from "../../models/reduxModels";
 import { Dropdown, Form } from 'react-bootstrap';
+import {CategoriesModel} from "../../models/reduxModels";
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
 import CloseButton from 'react-bootstrap/CloseButton';
+import { initializeCategories } from '../../features/categories/categoriesSlice';
 
 interface MyProps {
   typeForm: string,
@@ -17,7 +19,9 @@ interface MyProps {
 }
 
 function ExpenseForm ({typeForm, handleClose, show }: MyProps){
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+    const categoriesList = useAppSelector(state => state.categories.categoriesList)
 
     const dispatch = useAppDispatch()
 
@@ -33,9 +37,9 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
       setSelectedCategories(prev => prev.filter(category => category !== deleteItem))
     }
 
-    const handleSelectedCategories = (category: string) => {
-      if(selectedCategories.indexOf(category) === -1) {
-        setSelectedCategories(prev => prev.concat(category))
+    const handleSelectedCategories = (category: CategoriesModel) => {
+      if(selectedCategories.indexOf(category.categoryTitle) === -1) {
+        setSelectedCategories(prev => prev.concat(category.categoryTitle))
       }
     }
 
@@ -57,6 +61,10 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
         }
         window.location.reload()
     }
+
+    useEffect(()=>{
+      dispatch(initializeCategories());
+  }, [dispatch])
 
   return (
     <>
@@ -128,14 +136,14 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu >
-                  {["Communication", "Education", "Accomodation", "Fuel"]
+                  {categoriesList
                     .map(item => (
                         <Dropdown.Item 
                           onClick={()=> handleSelectedCategories(item)}
-                          eventKey={item}
-                          key={item}
+                          eventKey={item.categoryTitle}
+                          key={item.categoryTitle}
                         >
-                          {item}
+                          {item.categoryTitle}
                         </Dropdown.Item>
                   ))} 
                   </Dropdown.Menu>

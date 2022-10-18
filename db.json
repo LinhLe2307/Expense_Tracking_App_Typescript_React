@@ -1,25 +1,17 @@
 {
   "notes": [
     {
-      "title": "First one",
-      "price": "56",
-      "description": "",
+      "title": "First",
+      "price": "123",
+      "description": "first one",
       "categories": [
-        "Communication",
-        "Accomodation"
-      ],
-      "color": "#de7c7c",
-      "id": 1
-    },
-    {
-      "title": "2",
-      "price": "2",
-      "description": "2",
-      "categories": [
+        "Accommodation",
+        "Education",
+        "Cloth",
         "Fuel"
       ],
-      "color": "#c25656",
-      "id": 2
+      "color": "#db3939",
+      "id": 1
     }
   ],
   "income": [
@@ -40,6 +32,29 @@
     }
   ],
   "categories": [
-    
+    {
+      "categoryTitle": "Accommodation",
+      "categoryDescription": "This is when we do sth",
+      "categoryColor": "#c87474",
+      "id": 1
+    },
+    {
+      "categoryTitle": "Education",
+      "categoryDescription": "This is for education",
+      "categoryColor": "#e16b6b",
+      "id": 2
+    },
+    {
+      "categoryTitle": "Cloth",
+      "categoryDescription": "This is for clothing",
+      "categoryColor": "#8cc0bc",
+      "id": 3
+    },
+    {
+      "categoryTitle": "Fuel",
+      "categoryDescription": "This is for fuel",
+      "categoryColor": "#dfc93a",
+      "id": 4
+    }
   ]
 }
