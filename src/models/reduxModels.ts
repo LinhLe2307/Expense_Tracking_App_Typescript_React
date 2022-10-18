@@ -32,6 +32,7 @@ export interface CategoriesModel {
     categoryTitle: string,
     categoryDescription: string,
     categoryColor: string,
+    categoryTransactions?: number,
     id ?: number
 }
 export interface CategoriesModelArray {

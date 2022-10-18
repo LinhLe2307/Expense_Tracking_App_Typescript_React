@@ -15,12 +15,24 @@ export const categoriesSlice = createSlice({
         getCategoriesList:(state, action:PayloadAction<CategoriesModel[]>) =>{
             state.categoriesList = action.payload
         },
-        addNewCategory: (state, action) => {
-            state.categoriesList = state.categoriesList.concat(action.payload)
+        addNewCategory: (state, action:PayloadAction<CategoriesModel>) => {
+            const newCategory = {...action.payload, categoryTransactions: 0};
 
-            categoriesServices.postAll(action.payload)
+            state.categoriesList = state.categoriesList.concat(newCategory)
+
+            categoriesServices.postAll(newCategory)
+        },
+
+        addNewTransaction: (state, action:PayloadAction<string>):void => {
+            const inputCategory = action.payload;
+            const findIndex = state.categoriesList.find(categoryItem => categoryItem.categoryTitle.indexOf(inputCategory) !== -1); 
+            if(findIndex !== undefined) {
+                let transactions = JSON.parse(JSON.stringify(findIndex));
+                transactions.categoryTransactions++;        
+                categoriesServices.putAxios(transactions.id, transactions);
+            }
         }
-    }
+    } 
 });
 
 export const initializeCategories = () => {
@@ -30,5 +42,5 @@ export const initializeCategories = () => {
     }
 }
 
-export const {getCategoriesList, addNewCategory} = categoriesSlice.actions;
+export const {getCategoriesList, addNewCategory, addNewTransaction} = categoriesSlice.actions;
 export default categoriesSlice.reducer;

@@ -15,6 +15,8 @@ const Expense = () => {
     const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
     const expenseLists = useAppSelector((state) => state.expense.expenseLists);
 
+    const categoriesList = useAppSelector(state => state.categories.categoriesList)
+
     return (
     <>
         <Button 
@@ -41,13 +43,13 @@ const Expense = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                {["Communication", "Education", "Accomodation", "Fuel"]
+                {categoriesList
                     .map(item => (
                         <Dropdown.Item
-                            eventKey={item}
-                            key={item}
+                            eventKey={item.categoryTitle}
+                            key={item.categoryTitle}
                         >
-                            {item}
+                            {item.categoryTitle}
                         </Dropdown.Item>
                 ))} 
             </Dropdown.Menu>

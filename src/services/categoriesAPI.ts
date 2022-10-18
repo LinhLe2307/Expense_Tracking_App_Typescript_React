@@ -12,7 +12,7 @@ const postAll = (inputCategory:CategoriesModel) => {
     .catch(err => console.log(err))
 }
 
-const putExpense = (id:number, editCategory:CategoriesModel) => {
+const putAxios = (id:number, editCategory:CategoriesModel) => {
     axios.put(`http://localhost:3010/categories/${id}`, editCategory)
     .then(res => console.log(res))
     .catch(err => console.log(err))
@@ -25,4 +25,4 @@ const deleteAxios = (id:number) => {
     .catch(err => console.log(err))
 }
 
-export default {getAll, postAll, putExpense, deleteAxios}
+export default {getAll, postAll, putAxios, deleteAxios}

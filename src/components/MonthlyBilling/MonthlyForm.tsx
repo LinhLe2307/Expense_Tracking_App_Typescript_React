@@ -35,7 +35,7 @@ function MonthlyForm ({handleClose, show }: MyProps){
     const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
         dispatch(addNewCategory(inputCategory))
-        window.location.reload()
+        // window.location.reload()
     }
 
   return (

@@ -1,16 +1,13 @@
 {
   "notes": [
     {
-      "title": "First",
+      "title": "first",
       "price": "123",
-      "description": "first one",
+      "description": "",
       "categories": [
-        "Accommodation",
-        "Education",
-        "Cloth",
-        "Fuel"
+        "Accommodation"
       ],
-      "color": "#db3939",
+      "color": "#d87d7d",
       "id": 1
     }
   ],
@@ -34,27 +31,52 @@
   "categories": [
     {
       "categoryTitle": "Accommodation",
-      "categoryDescription": "This is when we do sth",
-      "categoryColor": "#c87474",
+      "categoryDescription": "This is 1st",
+      "categoryColor": "#be3c3c",
+      "categoryTransactions": 0,
       "id": 1
     },
     {
-      "categoryTitle": "Education",
-      "categoryDescription": "This is for education",
-      "categoryColor": "#e16b6b",
+      "categoryTitle": "Cloth",
+      "categoryDescription": "3rd",
+      "categoryColor": "#9c5454",
+      "categoryTransactions": 0,
       "id": 2
     },
     {
-      "categoryTitle": "Cloth",
-      "categoryDescription": "This is for clothing",
-      "categoryColor": "#8cc0bc",
+      "categoryTitle": "Education",
+      "categoryDescription": "2nd",
+      "categoryColor": "#f06666",
+      "categoryTransactions": 0,
       "id": 3
     },
     {
       "categoryTitle": "Fuel",
-      "categoryDescription": "This is for fuel",
-      "categoryColor": "#dfc93a",
+      "categoryDescription": "4",
+      "categoryColor": "#a2493f",
+      "categoryTransactions": 0,
       "id": 4
+    },
+    {
+      "categoryTitle": "Electric",
+      "categoryDescription": "5",
+      "categoryColor": "#d86f6f",
+      "categoryTransactions": 0,
+      "id": 5
+    },
+    {
+      "categoryTitle": "Food",
+      "categoryDescription": "6",
+      "categoryColor": "#d35a5a",
+      "categoryTransactions": 0,
+      "id": 6
+    },
+    {
+      "categoryTitle": "Hobby",
+      "categoryDescription": "7",
+      "categoryColor": "#d36464",
+      "categoryTransactions": 0,
+      "id": 7
     }
   ]
 }

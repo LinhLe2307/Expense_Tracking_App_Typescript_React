@@ -10,7 +10,7 @@ import {CategoriesModel} from "../../models/reduxModels";
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
 import CloseButton from 'react-bootstrap/CloseButton';
-import { initializeCategories } from '../../features/categories/categoriesSlice';
+import { initializeCategories, addNewTransaction } from '../../features/categories/categoriesSlice';
 
 interface MyProps {
   typeForm: string,
@@ -38,8 +38,11 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     }
 
     const handleSelectedCategories = (category: CategoriesModel) => {
-      if(selectedCategories.indexOf(category.categoryTitle) === -1) {
+      const inputCategory = category.categoryTitle;
+      if(selectedCategories.indexOf(inputCategory) === -1) {
         setSelectedCategories(prev => prev.concat(category.categoryTitle))
+
+        dispatch(addNewTransaction(inputCategory))
       }
     }
 
@@ -59,7 +62,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
         } else {
           dispatch(editExpense(inputExpense))
         }
-        window.location.reload()
+        // window.location.reload()
     }
 
     useEffect(()=>{
