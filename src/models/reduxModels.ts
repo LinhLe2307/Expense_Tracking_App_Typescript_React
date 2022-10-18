@@ -33,8 +33,14 @@ export interface CategoriesModel {
     categoryDescription: string,
     categoryColor: string,
     categoryTransactions?: number,
+    totalCategoryAmount?: number,
     id ?: number
 }
 export interface CategoriesModelArray {
     categoriesList: CategoriesModel[]
+}
+
+export interface CategoryPriceModel {
+    selectedCategories: string[],
+    inputPrice: number
 }

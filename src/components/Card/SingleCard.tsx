@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ExpenseModel } from '../../models/reduxModels';
 import {handleOpenEditExpense, deleteExpense, editExpense} from "../../features/expense/expenseSlice";
 import { Link } from 'react-router-dom';
-import { deleteTransaction } from '../../features/categories/categoriesSlice';
+import { removeTransaction } from '../../features/categories/categoriesSlice';
 
 interface MyProps {
   expense: ExpenseModel,
@@ -46,7 +46,7 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
                   <Dropdown.Item
                     onClick={()=> {
                       dispatch(deleteExpense(expense.id));
-                      dispatch(deleteTransaction(expense.categories));
+                      // dispatch(removeTransaction(expense.categories));
                     }}
                   >
                     Delete

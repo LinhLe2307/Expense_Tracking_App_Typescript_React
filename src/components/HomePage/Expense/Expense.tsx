@@ -2,12 +2,14 @@ import { Button, Dropdown } from 'react-bootstrap';
 import { useState } from "react";
 import { nanoid } from 'nanoid';
 
-import ExpenseForm from "../Card/ExpenseForm";
-import SingleCard from '../Card/SingleCard';
-import { useAppSelector } from '../../app/hooks';
-import { ExpenseModel } from '../../models/reduxModels';
+import ExpenseForm from "../../Card/ExpenseForm";
+import SingleCard from '../../Card/SingleCard';
+import { useAppSelector } from '../../../app/hooks';
+import { ExpenseModel } from '../../../models/reduxModels';
+import GraphDisplay from './GraphDisplay';
 
 const Expense = () => {
+    const [selectView, setSelectView] = useState("");
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,7 +17,8 @@ const Expense = () => {
     const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
     const expenseLists = useAppSelector((state) => state.expense.expenseLists);
 
-    const categoriesList = useAppSelector(state => state.categories.categoriesList)
+    const categoriesList = useAppSelector(state => state.categories.categoriesList);
+
 
     return (
     <>
@@ -35,6 +38,8 @@ const Expense = () => {
 
             {/* <Calendar onChange={onChange} value={value} /> */}
         
+        <GraphDisplay />
+
         <h1> €{expenseLists.reduce((prev, curr) => prev + (+curr.price), 0)} spent today</h1>
 
         <Dropdown>
@@ -48,16 +53,27 @@ const Expense = () => {
                         <Dropdown.Item
                             eventKey={item.categoryTitle}
                             key={item.categoryTitle}
+                            onClick={() => setSelectView(item.categoryTitle)}
                         >
                             {item.categoryTitle}
                         </Dropdown.Item>
                 ))} 
             </Dropdown.Menu>
         </Dropdown>
+                        
+        <Button onClick={()=> setSelectView("")}>Reset</Button>
 
-        { expenseLists.map((expense: ExpenseModel) => 
-            <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}/>
-        )}
+        <h3>{selectView === "" ? "All" : selectView}</h3>
+
+        {
+            expenseLists
+                .filter((expense:ExpenseModel) => {
+                    return selectView === "" ? expense : expense.categories.indexOf(selectView) !== -1
+                })
+                .map((expense:ExpenseModel) => 
+                    <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}
+                />)
+        }
 
         {openEditExpense ?
             <ExpenseForm 

@@ -1,27 +1,59 @@
 {
   "notes": [
     {
-      "title": "first",
-      "price": "1243",
+      "title": "1",
+      "price": "12",
       "description": "1",
       "categories": [
         "Accommodation",
-        "Cloth",
-        "Education"
+        "Cloth"
       ],
-      "color": "#ec6f6f",
+      "color": "#f35858",
       "id": 1
     },
     {
       "title": "2",
-      "price": "123",
+      "price": "23",
       "description": "2",
+      "categories": [
+        "Accommodation",
+        "Education",
+        "Fuel"
+      ],
+      "color": "#ed5454",
+      "id": 2
+    },
+    {
+      "title": "3",
+      "price": "21",
+      "description": "3",
       "categories": [
         "Accommodation",
         "Electric"
       ],
-      "color": "#f14141",
-      "id": 2
+      "color": "#ea8686",
+      "id": 3
+    },
+    {
+      "title": "4",
+      "price": "1",
+      "description": "4",
+      "categories": [
+        "Accommodation",
+        "Hobby"
+      ],
+      "color": "#ca3f3f",
+      "id": 4
+    },
+    {
+      "title": "6",
+      "price": "12",
+      "description": "6",
+      "categories": [
+        "Fuel"
+      ],
+      "color": "#cf3a3a",
+      "id": 5
     }
   ],
   "income": [
@@ -46,7 +78,8 @@
       "categoryTitle": "Accommodation",
       "categoryDescription": "This is 1st",
       "categoryColor": "#be3c3c",
-      "categoryTransactions": 2,
+      "categoryTransactions": 4,
+      "totalCategoryAmount": 57,
       "id": 1
     },
     {
@@ -54,6 +87,7 @@
       "categoryDescription": "3rd",
       "categoryColor": "#9c5454",
       "categoryTransactions": 1,
+      "totalCategoryAmount": 12,
       "id": 2
     },
     {
@@ -61,13 +95,15 @@
       "categoryDescription": "2nd",
       "categoryColor": "#f06666",
       "categoryTransactions": 1,
+      "totalCategoryAmount": 23,
       "id": 3
     },
     {
       "categoryTitle": "Fuel",
       "categoryDescription": "4",
       "categoryColor": "#a2493f",
-      "categoryTransactions": 0,
+      "categoryTransactions": 2,
+      "totalCategoryAmount": 35,
       "id": 4
     },
     {
@@ -75,6 +111,7 @@
       "categoryDescription": "5",
       "categoryColor": "#d86f6f",
       "categoryTransactions": 1,
+      "totalCategoryAmount": 21,
       "id": 5
     },
     {
@@ -82,13 +119,15 @@
       "categoryDescription": "6",
       "categoryColor": "#d35a5a",
       "categoryTransactions": 0,
+      "totalCategoryAmount": 0,
       "id": 6
     },
     {
       "categoryTitle": "Hobby",
       "categoryDescription": "7",
       "categoryColor": "#d36464",
-      "categoryTransactions": 0,
+      "categoryTransactions": 1,
+      "totalCategoryAmount": 1,
       "id": 7
     }
   ]

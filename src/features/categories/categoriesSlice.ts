@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
 import { categoryTransactions } from "../../functions/reusableFunction";
-import { CategoriesModel, CategoriesModelArray } from "../../models/reduxModels";
+import { CategoriesModel, CategoriesModelArray, CategoryPriceModel } from "../../models/reduxModels";
 
 import categoriesServices from "../../services/categoriesAPI";
 
@@ -17,21 +17,25 @@ export const categoriesSlice = createSlice({
             state.categoriesList = action.payload
         },
         addNewCategory: (state, action:PayloadAction<CategoriesModel>) => {
-            const newCategory = {...action.payload, categoryTransactions: 0};
+            const newCategory = {
+                ...action.payload, 
+                categoryTransactions: 0, totalCategoryAmount: 0
+            };
 
             state.categoriesList = state.categoriesList.concat(newCategory)
 
             categoriesServices.postAll(newCategory)
         },
 
-        addNewTransaction: (state, action:PayloadAction<string[]>):void => {
+        addNewTransaction: (state, action:PayloadAction<CategoryPriceModel>):void => {
             categoryTransactions(action, state, "add")
         },
 
-        deleteTransaction: (state, action: PayloadAction<string[]>):void => {
-            categoryTransactions(action, state, "delete")
+        removeTransaction: (state, action: PayloadAction<CategoryPriceModel>):void => {
+            categoryTransactions(action, state, "remove")
             
-        }
+        },
+
     } 
 });
 
@@ -42,5 +46,5 @@ export const initializeCategories = () => {
     }
 }
 
-export const {getCategoriesList, addNewCategory, addNewTransaction, deleteTransaction} = categoriesSlice.actions;
+export const { getCategoriesList, addNewCategory, addNewTransaction, removeTransaction } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

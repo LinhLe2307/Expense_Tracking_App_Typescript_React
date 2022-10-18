@@ -1,31 +1,31 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
-import { CategoriesModel, CategoriesModelArray } from "../models/reduxModels";
+import { CategoryPriceModel } from "../models/reduxModels";
 import categoriesServices from "../services/categoriesAPI";
 
-interface MyProps {
-    action: PayloadAction<string[]>;
-    state: RootState["categories"];
-    typeTransaction: string
-}
-
-export const categoryTransactions = (
-    action: PayloadAction<string[]>, 
+const categoryTransactions = (
+    action: PayloadAction<CategoryPriceModel>, 
     state:RootState["categories"], 
     typeTransaction:string 
     )=> {
-    const inputTransactions = action.payload;
-        inputTransactions.forEach(
+    const selectedCategories = action.payload.selectedCategories;
+
+    const inputPrice = +action.payload.inputPrice;
+        selectedCategories.forEach(
             category => {
                 const findIndex = state.categoriesList.find(categoryItem => categoryItem.categoryTitle.indexOf(category) !== -1); 
                     if(findIndex !== undefined) {
                         let transactions = JSON.parse(JSON.stringify(findIndex));
                         if(typeTransaction === "add") {
-                            transactions.categoryTransactions++;        
+                            transactions.categoryTransactions++;
+                            transactions.totalCategoryAmount += inputPrice;        
                         } else {
-                            transactions.categoryTransactions--; 
+                            transactions.categoryTransactions--;
+                            transactions.totalCategoryAmount -= inputPrice; 
                         }
                         categoriesServices.putAxios(transactions.id, transactions);
             }
     })
-}
+};
+
+export {categoryTransactions}
