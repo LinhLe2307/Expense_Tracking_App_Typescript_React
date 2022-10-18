@@ -5,8 +5,8 @@ import { useAppDispatch } from '../app/hooks';
 import { initializeExpense } from "../features/expense/expenseSlice";
 
 import { Tab } from 'react-bootstrap';
-import Expense from './HomePage/Expense/Expense';
-import Income from "./HomePage/Income";
+import Expense from './Expense/Expense';
+import Income from "./Income/Income";
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';

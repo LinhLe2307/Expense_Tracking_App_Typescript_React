@@ -2,10 +2,10 @@ import { Button, Dropdown } from 'react-bootstrap';
 import { useState } from "react";
 import { nanoid } from 'nanoid';
 
-import ExpenseForm from "../../Card/ExpenseForm";
-import SingleCard from '../../Card/SingleCard';
-import { useAppSelector } from '../../../app/hooks';
-import { ExpenseModel } from '../../../models/reduxModels';
+import ExpenseForm from "../Card/ExpenseForm";
+import SingleCard from '../Card/SingleCard';
+import { useAppSelector } from '../../app/hooks';
+import { ExpenseModel } from '../../models/reduxModels';
 import GraphDisplay from './GraphDisplay';
 
 const Expense = () => {
