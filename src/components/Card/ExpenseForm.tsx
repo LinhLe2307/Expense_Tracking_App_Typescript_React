@@ -62,7 +62,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
           dispatch(editExpense(inputExpense))
         }
 
-        selectedCategories.map(category => dispatch(addNewTransaction(category)))
+        dispatch(addNewTransaction(selectedCategories));
         window.location.reload()
     }
 

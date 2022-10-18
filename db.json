@@ -1,5 +1,29 @@
 {
-  "notes": [],
+  "notes": [
+    {
+      "title": "first",
+      "price": "1243",
+      "description": "1",
+      "categories": [
+        "Accommodation",
+        "Cloth",
+        "Education"
+      ],
+      "color": "#ec6f6f",
+      "id": 1
+    },
+    {
+      "title": "2",
+      "price": "123",
+      "description": "2",
+      "categories": [
+        "Accommodation",
+        "Electric"
+      ],
+      "color": "#f14141",
+      "id": 2
+    }
+  ],
   "income": [
     {
       "typeIncome": "accommodation",
@@ -22,21 +46,21 @@
       "categoryTitle": "Accommodation",
       "categoryDescription": "This is 1st",
       "categoryColor": "#be3c3c",
-      "categoryTransactions": 0,
+      "categoryTransactions": 2,
       "id": 1
     },
     {
       "categoryTitle": "Cloth",
       "categoryDescription": "3rd",
       "categoryColor": "#9c5454",
-      "categoryTransactions": 0,
+      "categoryTransactions": 1,
       "id": 2
     },
     {
       "categoryTitle": "Education",
       "categoryDescription": "2nd",
       "categoryColor": "#f06666",
-      "categoryTransactions": 0,
+      "categoryTransactions": 1,
       "id": 3
     },
     {
@@ -50,7 +74,7 @@
       "categoryTitle": "Electric",
       "categoryDescription": "5",
       "categoryColor": "#d86f6f",
-      "categoryTransactions": 0,
+      "categoryTransactions": 1,
       "id": 5
     },
     {

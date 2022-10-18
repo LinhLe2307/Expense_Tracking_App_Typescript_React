@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
+import { categoryTransactions } from "../../functions/reusableFunction";
 import { CategoriesModel, CategoriesModelArray } from "../../models/reduxModels";
 
 import categoriesServices from "../../services/categoriesAPI";
@@ -23,28 +24,12 @@ export const categoriesSlice = createSlice({
             categoriesServices.postAll(newCategory)
         },
 
-        addNewTransaction: (state, action:PayloadAction<string>):void => {
-            const inputCategory = action.payload;
-            const findIndex = state.categoriesList.find(categoryItem => categoryItem.categoryTitle.indexOf(inputCategory) !== -1); 
-            if(findIndex !== undefined) {
-                let transactions = JSON.parse(JSON.stringify(findIndex));
-                transactions.categoryTransactions++;        
-                categoriesServices.putAxios(transactions.id, transactions);
-            }
+        addNewTransaction: (state, action:PayloadAction<string[]>):void => {
+            categoryTransactions(action, state, "add")
         },
 
         deleteTransaction: (state, action: PayloadAction<string[]>):void => {
-            const inputTransactions = action.payload;
-            inputTransactions.forEach(
-                category => {
-                    const findIndex = state.categoriesList.find(transactionItem => transactionItem.categoryTitle.indexOf(category) !== -1); 
-                    if(findIndex !== undefined) {
-                        let transaction = JSON.parse(JSON.stringify(findIndex));
-                        transaction.categoryTransactions--;        
-                        categoriesServices.putAxios(transaction.id, transaction);
-                    }
-                }
-            )
+            categoryTransactions(action, state, "delete")
             
         }
     } 
