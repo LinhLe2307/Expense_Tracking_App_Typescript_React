@@ -18,3 +18,7 @@ export interface ExpenseFormType {
     handleInputExpense: (e: React.ChangeEvent<HTMLInputElement> ) => void;
     typeForm: string
 }
+
+export interface IncomeModel {
+    totalIncome: number
+}

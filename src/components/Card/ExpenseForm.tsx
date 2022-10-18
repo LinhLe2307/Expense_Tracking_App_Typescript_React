@@ -8,10 +8,7 @@ import {ExpenseModel} from "../../models/reduxModels";
 import { Dropdown, Form } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import CloseButton from 'react-bootstrap/CloseButton';
-import { nanoid } from 'nanoid';
 
 interface MyProps {
   typeForm: string,
@@ -165,13 +162,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
             </Form.Group>
 
             <Modal.Footer>
-              {/* <Button 
-                variant="secondary"
-                onClick={()=>handleClose()} 
-                type="button"
-              >
-                Close
-              </Button> */}
+
               <Button variant="primary" type="submit">Submit</Button>
             </Modal.Footer>
             </Row>

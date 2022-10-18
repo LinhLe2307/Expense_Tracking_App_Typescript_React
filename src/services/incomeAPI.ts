@@ -2,7 +2,7 @@ import axios from "axios";
 import {ExpenseModel} from "../models/reduxModels";
 
 const getAll = async () => {
-    const response = await axios.get("http://localhost:3010/notes");
+    const response = await axios.get("http://localhost:3010/income");
     return response.data
 }
 
