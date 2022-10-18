@@ -23,6 +23,22 @@
       "id": 2
     }
   ],
-  "income": [],
+  "income": [
+    {
+      "typeIncome": "accommodation",
+      "incomeAmount": "12",
+      "id": 1
+    },
+    {
+      "typeIncome": "34",
+      "incomeAmount": "23",
+      "id": 2
+    },
+    {
+      "typeIncome": "twieth",
+      "incomeAmount": "12",
+      "id": 3
+    }
+  ],
   "categoriesLists": []
 }

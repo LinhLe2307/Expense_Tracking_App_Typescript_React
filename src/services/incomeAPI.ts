@@ -1,18 +1,18 @@
 import axios from "axios";
-import {ExpenseModel} from "../models/reduxModels";
+import {IncomeModel} from "../models/reduxModels";
 
 const getAll = async () => {
     const response = await axios.get("http://localhost:3010/income");
     return response.data
 }
 
-const postAll = (inputExpense:ExpenseModel) => {
+const postAll = (inputExpense:IncomeModel) => {
     axios.post("http://localhost:3010/income", inputExpense)
     .then(res => console.log(res))
     .catch(err => console.log(err))
 }
 
-const putExpense = (id:number, editExpense:ExpenseModel) => {
+const putExpense = (id:number, editExpense:IncomeModel) => {
     axios.put(`http://localhost:3010/income/${id}`, editExpense)
     .then(res => console.log(res))
     .catch(err => console.log(err))

@@ -20,5 +20,10 @@ export interface ExpenseFormType {
 }
 
 export interface IncomeModel {
-    totalIncome: number
+    typeIncome : string,
+    incomeAmount: number,
+    id?: number
+}
+export interface IncomeArrayModel {
+    incomeList : IncomeModel[]
 }

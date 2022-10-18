@@ -22,7 +22,7 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
             </Link>
             <Card.Text>{expense.title}</Card.Text>
             <ButtonGroup  className="me-2" aria-label="Basic example">
-              {expense.categories.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
+              {expense.categories?.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
             </ButtonGroup>
             <Card.Text>{expense.description}</Card.Text>
             <Card.Text>id {expense.id}</Card.Text>
