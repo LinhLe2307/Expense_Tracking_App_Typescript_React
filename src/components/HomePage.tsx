@@ -1,55 +1,36 @@
-import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
-import { nanoid } from 'nanoid';
 import Calendar from 'react-calendar';
 
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import {ExpenseModel} from "../models/reduxModels";
+import { useAppDispatch } from '../app/hooks';
 import { initializeExpense } from "../features/expense/expenseSlice";
-import ExpenseForm from "./Card/ExpenseForm";
-import SingleCard from './Card/SingleCard';
+
+import { Tab, Tabs } from 'react-bootstrap';
+import Expense from './HomePage/Expense';
+import Income from "./HomePage/Income";
 
 const HomePage = () => {
     const [value, onChange] = useState(new Date());
 
     const dispatch = useAppDispatch();
-    const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
-    const expenseLists = useAppSelector((state) => state.expense.expenseLists);
-
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     useEffect(() => {
         dispatch(initializeExpense());
     }, [dispatch]);
 
     return (
         <div>
-            <Button variant="dark" onClick={handleShow} type="button">
-            +
-            </Button>
-
-            <Calendar onChange={onChange} value={value} />
-
-            <h1>{value.toString()}</h1>
-            { expenseLists.map((expense: ExpenseModel) => 
-                <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}/>
-            )}
-
-            {openEditExpense ?
-                <ExpenseForm 
-                    typeForm="edit"
-                    handleClose={handleClose}
-                    show={show}
-                />
-                : <ExpenseForm 
-                    typeForm="add" 
-                    handleClose={handleClose}
-                    show={show}
-                />
-            }
-            
+            <h3>{value.toString()}</h3>
+            <Tabs
+                defaultActiveKey="profile"
+                id="uncontrolled-tab-example"
+                className="mb-3"
+            >
+                <Tab eventKey="expense" title="Expense">
+                    <Expense />
+                </Tab>
+                <Tab eventKey="income" title="Income">
+                    <Income />
+                </Tab>
+            </Tabs>
         </div>
   )
 }

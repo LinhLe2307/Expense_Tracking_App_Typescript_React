@@ -11,6 +11,17 @@
       ],
       "color": "#dda6a6",
       "id": 1
+    },
+    {
+      "title": "2",
+      "price": "2",
+      "description": "2",
+      "categories": [
+        "Fuel"
+      ],
+      "color": "#c25656",
+      "id": 2
     }
-  ]
+  ],
+  "income": []
 }

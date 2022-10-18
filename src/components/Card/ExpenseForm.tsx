@@ -165,13 +165,13 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
             </Form.Group>
 
             <Modal.Footer>
-              <Button 
+              {/* <Button 
                 variant="secondary"
                 onClick={()=>handleClose()} 
                 type="button"
               >
                 Close
-              </Button>
+              </Button> */}
               <Button variant="primary" type="submit">Submit</Button>
             </Modal.Footer>
             </Row>

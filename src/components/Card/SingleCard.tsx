@@ -5,6 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ExpenseModel } from '../../models/reduxModels';
 import {handleOpenEditExpense, deleteExpense, editExpense} from "../../features/expense/expenseSlice";
+import { Link } from 'react-router-dom';
 
 interface MyProps {
   expense: ExpenseModel,
@@ -15,8 +16,10 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
   const dispatch = useAppDispatch();
   return (
     <Card className="mb-2">
-        <Card.Body>
-            <div style={{backgroundColor: `${expense.color}`, width: "5rem", height: "5rem"}}></div>
+        <Card.Body>   
+            <Link to={`${expense.id}`}>
+              <div style={{backgroundColor: `${expense.color}`, width: "5rem", height: "5rem"}}></div>
+            </Link>
             <Card.Text>{expense.title}</Card.Text>
             <ButtonGroup  className="me-2" aria-label="Basic example">
               {expense.categories.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
@@ -29,7 +32,6 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
                   variant="light" 
                   id="dropdown-basic"
                 >
-                  ...
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu >
