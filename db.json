@@ -10,6 +10,18 @@
       ],
       "color": "#db4848",
       "id": 1
+    },
+    {
+      "date": "Wednesday, October 19, 2022",
+      "title": "2",
+      "price": "12",
+      "description": "2",
+      "categories": [
+        "Education",
+        "Accommodation"
+      ],
+      "color": "#c56363",
+      "id": 2
     }
   ],
   "income": [],

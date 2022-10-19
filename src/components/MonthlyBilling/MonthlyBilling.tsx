@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import React, {useState, useEffect} from 'react'
 import { Button, Nav } from 'react-bootstrap'
 import { Calendar } from 'react-calendar';
@@ -8,45 +9,52 @@ import { customDate } from '../../functions/reusableFunction';
 import MonthlyDetails from './MonthlyDetails'
 import MonthlyForm from './MonthlyForm';
 
-// interface identity<T>(arg: T){
-//   return arg;
-// }
 
 const MonthlyBilling = () => {
   const [value, onChange] = useState(new Date());
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
   const categoriesList = useAppSelector(state => state.categories.inputLists);
   const expenseLists = useAppSelector((state) => state.expense.inputLists);
-
+  
   const dispatch = useAppDispatch();
-
+  
   const transactionCategories = () => {
-    const transactionList = expenseLists
-          .map(expense => expense.categories)
-          .map(category => (category))
-          .flat(1)
+    let identity : Record<string, number> = {};
+    const categoriesTitles = categoriesList.map(category => category.title)
 
-    // const newList: identity<transactionList> = typeof transactionList
-    // console.log(newList); 
-    // const transactionsAmount = 
-    //   transactionList.reduce((prev, curr) => {
-    //         if(curr in prev) {
-    //           prev[curr]++
-    //         } else {
-    //           prev[curr] = 1
-    //         }
-    //         return prev
-    //       }, {})
+    const transactionList = expenseLists
+    .map(expense => expense.categories)
+    .map(category => (category))
+    .flat(1)
+    .reduce((prev, curr)=> {
+            if(curr in prev) {
+              prev[curr]++
+            } else {
+              prev[curr] = 1
+            }
+            return prev
+          }, identity)
+
+    const cloneList = {...transactionList};
     
+    categoriesTitles.forEach(category => {
+      if(Object.keys(cloneList).indexOf(category) === -1) {
+        transactionList[category] = 0 
+      }
+    })
+
+    return Object.entries(transactionList).map((list, i) => <div key={i}>{list[0]}{list[1]}</div>)
   }
 
   useEffect(()=>{
     dispatch(initializeCategories());
     dispatch(initializeExpense());
-  }, [dispatch])
+    
+  }, [dispatch]);
+
 
   return (
     <div>
@@ -64,13 +72,14 @@ const MonthlyBilling = () => {
       </Nav>
       <MonthlyDetails />
 
-      {
+      {/* {
         categoriesList.map(category => <p key={category.id}>{category.title}</p>)
+      } */}
+
+      {
+        transactionCategories()
       }
 
-      {/* {
-        transactionCategories()
-      } */}
       <Button
             variant="dark" 
             onClick={handleShow} 
