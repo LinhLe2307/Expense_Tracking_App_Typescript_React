@@ -3,9 +3,9 @@ import {ThunkDispatch as Dispatch} from 'redux-thunk';
 import expenseServices from "../../services/expenseAPI";
 import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
 
-const initialExpenseState: ExpenseArrayModel = {
-    expenseLists: [],
-    openEditExpense: false,
+const initialExpenseState: ExpenseArrayModel<ExpenseModel> = {
+    inputLists: [],
+    openEditItem: false,
     editId: 0,
 }
 
@@ -14,21 +14,21 @@ export const expenseSlice = createSlice({
     initialState: initialExpenseState,
     reducers: {
         getExpenseList: (state, action: PayloadAction<ExpenseModel[]>):void => {
-            state.expenseLists = action.payload
+            state.inputLists = action.payload
         },
 
         addNewExpense : (state, action: PayloadAction<ExpenseModel>):void => {
             expenseServices.postAll(action.payload);
-            state.expenseLists = state.expenseLists.concat(action.payload)
+            state.inputLists = state.inputLists.concat(action.payload)
         },
 
         editExpense:(state, action:PayloadAction<ExpenseModel>):void => {
             const editExense = action.payload;
-            const findIndex = state.expenseLists.find(expense => expense.id === state.editId)
+            const findIndex = state.inputLists.find(expense => expense.id === state.editId)
             if(findIndex !== undefined) {
-                const indexElement = state.expenseLists.indexOf(findIndex);
-                state.expenseLists.splice(indexElement, 0, editExense);
-                state.expenseLists =  state.expenseLists
+                const indexElement = state.inputLists.indexOf(findIndex);
+                state.inputLists.splice(indexElement, 0, editExense);
+                state.inputLists =  state.inputLists
 
             }
             expenseServices.putExpense(state.editId, editExense)
@@ -36,14 +36,14 @@ export const expenseSlice = createSlice({
 
         deleteExpense: (state, action):void => {
             const deleteId = action.payload;
-            state.expenseLists = state.expenseLists.filter(expense => expense.id !== deleteId)
+            state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
             
             expenseServices.deleteAxios(deleteId)
         },
 
         handleOpenEditExpense: (state, action):void => {
             state.editId = action.payload
-            state.openEditExpense = !state.openEditExpense
+            state.openEditItem = !state.openEditItem
         }
 
     }

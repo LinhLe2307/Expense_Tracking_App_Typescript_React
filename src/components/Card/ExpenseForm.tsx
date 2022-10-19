@@ -6,12 +6,13 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { addNewExpense, editExpense } from '../../features/expense/expenseSlice';
 import {ExpenseModel} from "../../models/reduxModels";
 import { Dropdown, Form } from 'react-bootstrap';
-import {CategoriesModel} from "../../models/reduxModels";
+import { DefaultModel } from "../../models/reduxModels";
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
 import CloseButton from 'react-bootstrap/CloseButton';
-import { initializeCategories, addNewTransaction } from '../../features/categories/categoriesSlice';
+import { initializeCategories } from '../../features/categories/categoriesSlice';
 import { customDate } from "../../functions/reusableFunction";
+import { nanoid } from "nanoid";
 
 interface MyProps {
   typeForm: string,
@@ -22,16 +23,16 @@ interface MyProps {
 function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-    const categoriesList = useAppSelector(state => state.categories.categoriesList)
+    const categoriesList = useAppSelector(state => state.categories.inputLists)
 
     const dispatch = useAppDispatch()
 
     const [inputExpense, setInputExpense] = useState<ExpenseModel>({
-        date: customDate(),
+        date: customDate(new Date()),
         title: "",
         price: 0,
         description: "", 
-        categories: [],
+        categories: selectedCategories,
         color: ""
     });
 
@@ -39,10 +40,10 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
       setSelectedCategories(prev => prev.filter(category => category !== deleteItem))
     }
 
-    const handleSelectedCategories = (category: CategoriesModel) => {
-      const inputCategory = category.categoryTitle;
+    const handleSelectedCategories = (category: DefaultModel) => {
+      const inputCategory = category.title;
       if(selectedCategories.indexOf(inputCategory) === -1) {
-        setSelectedCategories(prev => prev.concat(category.categoryTitle))
+        setSelectedCategories(prev => prev.concat(category.title))
       }
     }
 
@@ -58,16 +59,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const submitHandler = (e: React.FormEvent<HTMLFormElement>, typeForm: string):void => {
         e.preventDefault();
         if(typeForm === "add") {
-          Promise.all([
-            dispatch(addNewExpense(inputExpense)),
-            dispatch(addNewTransaction(
-            {
-              selectedCategories: selectedCategories,
-              inputPrice: inputExpense.price,
-            }
-            ))
-          ])
-          
+            dispatch(addNewExpense(inputExpense)) 
         } else {
             dispatch(editExpense(inputExpense))
         }
@@ -152,10 +144,10 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
                     .map(item => (
                         <Dropdown.Item 
                           onClick={()=> handleSelectedCategories(item)}
-                          eventKey={item.categoryTitle}
-                          key={item.categoryTitle}
+                          eventKey={item.title}
+                          key={nanoid()}
                         >
-                          {item.categoryTitle}
+                          {item.title}
                         </Dropdown.Item>
                   ))} 
                   </Dropdown.Menu>

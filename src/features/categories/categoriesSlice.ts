@@ -1,50 +1,38 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
-import { categoryTransactions } from "../../functions/reusableFunction";
-import { CategoriesModel, CategoriesModelArray, CategoryPriceModel } from "../../models/reduxModels";
+import { DefaultModel, ExpenseArrayModel } from "../../models/reduxModels";
 
 import categoriesServices from "../../services/categoriesAPI";
 
-const initialCategoriesState:CategoriesModelArray = {
-    categoriesList: []
+const initialCategoriesState:ExpenseArrayModel<DefaultModel> = {
+    inputLists: [],
+    openEditItem: false,
+    editId: 0,
 }
 
 export const categoriesSlice = createSlice({
     name: "categories",
     initialState: initialCategoriesState,
     reducers: {
-        getCategoriesList:(state, action:PayloadAction<CategoriesModel[]>) =>{
-            state.categoriesList = action.payload
+        getCategoriesList:(state, action:PayloadAction<DefaultModel[]>) =>{
+            state.inputLists = action.payload
         },
-        addNewCategory: (state, action:PayloadAction<CategoriesModel>) => {
-            const newCategory = {
-                ...action.payload, 
-                categoryTransactions: 0, totalCategoryAmount: 0
-            };
+        addNewCategory: (state, action:PayloadAction<DefaultModel>) => {
+            const newCategory = action.payload;
 
-            state.categoriesList = state.categoriesList.concat(newCategory)
+            state.inputLists = state.inputLists.concat(newCategory)
 
             categoriesServices.postAll(newCategory)
         },
-
-        addNewTransaction: (state, action:PayloadAction<CategoryPriceModel>):void => {
-            categoryTransactions(action, state, "add")
-        },
-
-        removeTransaction: (state, action: PayloadAction<CategoryPriceModel>):void => {
-            categoryTransactions(action, state, "remove")
-            
-        },
-
     } 
 });
 
 export const initializeCategories = () => {
     return async(dispatch: Dispatch<any,any,any>)=>{
-        const response = await categoriesServices.getAll();
+        const response: DefaultModel[]= await categoriesServices.getAll();
         dispatch(getCategoriesList(response))
     }
 }
 
-export const { getCategoriesList, addNewCategory, addNewTransaction, removeTransaction } = categoriesSlice.actions;
+export const { getCategoriesList, addNewCategory} = categoriesSlice.actions;
 export default categoriesSlice.reducer;

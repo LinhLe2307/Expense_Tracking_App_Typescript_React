@@ -1,16 +1,21 @@
-export interface ExpenseModel {
-    date: string;
+export interface DefaultModel {
     title: string,
-    price: number,
     description: string,
-    categories: string[],
     color: string,
     id?: number
 }
 
-export interface ExpenseArrayModel {
-    expenseLists: ExpenseModel[],
-    openEditExpense: boolean,
+export interface ExpenseModel extends DefaultModel {
+    date: string;
+    price: number,
+    categories: string[],
+}
+export interface IncomeModel extends DefaultModel {
+    amount: number, 
+}
+export interface ExpenseArrayModel<T> {
+    inputLists: T[],
+    openEditItem: boolean,
     editId: number
 }
 
@@ -18,30 +23,4 @@ export interface ExpenseFormType {
     submitHandler: (e: React.FormEvent<HTMLFormElement>, typeForm:string) => void;
     handleInputExpense: (e: React.ChangeEvent<HTMLInputElement> ) => void;
     typeForm: string
-}
-
-export interface IncomeModel {
-    typeIncome : string,
-    incomeAmount: number,
-    id?: number
-}
-export interface IncomeArrayModel {
-    incomeList : IncomeModel[]
-}
-
-export interface CategoriesModel {
-    categoryTitle: string,
-    categoryDescription: string,
-    categoryColor: string,
-    categoryTransactions?: number,
-    totalCategoryAmount?: number,
-    id ?: number
-}
-export interface CategoriesModelArray {
-    categoriesList: CategoriesModel[]
-}
-
-export interface CategoryPriceModel {
-    selectedCategories: string[],
-    inputPrice: number
 }

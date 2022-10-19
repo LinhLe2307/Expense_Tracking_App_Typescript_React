@@ -1,10 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
 import incomeServices from "../../services/incomeAPI";
-import {IncomeModel, IncomeArrayModel} from "../../models/reduxModels"
+import {IncomeModel, ExpenseArrayModel} from "../../models/reduxModels"
 
-const initialExpenseState: IncomeArrayModel = {
-    incomeList: []
+const initialExpenseState: ExpenseArrayModel<IncomeModel> = {
+    inputLists: [],
+    openEditItem: false,
+    editId: 0,
 }
 
 export const incomeSlice = createSlice({
@@ -12,11 +14,11 @@ export const incomeSlice = createSlice({
     initialState: initialExpenseState,
     reducers: {
         getTotalIncome: (state, action: PayloadAction<IncomeModel[]>) => {
-            state.incomeList = action.payload
+            state.inputLists = action.payload
         },
         addNewIncome: (state, action: PayloadAction<IncomeModel>) => {
             incomeServices.postAll(action.payload);
-            state.incomeList = state.incomeList.concat(action.payload)
+            state.inputLists = state.inputLists.concat(action.payload)
 
         },
     }

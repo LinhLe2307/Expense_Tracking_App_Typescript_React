@@ -10,10 +10,12 @@ import { IncomeModel } from '../../models/reduxModels';
 const Income = () => {
     let navigate = useNavigate();
     const [addIncome, setAddIncome] = useState<IncomeModel>({
-        typeIncome: "",
-        incomeAmount: 0
+        title: "",
+        description: "",
+        color: "",
+        amount: 0
     });
-    const incomeList = useAppSelector(state => state.income.incomeList);
+    const incomeList = useAppSelector(state => state.income.inputLists);
     const dispatch= useAppDispatch();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
@@ -68,11 +70,11 @@ const Income = () => {
         <h1>
             Total earn: {
             incomeList.reduce((prev, curr) => {
-                return prev + (+curr.incomeAmount)
+                return prev + (+curr.amount)
             }, 0)
         }</h1>
         {
-            incomeList.map(income => <p key={nanoid()}>{income.typeIncome}{income.incomeAmount}</p>)
+            incomeList.map(income => <p key={nanoid()}>{income.title}{income.amount}</p>)
         }
     </>
     )

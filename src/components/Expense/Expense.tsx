@@ -14,10 +14,10 @@ const Expense = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const openEditExpense = useAppSelector((state) => state.expense.openEditExpense);
-    const expenseLists = useAppSelector((state) => state.expense.expenseLists);
+    const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
+    const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
-    const categoriesList = useAppSelector(state => state.categories.categoriesList);
+    const categoriesList = useAppSelector(state => state.categories.inputLists);
 
 
     return (
@@ -36,7 +36,6 @@ const Expense = () => {
             +
         </Button>
 
-            {/* <Calendar onChange={onChange} value={value} /> */}
         
         <GraphDisplay />
 
@@ -49,13 +48,13 @@ const Expense = () => {
 
             <Dropdown.Menu>
                 {categoriesList
-                    .map(item => (
+                    .map((item) => (
                         <Dropdown.Item
-                            eventKey={item.categoryTitle}
-                            key={item.categoryTitle}
-                            onClick={() => setSelectView(item.categoryTitle)}
+                            eventKey={item.title}
+                            key={nanoid()}
+                            onClick={() => setSelectView(item.title)}
                         >
-                            {item.categoryTitle}
+                            {item.title}
                         </Dropdown.Item>
                 ))} 
             </Dropdown.Menu>

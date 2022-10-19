@@ -12,10 +12,7 @@ import { useAppDispatch } from '../app/hooks';
 import { initializeExpense } from "../features/expense/expenseSlice";
 import {customDate} from "../functions/reusableFunction"
 
-let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 const HomePage = () => {
-    const [value, onChange] = useState(customDate());
-
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(initializeExpense());
@@ -23,7 +20,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <h3>{value}</h3>
+            <h3>{customDate(new Date())}</h3>
             {/* <Tabs
                 defaultActiveKey="profile"
                 id="uncontrolled-tab-example"

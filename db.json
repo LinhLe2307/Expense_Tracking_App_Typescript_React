@@ -6,99 +6,31 @@
       "price": "12",
       "description": "1",
       "categories": [
-        "Accommodation",
-        "Cloth",
-        "Education"
+        "Accommodation"
       ],
-      "color": "#e15b5b",
+      "color": "#db4848",
       "id": 1
-    },
-    {
-      "date": "Wednesday, October 19, 2022",
-      "title": "2",
-      "price": "12",
-      "description": "2",
-      "categories": [
-        "Accommodation",
-        "Fuel"
-      ],
-      "color": "#d26565",
-      "id": 2
     }
   ],
-  "income": [
-    {
-      "typeIncome": "accommodation",
-      "incomeAmount": "12",
-      "id": 1
-    },
-    {
-      "typeIncome": "34",
-      "incomeAmount": "23",
-      "id": 2
-    },
-    {
-      "typeIncome": "twieth",
-      "incomeAmount": "12",
-      "id": 3
-    }
-  ],
+  "income": [],
   "categories": [
     {
-      "categoryTitle": "Accommodation",
-      "categoryDescription": "This is 1st",
-      "categoryColor": "#be3c3c",
-      "categoryTransactions": 2,
-      "totalCategoryAmount": 24,
+      "title": "Accommodation",
+      "description": "1",
+      "color": "#ba7878",
       "id": 1
     },
     {
-      "categoryTitle": "Cloth",
-      "categoryDescription": "3rd",
-      "categoryColor": "#9c5454",
-      "categoryTransactions": 1,
-      "totalCategoryAmount": 12,
+      "title": "Education",
+      "description": "2",
+      "color": "#d28989",
       "id": 2
     },
     {
-      "categoryTitle": "Education",
-      "categoryDescription": "2nd",
-      "categoryColor": "#f06666",
-      "categoryTransactions": 1,
-      "totalCategoryAmount": 12,
+      "title": "Food",
+      "description": "3",
+      "color": "#ad7676",
       "id": 3
-    },
-    {
-      "categoryTitle": "Fuel",
-      "categoryDescription": "4",
-      "categoryColor": "#a2493f",
-      "categoryTransactions": 1,
-      "totalCategoryAmount": 12,
-      "id": 4
-    },
-    {
-      "categoryTitle": "Electric",
-      "categoryDescription": "5",
-      "categoryColor": "#d86f6f",
-      "categoryTransactions": 0,
-      "totalCategoryAmount": 0,
-      "id": 5
-    },
-    {
-      "categoryTitle": "Food",
-      "categoryDescription": "6",
-      "categoryColor": "#d35a5a",
-      "categoryTransactions": 0,
-      "totalCategoryAmount": 0,
-      "id": 6
-    },
-    {
-      "categoryTitle": "Hobby",
-      "categoryDescription": "7",
-      "categoryColor": "#d36464",
-      "categoryTransactions": 0,
-      "totalCategoryAmount": 0,
-      "id": 7
     }
   ]
 }
