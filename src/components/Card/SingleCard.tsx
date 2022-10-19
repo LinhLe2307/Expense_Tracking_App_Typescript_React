@@ -18,6 +18,7 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
   return (
     <Card className="mb-2">
         <Card.Body style={{display:"flex", justifyContent:"space-between", alignItems: "center"}}>
+          <div>{expense.date}</div>
             <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
               <Link 
                 to={`${expense.id}`} 

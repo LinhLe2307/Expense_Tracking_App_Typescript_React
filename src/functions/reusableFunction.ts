@@ -28,4 +28,11 @@ const categoryTransactions = (
     }))
 };
 
-export {categoryTransactions}
+const customDate = () => {
+    // When you initialize a class property with a literal such as public foo = { bar: 'a' }, its type becomes { bar: string }, even if you declare it as readonly. TypeScript on purpose doesn't make the type too strict ({ bar: 'a' }).
+    let options = { weekday: "long", year: "numeric", month: "long", day: "numeric" } as const;
+    let today = new Date();
+    return today.toLocaleDateString("en-EU", options)
+}
+
+export {categoryTransactions, customDate}

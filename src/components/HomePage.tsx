@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import Calendar from 'react-calendar';
 
-import { useAppDispatch } from '../app/hooks';
-import { initializeExpense } from "../features/expense/expenseSlice";
-
 import { Tab } from 'react-bootstrap';
 import Expense from './Expense/Expense';
 import Income from "./Income/Income";
@@ -11,8 +8,13 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 
+import { useAppDispatch } from '../app/hooks';
+import { initializeExpense } from "../features/expense/expenseSlice";
+import {customDate} from "../functions/reusableFunction"
+
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 const HomePage = () => {
-    const [value, onChange] = useState(new Date());
+    const [value, onChange] = useState(customDate());
 
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -21,7 +23,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <h3>{value.toString()}</h3>
+            <h3>{value}</h3>
             {/* <Tabs
                 defaultActiveKey="profile"
                 id="uncontrolled-tab-example"

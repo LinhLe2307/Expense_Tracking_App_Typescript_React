@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
 import CloseButton from 'react-bootstrap/CloseButton';
 import { initializeCategories, addNewTransaction } from '../../features/categories/categoriesSlice';
+import { customDate } from "../../functions/reusableFunction";
 
 interface MyProps {
   typeForm: string,
@@ -26,6 +27,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const dispatch = useAppDispatch()
 
     const [inputExpense, setInputExpense] = useState<ExpenseModel>({
+        date: customDate(),
         title: "",
         price: 0,
         description: "", 
@@ -69,8 +71,6 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
         } else {
             dispatch(editExpense(inputExpense))
         }
-
-        
         window.location.reload()
     }
 

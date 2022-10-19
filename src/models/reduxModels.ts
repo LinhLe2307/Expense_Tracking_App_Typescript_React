@@ -1,4 +1,5 @@
 export interface ExpenseModel {
+    date: string;
     title: string,
     price: number,
     description: string,

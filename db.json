@@ -1,15 +1,28 @@
 {
   "notes": [
     {
+      "date": "Wednesday, October 19, 2022",
+      "title": "1",
+      "price": "12",
+      "description": "1",
+      "categories": [
+        "Accommodation",
+        "Cloth",
+        "Education"
+      ],
+      "color": "#e15b5b",
+      "id": 1
+    },
+    {
+      "date": "Wednesday, October 19, 2022",
       "title": "2",
       "price": "12",
       "description": "2",
       "categories": [
         "Accommodation",
-        "Education",
         "Fuel"
       ],
-      "color": "#ec7e7e",
+      "color": "#d26565",
       "id": 2
     }
   ],
@@ -35,16 +48,16 @@
       "categoryTitle": "Accommodation",
       "categoryDescription": "This is 1st",
       "categoryColor": "#be3c3c",
-      "categoryTransactions": 1,
-      "totalCategoryAmount": 12,
+      "categoryTransactions": 2,
+      "totalCategoryAmount": 24,
       "id": 1
     },
     {
       "categoryTitle": "Cloth",
       "categoryDescription": "3rd",
       "categoryColor": "#9c5454",
-      "categoryTransactions": 0,
-      "totalCategoryAmount": 0,
+      "categoryTransactions": 1,
+      "totalCategoryAmount": 12,
       "id": 2
     },
     {

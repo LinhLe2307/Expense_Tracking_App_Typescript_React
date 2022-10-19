@@ -13,16 +13,16 @@ export const expenseSlice = createSlice({
     name: "expense",
     initialState: initialExpenseState,
     reducers: {
-        getExpenseList: (state, action: PayloadAction<ExpenseModel[]>) => {
+        getExpenseList: (state, action: PayloadAction<ExpenseModel[]>):void => {
             state.expenseLists = action.payload
         },
 
-        addNewExpense : (state, action: PayloadAction<ExpenseModel>) => {
+        addNewExpense : (state, action: PayloadAction<ExpenseModel>):void => {
             expenseServices.postAll(action.payload);
             state.expenseLists = state.expenseLists.concat(action.payload)
         },
 
-        editExpense:(state, action) => {
+        editExpense:(state, action:PayloadAction<ExpenseModel>):void => {
             const editExense = action.payload;
             const findIndex = state.expenseLists.find(expense => expense.id === state.editId)
             if(findIndex !== undefined) {
@@ -34,14 +34,14 @@ export const expenseSlice = createSlice({
             expenseServices.putExpense(state.editId, editExense)
         },
 
-        deleteExpense: (state, action) => {
+        deleteExpense: (state, action):void => {
             const deleteId = action.payload;
             state.expenseLists = state.expenseLists.filter(expense => expense.id !== deleteId)
             
             expenseServices.deleteAxios(deleteId)
         },
 
-        handleOpenEditExpense: (state, action) => {
+        handleOpenEditExpense: (state, action):void => {
             state.editId = action.payload
             state.openEditExpense = !state.openEditExpense
         }
