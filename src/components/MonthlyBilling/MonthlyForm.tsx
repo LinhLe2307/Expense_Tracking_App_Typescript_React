@@ -4,7 +4,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import React, { useState } from "react";
 import { useAppDispatch } from '../../app/hooks';
 import { addNewCategory } from '../../features/categories/categoriesSlice';
-import {CategoriesModel} from "../../models/reduxModels";
+import {DefaultModel} from "../../models/reduxModels";
 import { Form } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -18,7 +18,7 @@ function MonthlyForm ({handleClose, show }: MyProps){
 
     const dispatch = useAppDispatch()
 
-    const [inputCategory, setInputCategory] = useState<CategoriesModel>({
+    const [inputCategory, setInputCategory] = useState<DefaultModel>({
         title: "",
         description: "", 
         color: ""
