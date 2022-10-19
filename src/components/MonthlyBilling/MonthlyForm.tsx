@@ -19,9 +19,9 @@ function MonthlyForm ({handleClose, show }: MyProps){
     const dispatch = useAppDispatch()
 
     const [inputCategory, setInputCategory] = useState<CategoriesModel>({
-        categoryTitle: "",
-        categoryDescription: "", 
-        categoryColor: ""
+        title: "",
+        description: "", 
+        color: ""
     });
 
     const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
@@ -35,7 +35,7 @@ function MonthlyForm ({handleClose, show }: MyProps){
     const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
         dispatch(addNewCategory(inputCategory))
-        // window.location.reload()
+        window.location.reload()
     }
 
   return (
@@ -59,7 +59,7 @@ function MonthlyForm ({handleClose, show }: MyProps){
                 >
                     <Form.Control 
                     required 
-                    name="categoryTitle" 
+                    name="title" 
                     type="text" 
                     placeholder="Enter Category"
                     onChange={handleInputExpense}/>
@@ -74,7 +74,7 @@ function MonthlyForm ({handleClose, show }: MyProps){
                     >
                     <Form.Control 
                         as="textarea"
-                        name="categoryDescription"  
+                        name="description"  
                         type="text" 
                         placeholder="Enter Description"
                         onChange={handleInputExpense}/>
@@ -87,7 +87,7 @@ function MonthlyForm ({handleClose, show }: MyProps){
                 <Form.Control 
                     required 
                     type="color" 
-                    name="categoryColor" 
+                    name="color" 
                     title="Choose your color"
                     onChange={handleInputExpense}/>
                 </Form.Group>
