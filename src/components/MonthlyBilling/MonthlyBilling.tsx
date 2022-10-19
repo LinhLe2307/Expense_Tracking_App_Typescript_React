@@ -8,6 +8,9 @@ import { customDate } from '../../functions/reusableFunction';
 import MonthlyDetails from './MonthlyDetails'
 import MonthlyForm from './MonthlyForm';
 
+// interface identity<T>(arg: T){
+//   return arg;
+// }
 
 const MonthlyBilling = () => {
   const [value, onChange] = useState(new Date());
@@ -26,8 +29,8 @@ const MonthlyBilling = () => {
           .map(category => (category))
           .flat(1)
 
-    const newList = typeof transactionList
-    console.log(newList); 
+    // const newList: identity<transactionList> = typeof transactionList
+    // console.log(newList); 
     // const transactionsAmount = 
     //   transactionList.reduce((prev, curr) => {
     //         if(curr in prev) {
@@ -37,7 +40,6 @@ const MonthlyBilling = () => {
     //         }
     //         return prev
     //       }, {})
-          
     
   }
 
