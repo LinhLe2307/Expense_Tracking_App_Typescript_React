@@ -7,6 +7,7 @@ import SingleCard from '../Card/SingleCard';
 import { useAppSelector } from '../../app/hooks';
 import { ExpenseModel } from '../../models/reduxModels';
 import GraphDisplay from './GraphDisplay';
+import { customDate } from '../../functions/reusableFunction';
 
 const Expense = () => {
     const [selectView, setSelectView] = useState("");
@@ -66,6 +67,9 @@ const Expense = () => {
 
         {
             expenseLists
+                .filter((expense:ExpenseModel) => {
+                    return expense.date === customDate(new Date())
+                })
                 .filter((expense:ExpenseModel) => {
                     return selectView === "" ? expense : expense.categories.indexOf(selectView) !== -1
                 })

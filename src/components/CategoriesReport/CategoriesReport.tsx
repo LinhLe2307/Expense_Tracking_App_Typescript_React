@@ -6,8 +6,8 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { initializeCategories } from '../../features/categories/categoriesSlice';
 import { initializeExpense } from "../../features/expense/expenseSlice";
 import { customDate } from '../../functions/reusableFunction';
-import MonthlyDetails from './MonthlyDetails'
-import MonthlyForm from './MonthlyForm';
+import CategoryDetails from './CategoryDetails'
+import CategoryForm from './CategoryForm';
 
 
 const MonthlyBilling = () => {
@@ -16,39 +16,8 @@ const MonthlyBilling = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  const categoriesList = useAppSelector(state => state.categories.inputLists);
-  const expenseLists = useAppSelector((state) => state.expense.inputLists);
-  
   const dispatch = useAppDispatch();
   
-  const transactionCategories = () => {
-    let identity : Record<string, number> = {};
-    const categoriesTitles = categoriesList.map(category => category.title)
-
-    const transactionList = expenseLists
-    .map(expense => expense.categories)
-    .map(category => (category))
-    .flat(1)
-    .reduce((prev, curr)=> {
-            if(curr in prev) {
-              prev[curr]++
-            } else {
-              prev[curr] = 1
-            }
-            return prev
-          }, identity)
-
-    const cloneList = {...transactionList};
-    
-    categoriesTitles.forEach(category => {
-      if(Object.keys(cloneList).indexOf(category) === -1) {
-        transactionList[category] = 0 
-      }
-    })
-
-    return Object.entries(transactionList).map((list, i) => <div key={i}>{list[0]}{list[1]}</div>)
-  }
-
   useEffect(()=>{
     dispatch(initializeCategories());
     dispatch(initializeExpense());
@@ -70,15 +39,7 @@ const MonthlyBilling = () => {
           <Nav.Link eventKey="link-3">December</Nav.Link>
         </Nav.Item>
       </Nav>
-      <MonthlyDetails />
-
-      {/* {
-        categoriesList.map(category => <p key={category.id}>{category.title}</p>)
-      } */}
-
-      {
-        transactionCategories()
-      }
+      <CategoryDetails />
 
       <Button
             variant="dark" 
@@ -93,7 +54,7 @@ const MonthlyBilling = () => {
         >
             +
         </Button>
-        <MonthlyForm 
+        <CategoryForm 
           handleClose={handleClose}
           show={show}
         />

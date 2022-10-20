@@ -10,7 +10,7 @@ const Header = () => {
         <Nav.Link href="/daily-report">Daily Report</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/monthly-report">Monthly Report</Nav.Link>
+        <Nav.Link href="/categories-report">Categories Report</Nav.Link>
       </Nav.Item>
     </Nav>
   )
