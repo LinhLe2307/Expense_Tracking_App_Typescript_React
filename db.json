@@ -22,9 +22,29 @@
       ],
       "color": "#c56363",
       "id": 2
+    },
+    {
+      "date": "Thursday, October 20, 2022",
+      "title": "20.10.2022",
+      "price": "12",
+      "description": "test",
+      "categories": [
+        "Accommodation",
+        "Education"
+      ],
+      "color": "#e97777",
+      "id": 3
     }
   ],
-  "income": [],
+  "income": [
+    {
+      "title": "Salary",
+      "description": "test",
+      "color": "#c58181",
+      "amount": "1111",
+      "id": 1
+    }
+  ],
   "categories": [
     {
       "title": "Accommodation",

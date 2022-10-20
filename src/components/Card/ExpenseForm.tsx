@@ -126,7 +126,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
                     as="textarea"
                     name="description"  
                     type="text" 
-                    placeholder="Enter Price"
+                    placeholder="Enter Description"
                     onChange={handleInputExpense}/>
                 </FloatingLabel>
                 </InputGroup>
