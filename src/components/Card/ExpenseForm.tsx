@@ -13,6 +13,7 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import { initializeCategories } from '../../features/categories/categoriesSlice';
 import { customDate } from "../../functions/reusableFunction";
 import { nanoid } from "nanoid";
+import FormModel from "../FormModel";
 
 interface MyProps {
   typeForm: string,
@@ -22,8 +23,6 @@ interface MyProps {
 
 function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-
-    const categoriesList = useAppSelector(state => state.categories.inputLists)
 
     const dispatch = useAppDispatch()
 
@@ -56,7 +55,7 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
     }
 
 
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>, typeForm: string):void => {
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
         if(typeForm === "add") {
             dispatch(addNewExpense(inputExpense)) 
@@ -71,117 +70,16 @@ function ExpenseForm ({typeForm, handleClose, show }: MyProps){
   }, [dispatch])
 
   return (
-    <>
-      <Modal
+    <FormModel 
         show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitHandler(e, typeForm)}>
-            <Row className="mb-3">
-            <Form.Group className="mb-3">
-              <FloatingLabel
-                controlId="titleInput"
-                label="Enter title"
-              >
-                <Form.Control 
-                  required 
-                  name="title" 
-                  type="text" 
-                  placeholder="Enter Title"
-                  onChange={handleInputExpense}/>
-              </FloatingLabel>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <InputGroup className="mb-3">
-                <InputGroup.Text>$</InputGroup.Text>
-              <FloatingLabel
-                controlId="priceInput"
-                label="Enter Price"
-              >
-                <Form.Control 
-                  required 
-                  name="price"  
-                  type="number" 
-                  placeholder="Enter Price"
-                  onChange={handleInputExpense}/>
-              </FloatingLabel>
-                <InputGroup.Text>.00</InputGroup.Text>
-              </InputGroup>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <InputGroup className="mb-3">
-                <FloatingLabel
-                  controlId="descriptionInput"
-                  label="Enter description"
-                >
-                  <Form.Control 
-                    as="textarea"
-                    name="description"  
-                    type="text" 
-                    placeholder="Enter Description"
-                    onChange={handleInputExpense}/>
-                </FloatingLabel>
-                </InputGroup>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Categories</Form.Label>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Choose category
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu >
-                  {categoriesList
-                    .map(item => (
-                        <Dropdown.Item 
-                          onClick={()=> handleSelectedCategories(item)}
-                          eventKey={item.title}
-                          key={nanoid()}
-                        >
-                          {item.title}
-                        </Dropdown.Item>
-                  ))} 
-                  </Dropdown.Menu>
-                
-              </Dropdown>
-            </Form.Group>
-            
-            {selectedCategories.map((category) => 
-              <div key={category}>{category}
-                <CloseButton 
-                  onClick={()=>deleteCategory(category)}
-                />
-              </div>
-            )}
-
-            <Form.Group className="mb-3">
-              <Form.Label>Color</Form.Label>
-              <Form.Control 
-                required 
-                type="color" 
-                name="color" 
-                title="Choose your color"
-                onChange={handleInputExpense}/>
-            </Form.Group>
-
-            <Modal.Footer>
-
-              <Button variant="primary" type="submit">Submit</Button>
-            </Modal.Footer>
-            </Row>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </>
+        handleClose={handleClose}
+        submitHandler={submitHandler}
+        handleInputExpense={handleInputExpense}
+        selectedCategories={selectedCategories}
+        deleteCategory={deleteCategory}
+        handleSelectedCategories={handleSelectedCategories}
+        type="expense"
+    />
   )
 }
 

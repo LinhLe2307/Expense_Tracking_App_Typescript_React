@@ -4,12 +4,18 @@ import { Button, Form, FloatingLabel } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addNewIncome, initializeIncome } from '../../features/income/incomeSlice';
+import { customDate } from '../../functions/reusableFunction';
 import { IncomeModel } from '../../models/reduxModels';
+import IncomeCard from './IncomeCard';
+import IncomeForm from './IncomeForm';
 
 
 const Income = () => {
-    let navigate = useNavigate();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [addIncome, setAddIncome] = useState<IncomeModel>({
+        date: customDate(new Date()),
         title: "",
         description: "",
         color: "",
@@ -36,60 +42,6 @@ const Income = () => {
 
   return (
     <>
-        <Form onSubmit={(e:React.FormEvent<HTMLFormElement>)=>handleSubmit(e)}>
-            <Form.Group className="mb-3"  controlId="formBasicIncome">
-                <FloatingLabel
-                    controlId="titleInput"
-                    label="Type of Income"
-                >
-                    <Form.Control 
-                        required 
-                        name="title"
-                        type="text" 
-                        placeholder="Type of Income"
-                        onChange={handleChange}
-                    />
-                </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3"  controlId="formBasicIncome">
-                <FloatingLabel
-                    controlId="titleInput"
-                    label="Enter Income Amount"
-                >
-                    <Form.Control 
-                        required 
-                        name="amount"
-                        type="number" 
-                        placeholder="Enter Income Amount"
-                        onChange={handleChange}
-                    />
-                </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3"  controlId="formBasicIncome">
-                <FloatingLabel
-                    controlId="titleInput"
-                    label="Enter Income Description"
-                >
-                    <Form.Control 
-                        required 
-                        name="description"
-                        type="text" 
-                        placeholder="Enter Income Description"
-                        onChange={handleChange}
-                    />
-                </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Color</Form.Label>
-              <Form.Control 
-                required 
-                type="color" 
-                name="color" 
-                title="Choose your color"
-                onChange={handleChange}/>
-            </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
-        </Form>
         <h1>
             Total earn: {
             incomeList.reduce((prev, curr) => {
@@ -97,8 +49,27 @@ const Income = () => {
             }, 0)
         }</h1>
         {
-            incomeList.map(income => <p key={nanoid()}>{income.title}{income.amount}</p>)
+            incomeList.map(income => <IncomeCard key={nanoid()} income={income}/>)
         }
+
+        <Button 
+            variant="dark" 
+            onClick={handleShow} 
+            type="button" 
+            style={{
+                position:"absolute",
+                bottom: "3rem",
+                right: "3rem",
+                borderRadius: "50%"
+            }}
+        >
+            +
+        </Button>
+
+        <IncomeForm 
+            handleClose={handleClose}
+            show={show}
+        />
     </>
     )
 }
