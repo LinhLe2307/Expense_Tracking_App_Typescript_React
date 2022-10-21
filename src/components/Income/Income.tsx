@@ -1,43 +1,48 @@
 import { nanoid } from 'nanoid';
 import React, {useEffect, useState} from 'react'
-import { Button, Form, FloatingLabel } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { initializeCategories } from '../../features/categories/categoriesSlice';
 import { addNewIncome, initializeIncome } from '../../features/income/incomeSlice';
 import { customDate } from '../../functions/reusableFunction';
 import { IncomeModel } from '../../models/reduxModels';
+import FormModel from '../FormModel';
 import IncomeCard from './IncomeCard';
-import IncomeForm from './IncomeForm';
 
 
 const Income = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [addIncome, setAddIncome] = useState<IncomeModel>({
+    const dispatch = useAppDispatch();
+
+    const incomeList = useAppSelector(state => state.income.inputLists);
+
+        const [inputExpense, setInputExpense] = useState<IncomeModel>({
         date: customDate(new Date()),
         title: "",
-        description: "",
-        color: "",
-        amount: 0
+        amount: 0,
+        description: "", 
+        color: ""
     });
-    const incomeList = useAppSelector(state => state.income.inputLists);
-    const dispatch= useAppDispatch();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
-        setAddIncome({
-            ...addIncome,
-            [e.target.name]: e.target.value
+    const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
+        setInputExpense({
+            ...inputExpense,
+            [e.target.name] : e.target.value
         })
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
-        dispatch(addNewIncome(addIncome));
+        
+        dispatch(addNewIncome(inputExpense)) 
+        window.location.reload()
     }
 
     useEffect(()=>{
         dispatch(initializeIncome());
+        dispatch(initializeCategories());
     }, [dispatch])
 
   return (
@@ -66,9 +71,11 @@ const Income = () => {
             +
         </Button>
 
-        <IncomeForm 
-            handleClose={handleClose}
+        <FormModel 
             show={show}
+            handleClose={handleClose}
+            submitHandler={submitHandler}
+            handleInputExpense={handleInputExpense}
         />
     </>
     )
