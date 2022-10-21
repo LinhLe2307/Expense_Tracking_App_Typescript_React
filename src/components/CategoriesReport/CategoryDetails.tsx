@@ -3,6 +3,7 @@ import React from 'react'
 import { CloseButton } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { deleteCategory } from '../../features/categories/categoriesSlice';
+import { deleteExpenseCategories } from '../../features/expense/expenseSlice';
 
 const CategoryDetails = () => {
   const categoriesList = useAppSelector(state => state.categories.inputLists);
@@ -37,12 +38,18 @@ const CategoryDetails = () => {
   }
 
   const handleDelete = (selectedItem:string) => {
-    console.log(selectedItem)
-    console.log(categoriesList)
+  
     const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
-    console.log(findIndex)
     if(findIndex !== undefined && findIndex.id !== undefined) {
-      dispatch(deleteCategory(findIndex.id))
+      const selectedCategory = expenseLists.map(expense => {
+        const newClone = expense.categories.filter(category => category !== selectedItem)
+        return {...expense, categories: newClone}
+      });
+      console.log(selectedCategory)
+      Promise.all([
+        dispatch(deleteCategory(findIndex.id)),
+        dispatch(deleteExpenseCategories(selectedCategory))
+      ])
     }
   }
 

@@ -19,7 +19,7 @@ export const incomeSlice = createSlice({
             state.inputLists = action.payload
         },
         addNewIncome: (state, action: PayloadAction<IncomeModel>) => {
-            serviceAPI.postAll(baseURL, action.payload);
+            serviceAPI.postSingle(baseURL, action.payload);
             state.inputLists = state.inputLists.concat(action.payload)
 
         },

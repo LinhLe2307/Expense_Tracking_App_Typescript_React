@@ -23,7 +23,7 @@ export const categoriesSlice = createSlice({
 
             state.inputLists = state.inputLists.concat(newCategory)
 
-            serviceAPI.postAll(baseURL, newCategory)
+            serviceAPI.postSingle(baseURL, newCategory)
         },
         editCategory:(state, action:PayloadAction<DefaultModel>):void => {
             const editIncome = action.payload;

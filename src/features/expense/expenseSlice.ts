@@ -20,7 +20,7 @@ export const expenseSlice = createSlice({
         },
 
         addNewExpense : (state, action: PayloadAction<ExpenseModel>):void => {
-            serviceAPI.postAll(baseURL,action.payload);
+            serviceAPI.postSingle(baseURL,action.payload);
             state.inputLists = state.inputLists.concat(action.payload)
         },
 
@@ -46,6 +46,19 @@ export const expenseSlice = createSlice({
         handleOpenEditExpense: (state, action):void => {
             state.editId = action.payload
             state.openEditItem = !state.openEditItem
+        },
+
+        deleteExpenseCategories: (state, action:PayloadAction<ExpenseModel[]>) => {
+            state.inputLists = action.payload;
+            const selectedPosts = action.payload
+            const postsIdsArray = action.payload.map(post => post.id);
+
+            console.log("postIdArray", postsIdsArray)
+
+            Promise.all([postsIdsArray.map((id) => 
+                id && serviceAPI.deleteAxios(baseURL, id))
+            , selectedPosts.map(post => serviceAPI.postSingle(baseURL, post))
+            ])
         }
 
     }
@@ -58,5 +71,12 @@ export const initializeExpense = () => {
     }
 }
 
-export const {getExpenseList, addNewExpense, editExpense, deleteExpense, handleOpenEditExpense} = expenseSlice.actions;
+export const {
+    getExpenseList, 
+    addNewExpense, 
+    editExpense, 
+    deleteExpense, 
+    handleOpenEditExpense, 
+    deleteExpenseCategories
+} = expenseSlice.actions;
 export default expenseSlice.reducer;
