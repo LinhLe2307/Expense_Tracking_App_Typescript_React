@@ -20,6 +20,7 @@ const Expense = () => {
 
     const categoriesList = useAppSelector(state => state.categories.inputLists);
 
+    const filterExpense:ExpenseModel[] = expenseLists.filter((expense:ExpenseModel) => expense.date === customDate(new Date()))
 
     return (
     <>
@@ -40,7 +41,11 @@ const Expense = () => {
         
         <GraphDisplay />
 
-        <h1> €{expenseLists.reduce((prev, curr) => prev + (+curr.price), 0)} spent today</h1>
+        <h1>€{
+            filterExpense.reduce((prev, curr) => prev + (+curr.price), 0) 
+        } spent today</h1>
+
+        
 
         <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -66,10 +71,7 @@ const Expense = () => {
         <h3>{selectView === "" ? "All" : selectView}</h3>
 
         {
-            expenseLists
-                .filter((expense:ExpenseModel) => {
-                    return expense.date === customDate(new Date())
-                })
+            filterExpense
                 .filter((expense:ExpenseModel) => {
                     return selectView === "" ? expense : expense.categories.indexOf(selectView) !== -1
                 })
