@@ -36,70 +36,18 @@
     },
     {
       "date": "Friday, October 21, 2022",
-      "title": "1",
-      "price": "23",
-      "description": "1",
+      "title": "Todo",
+      "price": "45",
+      "description": "2",
       "categories": [
-        "Food"
+        "Food",
+        "Education"
       ],
-      "color": "#d07676",
+      "color": "#f16a6a",
       "id": 4
     }
   ],
-  "income": [
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "Salary",
-      "description": "October's salary",
-      "color": "#c98282",
-      "amount": "12",
-      "id": 1
-    },
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "Salary",
-      "description": "October's salary",
-      "color": "#c98282",
-      "amount": "1223",
-      "id": 2
-    },
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "Loan",
-      "amount": 0,
-      "description": "23",
-      "color": "#964545",
-      "price": "1234",
-      "id": 3
-    },
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "Partime job",
-      "amount": 0,
-      "description": "34",
-      "color": "#b96464",
-      "price": "5676",
-      "id": 4
-    },
-    {
-      "date": "Friday, October 21, 2022",
-      "title": "micro",
-      "amount": 0,
-      "description": "2",
-      "color": "#833f3f",
-      "price": "23",
-      "id": 5
-    },
-    {
-      "date": "Friday, October 21, 2022",
-      "title": "lap",
-      "amount": 0,
-      "description": "2",
-      "color": "#9d5858",
-      "price": "23",
-      "id": 6
-    }
-  ],
+  "income": [],
   "categories": [
     {
       "date": "Thursday, October 20, 2022",

@@ -34,7 +34,7 @@ export const expenseSlice = createSlice({
             expenseServices.putExpense(state.editId, editExense)
         },
 
-        deleteExpense: (state, action):void => {
+        deleteExpense: (state, action:PayloadAction<number>):void => {
             const deleteId = action.payload;
             state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
             

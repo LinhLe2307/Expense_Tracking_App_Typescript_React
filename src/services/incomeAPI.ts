@@ -12,7 +12,7 @@ const postAll = (inputIncome:IncomeModel) => {
     .catch(err => console.log(err))
 }
 
-const putExpense = (id:number, editIncome:IncomeModel) => {
+const putAxios = (id:number, editIncome:IncomeModel) => {
     axios.put(`http://localhost:3010/income/${id}`, editIncome)
     .then(res => console.log(res))
     .catch(err => console.log(err))
@@ -25,4 +25,4 @@ const deleteAxios = (id:number) => {
     .catch(err => console.log(err))
 }
 
-export default {getAll, postAll, putExpense, deleteAxios}
+export default {getAll, postAll, putAxios, deleteAxios}

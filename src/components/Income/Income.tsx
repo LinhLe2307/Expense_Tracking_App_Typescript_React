@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import { Button } from 'react-bootstrap'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { initializeCategories } from '../../features/categories/categoriesSlice';
-import { addNewIncome, initializeIncome } from '../../features/income/incomeSlice';
+import { addNewIncome, editIncome, initializeIncome } from '../../features/income/incomeSlice';
 import { customDate } from '../../functions/reusableFunction';
 import { IncomeModel } from '../../models/reduxModels';
 import FormModel from '../FormModel';
@@ -15,6 +15,7 @@ const Income = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useAppDispatch();
+    const openEditIncome = useAppSelector((state) => state.income.openEditItem);
 
     const incomeList = useAppSelector(state => state.income.inputLists);
 
@@ -35,8 +36,11 @@ const Income = () => {
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
-        
-        dispatch(addNewIncome(inputExpense)) 
+        if(!openEditIncome) {
+            dispatch(addNewIncome(inputExpense)) 
+        } else {
+            dispatch(editIncome(inputExpense))
+        }
         window.location.reload()
     }
 
@@ -53,8 +57,13 @@ const Income = () => {
                 return prev + (+curr.amount)
             }, 0)
         }</h1>
+
         {
-            incomeList.map(income => <IncomeCard key={nanoid()} income={income}/>)
+            incomeList.map(income => <IncomeCard 
+                key={nanoid()} 
+                income={income}
+                handleShow={handleShow}
+            />)
         }
 
         <Button 

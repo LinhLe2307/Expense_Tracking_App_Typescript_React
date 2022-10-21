@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { ExpenseModel } from '../../models/reduxModels';
 import {handleOpenEditExpense, deleteExpense, editExpense} from "../../features/expense/expenseSlice";
 import { Link } from 'react-router-dom';
+import CustomDropdown from '../CustomDropdown';
 
 
 interface MyProps {
@@ -36,32 +36,15 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
             <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
             {/* <Card.Text>{expense.description}</Card.Text> */}
             <Card.Title>-€{expense.price}</Card.Title>
-              <Dropdown>
-                <Dropdown.Toggle 
-                  variant="light" 
-                  id="dropdown-basic"
-                >
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu >
-                  <Dropdown.Item
-                    onClick={()=> {
-                        dispatch(deleteExpense(expense.id))
-                    }}
-                  >
-                    Delete
-                  </Dropdown.Item>
-
-                  <Dropdown.Item
-                    onClick={()=> {
-                      dispatch(handleOpenEditExpense(expense.id));
-                      handleShow()
-                    }}
-                  >
-                    Edit
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+            {
+              expense.id &&
+              <CustomDropdown 
+                deleteItem={deleteExpense}
+                handleOpenEditItem={handleOpenEditExpense}
+                itemId={expense.id}
+                handleShow={handleShow}
+              />
+            }
             </div>
         </Card.Body>
     </Card>

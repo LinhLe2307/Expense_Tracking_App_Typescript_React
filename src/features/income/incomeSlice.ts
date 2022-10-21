@@ -21,6 +21,28 @@ export const incomeSlice = createSlice({
             state.inputLists = state.inputLists.concat(action.payload)
 
         },
+        editIncome:(state, action:PayloadAction<IncomeModel>):void => {
+            const editIncome = action.payload;
+            const findIndex = state.inputLists.find(expense => expense.id === state.editId)
+            if(findIndex !== undefined) {
+                const indexElement = state.inputLists.indexOf(findIndex);
+                state.inputLists.splice(indexElement, 0, editIncome);
+                state.inputLists =  state.inputLists
+
+            }
+            incomeServices.putAxios(state.editId, editIncome)
+        },
+        deleteIncome: (state, action:PayloadAction<number>):void => {
+            const deleteId = action.payload;
+            state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
+            
+            incomeServices.deleteAxios(deleteId)
+        },
+
+        handleOpenEditIncome: (state, action):void => {
+            state.editId = action.payload
+            state.openEditItem = !state.openEditItem
+        }
     }
 });
 
@@ -31,5 +53,5 @@ export const initializeIncome = () => {
     }
 }
 
-export const {getTotalIncome, addNewIncome} = incomeSlice.actions;
+export const {getTotalIncome, addNewIncome, editIncome, deleteIncome, handleOpenEditIncome} = incomeSlice.actions;
 export default incomeSlice.reducer;
