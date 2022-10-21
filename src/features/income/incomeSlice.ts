@@ -1,7 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
-import incomeServices from "../../services/incomeAPI";
+import serviceAPI from "../../services/serviceAPI";
 import {IncomeModel, ExpenseArrayModel} from "../../models/reduxModels"
+
+const baseURL = "http://localhost:3010/income"
 
 const initialExpenseState: ExpenseArrayModel<IncomeModel> = {
     inputLists: [],
@@ -17,7 +19,7 @@ export const incomeSlice = createSlice({
             state.inputLists = action.payload
         },
         addNewIncome: (state, action: PayloadAction<IncomeModel>) => {
-            incomeServices.postAll(action.payload);
+            serviceAPI.postAll(baseURL, action.payload);
             state.inputLists = state.inputLists.concat(action.payload)
 
         },
@@ -30,13 +32,13 @@ export const incomeSlice = createSlice({
                 state.inputLists =  state.inputLists
 
             }
-            incomeServices.putAxios(state.editId, editIncome)
+            serviceAPI.putAxios(baseURL, state.editId, editIncome)
         },
         deleteIncome: (state, action:PayloadAction<number>):void => {
             const deleteId = action.payload;
             state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
             
-            incomeServices.deleteAxios(deleteId)
+            serviceAPI.deleteAxios(baseURL, deleteId)
         },
 
         handleOpenEditIncome: (state, action):void => {
@@ -48,7 +50,7 @@ export const incomeSlice = createSlice({
 
 export const initializeIncome = () => {
     return async (dispatch: Dispatch<any, any, any>) => {
-        const income:IncomeModel[] = await incomeServices.getAll();
+        const income:IncomeModel[] = await serviceAPI.getAll(baseURL);
         dispatch(getTotalIncome(income))
     }
 }

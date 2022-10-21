@@ -1,7 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
-import expenseServices from "../../services/expenseAPI";
+import serviceAPI from "../../services/serviceAPI";
 import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
+
+const baseURL = "http://localhost:3010/notes"
 
 const initialExpenseState: ExpenseArrayModel<ExpenseModel> = {
     inputLists: [],
@@ -18,7 +20,7 @@ export const expenseSlice = createSlice({
         },
 
         addNewExpense : (state, action: PayloadAction<ExpenseModel>):void => {
-            expenseServices.postAll(action.payload);
+            serviceAPI.postAll(baseURL,action.payload);
             state.inputLists = state.inputLists.concat(action.payload)
         },
 
@@ -31,14 +33,14 @@ export const expenseSlice = createSlice({
                 state.inputLists =  state.inputLists
 
             }
-            expenseServices.putExpense(state.editId, editExense)
+            serviceAPI.putAxios(baseURL, state.editId, editExense)
         },
 
         deleteExpense: (state, action:PayloadAction<number>):void => {
             const deleteId = action.payload;
             state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
             
-            expenseServices.deleteAxios(deleteId)
+            serviceAPI.deleteAxios(baseURL,deleteId)
         },
 
         handleOpenEditExpense: (state, action):void => {
@@ -51,7 +53,7 @@ export const expenseSlice = createSlice({
 
 export const initializeExpense = () => {
     return async (dispatch: Dispatch<any, any, any>) => {
-        const expense:ExpenseModel[] = await expenseServices.getAll();
+        const expense:ExpenseModel[] = await serviceAPI.getAll(baseURL);
         dispatch(getExpenseList(expense))
     }
 }

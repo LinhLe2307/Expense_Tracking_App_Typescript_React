@@ -3,27 +3,53 @@ import React, {useState, useEffect} from 'react'
 import { Button, Nav } from 'react-bootstrap'
 import { Calendar } from 'react-calendar';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { initializeCategories } from '../../features/categories/categoriesSlice';
+import { addNewCategory, editCategory, initializeCategories } from '../../features/categories/categoriesSlice';
 import { initializeExpense } from "../../features/expense/expenseSlice";
 import { customDate } from '../../functions/reusableFunction';
+import { DefaultModel } from '../../models/reduxModels';
+import FormModel from '../FormModel';
 import CategoryDetails from './CategoryDetails'
-import CategoryForm from './CategoryForm';
 
 
-const MonthlyBilling = () => {
+const CategoriesReport = () => {
   const [value, onChange] = useState(new Date());
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
   const dispatch = useAppDispatch();
+
+  const openEditCategory = useAppSelector((state) => state.categories.openEditItem);
+
+  const [inputCategory, setInputCategory] = useState<DefaultModel>({
+        date: customDate(new Date()),
+        title: "",
+        description: "", 
+        color: ""
+    });
+
+    const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
+        setInputCategory({
+            ...inputCategory,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
+        e.preventDefault();
+       if(!openEditCategory) {
+            dispatch(addNewCategory(inputCategory)) 
+        } else {
+            dispatch(editCategory(inputCategory))
+        }
+        window.location.reload()
+    } 
   
   useEffect(()=>{
     dispatch(initializeCategories());
     dispatch(initializeExpense());
     
   }, [dispatch]);
-
 
   return (
     <div>
@@ -54,12 +80,16 @@ const MonthlyBilling = () => {
         >
             +
         </Button>
-        <CategoryForm 
+
+        <FormModel 
+          show={show} 
           handleClose={handleClose}
-          show={show}
-        />
+          submitHandler={submitHandler}
+          handleInputExpense={handleInputExpense}
+          type="categories"
+    />
     </div>
   )
 }
 
-export default MonthlyBilling
+export default CategoriesReport

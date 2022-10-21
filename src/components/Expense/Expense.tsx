@@ -1,13 +1,15 @@
+import React, { useState, useEffect } from "react";
 import { Button, Dropdown } from 'react-bootstrap';
-import { useState } from "react";
 import { nanoid } from 'nanoid';
 
-import ExpenseForm from "../Card/ExpenseForm";
 import SingleCard from '../Card/SingleCard';
-import { useAppSelector } from '../../app/hooks';
-import { ExpenseModel } from '../../models/reduxModels';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { DefaultModel, ExpenseModel } from '../../models/reduxModels';
 import GraphDisplay from './GraphDisplay';
 import { customDate } from '../../functions/reusableFunction';
+import { addNewExpense, editExpense } from "../../features/expense/expenseSlice";
+import { initializeCategories } from "../../features/categories/categoriesSlice";
+import FormModel from "../FormModel";
 
 const Expense = () => {
     const [selectView, setSelectView] = useState("");
@@ -15,12 +17,60 @@ const Expense = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const dispatch = useAppDispatch()
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
     const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
     const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
     const categoriesList = useAppSelector(state => state.categories.inputLists);
 
     const filterExpense:ExpenseModel[] = expenseLists.filter((expense:ExpenseModel) => expense.date === customDate(new Date()))
+
+    const [inputExpense, setInputExpense] = useState<ExpenseModel>({
+        date: customDate(new Date()),
+        title: "",
+        price: 0,
+        description: "", 
+        categories: selectedCategories,
+        color: ""
+    });
+
+    const deleteCategory = (deleteItem: string) => {
+      setSelectedCategories(prev => prev.filter(category => category !== deleteItem))
+    }
+
+    const handleSelectedCategories = (category: DefaultModel) => {
+      const inputCategory = category.title;
+      if(selectedCategories.indexOf(inputCategory) === -1) {
+        setSelectedCategories(prev => prev.concat(category.title))
+      }
+    }
+
+    const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
+        setInputExpense({
+            ...inputExpense,
+            [e.target.name] : e.target.value,
+            categories: selectedCategories
+        })
+    }
+
+
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
+        e.preventDefault();
+        if(!openEditExpense) {
+            dispatch(addNewExpense(inputExpense)) 
+        } else {
+            dispatch(editExpense(inputExpense))
+        }
+        window.location.reload()
+    }
+
+
+    useEffect(()=>{
+        dispatch(initializeCategories());
+  }, [dispatch])
+
 
     return (
     <>
@@ -80,18 +130,16 @@ const Expense = () => {
                 />)
         }
 
-        {openEditExpense ?
-            <ExpenseForm 
-                typeForm="edit"
-                handleClose={handleClose}
-                show={show}
-            />
-            : <ExpenseForm 
-                typeForm="add" 
-                handleClose={handleClose}
-                show={show}
-            />
-        }
+        <FormModel 
+        show={show}
+        handleClose={handleClose}
+        submitHandler={submitHandler}
+        handleInputExpense={handleInputExpense}
+        selectedCategories={selectedCategories}
+        deleteCategory={deleteCategory}
+        handleSelectedCategories={handleSelectedCategories}
+        type="expense"
+    />
     </>
   )
 }

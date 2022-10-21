@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CloseButton, Dropdown } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { deleteIncome, handleOpenEditIncome } from '../../features/income/incomeSlice'
 import { IncomeModel } from '../../models/reduxModels'
 import CustomDropdown from '../CustomDropdown'

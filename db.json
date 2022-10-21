@@ -1,82 +1,61 @@
 {
   "notes": [
     {
-      "date": "Thursday, October 20, 2022",
-      "title": "First",
-      "price": "12",
-      "description": "1",
+      "date": "Friday, October 21, 2022",
+      "title": "edit first",
+      "price": "56",
+      "description": "5",
       "categories": [
-        "Accommodation",
+        "Acommodation",
         "Food"
       ],
-      "color": "#d27070",
+      "color": "#db8080",
       "id": 1
-    },
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "2",
-      "price": "12",
-      "description": "2",
-      "categories": [
-        "Accommodation"
-      ],
-      "color": "#cb6c6c",
-      "id": 2
-    },
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "3",
-      "price": "45",
-      "description": "3",
-      "categories": [
-        "Education"
-      ],
-      "color": "#e26f6f",
-      "id": 3
     },
     {
       "date": "Friday, October 21, 2022",
-      "title": "Todo",
-      "price": "45",
-      "description": "2",
+      "title": "second",
+      "price": "34",
+      "description": "re",
       "categories": [
-        "Food",
-        "Education"
+        "Food"
       ],
-      "color": "#f16a6a",
-      "id": 4
+      "color": "#bf5f5f",
+      "id": 2
     }
   ],
-  "income": [],
+  "income": [
+    {
+      "date": "Friday, October 21, 2022",
+      "title": "edit salary",
+      "amount": 0,
+      "description": "salary",
+      "color": "#225d53",
+      "price": "56",
+      "id": 1
+    }
+  ],
   "categories": [
     {
-      "date": "Thursday, October 20, 2022",
-      "title": "Accommodation",
-      "description": "1",
-      "color": "#ca9191",
+      "date": "Friday, October 21, 2022",
+      "title": "Acommodation",
+      "description": "acc",
+      "color": "#d08080",
       "id": 1
     },
     {
-      "date": "Thursday, October 20, 2022",
+      "date": "Friday, October 21, 2022",
       "title": "Food",
-      "description": "This is food",
-      "color": "#57b266",
+      "description": "food",
+      "color": "#ba8787",
       "id": 2
     },
     {
-      "date": "Thursday, October 20, 2022",
+      "date": "Friday, October 21, 2022",
       "title": "Education",
-      "description": "3",
-      "color": "#e6a8a8",
+      "description": "education",
+      "color": "#4bb9a7",
       "id": 3
-    },
-    {
-      "date": "Thursday, October 20, 2022",
-      "title": "Cloth",
-      "description": "4",
-      "color": "#eea0a0",
-      "price": "34",
-      "id": 4
     }
   ]
 }
