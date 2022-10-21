@@ -45,7 +45,7 @@ const CategoriesReport = () => {
         window.location.reload()
     } 
   
-  useEffect(()=>{
+    useEffect(()=>{
     dispatch(initializeCategories());
     dispatch(initializeExpense());
     

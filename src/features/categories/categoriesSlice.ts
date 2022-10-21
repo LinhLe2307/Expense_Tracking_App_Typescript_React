@@ -37,12 +37,12 @@ export const categoriesSlice = createSlice({
             serviceAPI.putAxios(baseURL, state.editId, editIncome)
         },
         deleteCategory: (state, action:PayloadAction<number>):void => {
-            const deleteId = action.payload;
-            state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
-            
-            serviceAPI.deleteAxios(baseURL, deleteId)
-        },
+            const deleteItem = action.payload;
+            serviceAPI.deleteAxios(baseURL, deleteItem)
 
+            state.inputLists = state.inputLists.filter(expense => expense.id !== deleteItem)
+        },
+        
         handleOpenEditCategory: (state, action):void => {
             state.editId = action.payload
             state.openEditItem = !state.openEditItem
