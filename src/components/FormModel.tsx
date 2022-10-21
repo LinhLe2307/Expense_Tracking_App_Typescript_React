@@ -1,7 +1,11 @@
-import React from 'react'
+import axios from 'axios';
+import React, {useEffect, useState} from 'react'
 import { Button, FloatingLabel, InputGroup, Modal, Row, Form } from 'react-bootstrap'
-import { FormTypeModels } from '../models/reduxModels'
-import CategoryAddition from './Card/CategoryAddition'
+import { useAppSelector } from '../app/hooks';
+import { customDate } from '../functions/reusableFunction';
+import { ExpenseModel, FormTypeModels } from '../models/reduxModels'
+import CategoryAddition from './Card/CategoryAddition';
+
 
 function FormModel({
     show, 
@@ -13,6 +17,20 @@ function FormModel({
     selectedCategories,
     deleteCategory,
 }:FormTypeModels) {
+    const [displayInput, setDisplayInput] = useState<ExpenseModel>({
+        date: customDate(new Date()),
+        title: "",
+        amount: 0,
+        description: "", 
+        categories: [],
+        color: ""
+    })
+    const expenseId = useAppSelector((state) => state.expense.editId);
+
+    useEffect(() => {
+        axios.get(`http://localhost:3010/notes/${expenseId}`).then(res => setDisplayInput(res.data))
+    }, [expenseId]
+    )
   return (
     <>
     <Modal
@@ -37,6 +55,7 @@ function FormModel({
                     name="title" 
                     type="text" 
                     placeholder="Enter Title"
+                    defaultValue={displayInput.title}
                     onChange={handleInputExpense}/>
                 </FloatingLabel>
             </Form.Group>
@@ -55,6 +74,7 @@ function FormModel({
                         name="amount"  
                         type="number" 
                         placeholder="Enter Price"
+                        
                         onChange={handleInputExpense}/>
                     </FloatingLabel>
                     <InputGroup.Text>.00</InputGroup.Text>
@@ -72,6 +92,7 @@ function FormModel({
                     as="textarea"
                     name="description"  
                     type="text" 
+                    defaultValue={displayInput.description}
                     placeholder="Enter Description"
                     onChange={handleInputExpense}/>
                 </FloatingLabel>

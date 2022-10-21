@@ -44,7 +44,9 @@ export const incomeSlice = createSlice({
         handleOpenEditIncome: (state, action):void => {
             state.editId = action.payload
             state.openEditItem = !state.openEditItem
-        }
+        },
+
+        
     }
 });
 

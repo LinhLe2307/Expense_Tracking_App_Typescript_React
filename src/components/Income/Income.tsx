@@ -19,7 +19,7 @@ const Income = () => {
 
     const incomeList = useAppSelector(state => state.income.inputLists);
 
-        const [inputExpense, setInputExpense] = useState<IncomeModel>({
+    const [inputExpense, setInputExpense] = useState<IncomeModel>({
         date: customDate(new Date()),
         title: "",
         amount: 0,

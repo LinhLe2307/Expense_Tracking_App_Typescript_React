@@ -27,6 +27,7 @@ export interface CategoryExpense {
 }
 
 export interface FormTypeModels extends CategoryExpense {
+    items?: DefaultModel[] | ExpenseModel[] | IncomeModel[],
     show: boolean, 
     handleClose:()=>void,
     submitHandler:(e: React.FormEvent<HTMLFormElement>, typeForm?:string)=>void,
