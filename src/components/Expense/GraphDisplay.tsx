@@ -6,9 +6,9 @@ const GraphDisplay = () => {
 
   const incomeList = useAppSelector(state => state.income.inputLists);
 
-  const totalExpense = expenseLists.reduce((prev, curr) => prev + curr.price, 0) 
+  const totalExpense = expenseLists.reduce((prev, curr) => prev + curr.amount, 0) 
 
-  const totalIncome = expenseLists.reduce((prev, curr) => prev + curr.price, 0)
+  const totalIncome = expenseLists.reduce((prev, curr) => prev + curr.amount, 0)
 
   return (
     <div>

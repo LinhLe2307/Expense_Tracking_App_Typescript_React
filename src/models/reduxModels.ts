@@ -7,7 +7,7 @@ export interface DefaultModel {
 }
 
 export interface ExpenseModel extends DefaultModel {
-    price: number,
+    amount: number,
     categories: string[],
 }
 export interface IncomeModel extends DefaultModel {

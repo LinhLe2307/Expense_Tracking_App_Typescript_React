@@ -35,7 +35,7 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
             </div>
             <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
             {/* <Card.Text>{expense.description}</Card.Text> */}
-            <Card.Title>-€{expense.price}</Card.Title>
+            <Card.Title>-€{expense.amount}</Card.Title>
             {
               expense.id &&
               <CustomDropdown 

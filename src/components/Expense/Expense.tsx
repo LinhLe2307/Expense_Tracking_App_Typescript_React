@@ -30,7 +30,7 @@ const Expense = () => {
     const [inputExpense, setInputExpense] = useState<ExpenseModel>({
         date: customDate(new Date()),
         title: "",
-        price: 0,
+        amount: 0,
         description: "", 
         categories: selectedCategories,
         color: ""
@@ -92,7 +92,7 @@ const Expense = () => {
         <GraphDisplay />
 
         <h1>€{
-            filterExpense.reduce((prev, curr) => prev + (+curr.price), 0) 
+            filterExpense.reduce((prev, curr) => prev + (+curr.amount), 0) 
         } spent today</h1>
 
         

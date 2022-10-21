@@ -2,33 +2,31 @@
   "notes": [
     {
       "date": "Saturday, October 22, 2022",
-      "title": "2",
-      "price": "23",
-      "description": "2",
+      "title": "1",
+      "amount": "12",
+      "description": "12",
       "categories": [],
-      "color": "#9d5858",
+      "color": "#944747",
       "id": 1
-    },
-    {
-      "date": "Saturday, October 22, 2022",
-      "title": "3",
-      "price": "23",
-      "description": "3",
-      "categories": [],
-      "color": "#ff8080",
-      "id": 2
     }
   ],
   "income": [
     {
-      "date": "Friday, October 21, 2022",
-      "title": "edit salary",
-      "amount": 0,
-      "description": "salary",
-      "color": "#225d53",
-      "price": "56",
+      "date": "Saturday, October 22, 2022",
+      "title": "1",
+      "amount": "12",
+      "description": "1",
+      "color": "#a16363",
       "id": 1
     }
   ],
-  "categories": []
+  "categories": [
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "accommodation",
+      "description": "ewr",
+      "color": "#684545",
+      "id": 1
+    }
+  ]
 }

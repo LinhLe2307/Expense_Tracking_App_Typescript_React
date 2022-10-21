@@ -52,7 +52,7 @@ function FormModel({
                     >
                     <Form.Control 
                         required 
-                        name="price"  
+                        name="amount"  
                         type="number" 
                         placeholder="Enter Price"
                         onChange={handleInputExpense}/>
