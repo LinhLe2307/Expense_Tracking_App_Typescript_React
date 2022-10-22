@@ -21,7 +21,7 @@ const HomePage = () => {
     return (
         <div>
             <h3>{customDate(new Date())}</h3>
-            {/* <Tab.Container id="left-tabs-example" defaultActiveKey="expense">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="expense">
                 <Row>
                 <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
@@ -36,15 +36,15 @@ const HomePage = () => {
                 <Col sm={9}>
                 <Tab.Content>
                     <Tab.Pane eventKey="expense">
-                    <Expense />
+                        <Expense />
                     </Tab.Pane>
                     <Tab.Pane eventKey="income">
-                    <Income />
+                        <Income />
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>
                 </Row>
-            </Tab.Container> */}
+            </Tab.Container>
         </div>
   )
 }

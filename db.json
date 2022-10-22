@@ -5,11 +5,18 @@
       "title": "Second",
       "amount": "23",
       "description": "second",
-      "categories": [
-        "accommodation"
-      ],
+      "categories": [],
       "color": "#cd8484",
       "id": 2
+    },
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "second",
+      "amount": "234",
+      "description": "2nd",
+      "categories": [],
+      "color": "#d16b6b",
+      "id": 3
     }
   ],
   "income": [
@@ -49,9 +56,9 @@
   "categories": [
     {
       "date": "Saturday, October 22, 2022",
-      "title": "accommodation",
-      "description": "ewr",
-      "color": "#684545",
+      "title": "Accommodation",
+      "description": "23",
+      "color": "#4e3c3c",
       "id": 1
     }
   ]
