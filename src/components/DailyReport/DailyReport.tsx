@@ -5,13 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { initializeExpense } from '../../features/expense/expenseSlice';
 import { customDate } from '../../functions/reusableFunction';
 import SingleCard from '../Card/SingleCard';
-
+import { ExpenseModel } from '../../models/reduxModels';
 
 const DailyReport = () => {
     const [value, onChange] = useState(new Date());
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
     const dispatch = useAppDispatch();
@@ -25,12 +22,11 @@ const DailyReport = () => {
         <h3>{customDate(value)}</h3>
         {
             expenseLists
-                .filter(expense => expense.date === customDate(value))
-                .map(expense => 
+                .filter((expense:ExpenseModel) => expense.date === customDate(value))
+                .map((expense:ExpenseModel) => 
                     <SingleCard 
                         expense={expense} 
                         key={nanoid()} 
-                        handleShow={handleShow}
                     />
                 )
         }

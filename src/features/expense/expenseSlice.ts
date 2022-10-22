@@ -9,6 +9,7 @@ const initialExpenseState: ExpenseArrayModel<ExpenseModel> = {
     inputLists: [],
     openEditItem: false,
     editId: 0,
+    show: false,
 }
 
 export const expenseSlice = createSlice({
@@ -59,6 +60,9 @@ export const expenseSlice = createSlice({
                 id && serviceAPI.deleteAxios(baseURL, id))
             , selectedPosts.map(post => serviceAPI.postSingle(baseURL, post))
             ])
+        },
+        handleOpenForm: (state) => {
+            state.show = !state.show
         }
 
     }
@@ -77,6 +81,7 @@ export const {
     editExpense, 
     deleteExpense, 
     handleOpenEditExpense, 
-    deleteExpenseCategories
+    deleteExpenseCategories,
+    handleOpenForm
 } = expenseSlice.actions;
 export default expenseSlice.reducer;

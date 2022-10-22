@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import { Button, FloatingLabel, InputGroup, Modal, Row, Form, CloseButton } from 'react-bootstrap'
-import { useAppSelector } from '../app/hooks';
+import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { handleOpenForm } from '../features/expense/expenseSlice';
 import { customDate } from '../functions/reusableFunction';
 import { CategoriesModel, ExpenseModel, FormTypeModels, IncomeModel } from '../models/reduxModels'
 import CategoryAddition from './Card/CategoryAddition';
@@ -9,8 +11,6 @@ import CategoryAddition from './Card/CategoryAddition';
 
 function FormModel({
     inputExpense,
-    show, 
-    handleClose,
     submitHandler,
     handleInputExpense,
     handleSelectedCategories,
@@ -19,17 +19,14 @@ function FormModel({
     deleteCategory,
     baseURL, 
     expenseId,
-    handleShow
 }:FormTypeModels) {
-    
-    
+
+    const dispatch = useAppDispatch();
+    const show = useAppSelector(state => state.expense.show)
     const [displayInput, setDisplayInput] = useState<CategoriesModel | ExpenseModel | IncomeModel>(inputExpense);
 
-    const onCloseForm = () => {
-        setDisplayInput(inputExpense)
-    }
-
     useEffect(() => {
+        
         async function fetchData () {
             if(expenseId !== 0) {
                 const response = await axios.get(`${baseURL}/${expenseId}`)
@@ -46,7 +43,7 @@ function FormModel({
     <>
     <Button 
             variant="dark" 
-            onClick={handleShow} 
+            onClick={()=>dispatch(handleOpenForm())} 
             type="button" 
             style={{
                 position:"absolute",
@@ -59,7 +56,7 @@ function FormModel({
         </Button>
     <Modal
         show={show}
-        onHide={handleClose}
+        onHide={()=>dispatch(handleOpenForm())}
         backdrop="static"
         keyboard={false}
     >

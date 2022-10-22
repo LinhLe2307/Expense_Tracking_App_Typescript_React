@@ -9,6 +9,7 @@ const initialCategoriesState:ExpenseArrayModel<CategoriesModel> = {
     inputLists: [],
     openEditItem: false,
     editId: 0,
+    show: false,
 }
 
 export const categoriesSlice = createSlice({
@@ -57,5 +58,11 @@ export const initializeCategories = () => {
     }
 }
 
-export const { getCategoriesList, addNewCategory, editCategory, deleteCategory, handleOpenEditCategory} = categoriesSlice.actions;
+export const { 
+    getCategoriesList, 
+    addNewCategory, 
+    editCategory, 
+    deleteCategory, 
+    handleOpenEditCategory,
+} = categoriesSlice.actions;
 export default categoriesSlice.reducer;

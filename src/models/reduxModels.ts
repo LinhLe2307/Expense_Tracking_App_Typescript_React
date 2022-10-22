@@ -19,7 +19,8 @@ export interface CategoriesModel extends DefaultModel {
 export interface ExpenseArrayModel<T> {
     inputLists: T[],
     openEditItem: boolean,
-    editId: number
+    editId: number,
+    show: boolean
 }
 
 
@@ -30,12 +31,9 @@ export interface CategoryExpense {
 }
 
 export interface FormTypeModels extends CategoryExpense {
-    handleShow: ()=>void,
     inputExpense: DefaultModel | ExpenseModel | IncomeModel
     items?: DefaultModel[] | ExpenseModel[] | IncomeModel[],
-    show: boolean,
     expenseId: number,
-    handleClose:()=>void,
     submitHandler:(e: React.FormEvent<HTMLFormElement>, typeForm?:string)=>void,
     handleInputExpense:(e: React.ChangeEvent<HTMLInputElement>)=>void,
     type?:string,

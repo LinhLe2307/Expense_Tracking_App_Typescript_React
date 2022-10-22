@@ -6,15 +6,17 @@ import HomePage from './components/HomePage';
 import CategoriesReport from './components/CategoriesReport/CategoriesReport';
 import Layout from './pages/Layout';
 import Income from './components/Income/Income';
+import Expense from './components/Expense/Expense';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />}/>
+          <Route index element={<Expense />}/>
           <Route path="/:id" element={<DetailsInfo />}/>
           <Route path="/categories-report" element={<CategoriesReport />}/>
+          <Route path="/income-report" element={<Income />}/>
           <Route path="/daily-report" element={<DailyReport />}/>
         </ Route>
       </Routes>

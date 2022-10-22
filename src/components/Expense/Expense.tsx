@@ -7,15 +7,12 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { DefaultModel, ExpenseModel } from '../../models/reduxModels';
 import GraphDisplay from './GraphDisplay';
 import { customDate } from '../../functions/reusableFunction';
-import { addNewExpense, editExpense } from "../../features/expense/expenseSlice";
+import { addNewExpense, editExpense, initializeExpense } from "../../features/expense/expenseSlice";
 import { initializeCategories } from "../../features/categories/categoriesSlice";
 import FormModel from "../FormModel";
 
 const Expense = () => {
     const [selectView, setSelectView] = useState("");
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const dispatch = useAppDispatch()
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -72,33 +69,17 @@ const Expense = () => {
 
     useEffect(()=>{
         dispatch(initializeCategories());
+        dispatch(initializeExpense());
   }, [dispatch])
 
 
     return (
-    <>
-        {/* <Button 
-            variant="dark" 
-            onClick={handleShow} 
-            type="button" 
-            style={{
-                position:"absolute",
-                bottom: "3rem",
-                right: "3rem",
-                borderRadius: "50%"
-            }}
-        >
-            +
-        </Button> */}
-
-        
+    <>  
         <GraphDisplay />
 
         <h1>€{
             filterExpense.reduce((prev, curr) => prev + (+curr.amount), 0) 
         } spent today</h1>
-
-        
 
         <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -129,14 +110,11 @@ const Expense = () => {
                     return selectView === "" ? expense : expense.categories.indexOf(selectView) !== -1
                 })
                 .map((expense:ExpenseModel) => 
-                    <SingleCard expense={expense} key={nanoid()} handleShow={handleShow}
+                    <SingleCard expense={expense} key={nanoid()}
                 />)
         }
 
         <FormModel 
-        show={show}
-        handleClose={handleClose}
-            handleShow={handleShow}
             inputExpense={inputExpense}
             expenseId={expenseId}
             submitHandler={submitHandler}

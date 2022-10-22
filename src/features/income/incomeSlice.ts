@@ -9,6 +9,7 @@ const initialExpenseState: ExpenseArrayModel<IncomeModel> = {
     inputLists: [],
     openEditItem: false,
     editId: 0,
+    show: false,
 }
 
 export const incomeSlice = createSlice({
@@ -44,9 +45,7 @@ export const incomeSlice = createSlice({
         handleOpenEditIncome: (state, action):void => {
             state.editId = action.payload
             state.openEditItem = !state.openEditItem
-        },
-
-        
+        }
     }
 });
 
@@ -57,5 +56,11 @@ export const initializeIncome = () => {
     }
 }
 
-export const {getTotalIncome, addNewIncome, editIncome, deleteIncome, handleOpenEditIncome} = incomeSlice.actions;
+export const {
+    getTotalIncome, 
+    addNewIncome, 
+    editIncome, 
+    deleteIncome, 
+    handleOpenEditIncome
+} = incomeSlice.actions;
 export default incomeSlice.reducer;

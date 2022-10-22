@@ -21,42 +21,30 @@ const HomePage = () => {
     return (
         <div>
             <h3>{customDate(new Date())}</h3>
-            {/* <Tabs
-                defaultActiveKey="profile"
-                id="uncontrolled-tab-example"
-                className="mb-3"
-            >
-                <Tab eventKey="expense" title="Expense">
-                    <Expense />
-                </Tab>
-                <Tab eventKey="income" title="Income">
-                    <Income />
-                </Tab>
-            </Tabs> */}
-            <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+            {/* <Tab.Container id="left-tabs-example" defaultActiveKey="expense">
                 <Row>
                 <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                    <Nav.Link eventKey="first">Expense</Nav.Link>
+                    <Nav.Link eventKey="expense">Expense</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                    <Nav.Link eventKey="second">Income</Nav.Link>
+                    <Nav.Link eventKey="income">Income</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 </Col>
                 <Col sm={9}>
                 <Tab.Content>
-                    <Tab.Pane eventKey="first">
+                    <Tab.Pane eventKey="expense">
                     <Expense />
                     </Tab.Pane>
-                    <Tab.Pane eventKey="second">
+                    <Tab.Pane eventKey="income">
                     <Income />
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>
                 </Row>
-            </Tab.Container>
+            </Tab.Container> */}
         </div>
   )
 }

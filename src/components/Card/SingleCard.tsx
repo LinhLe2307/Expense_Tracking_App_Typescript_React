@@ -9,12 +9,10 @@ import CustomDropdown from '../CustomDropdown';
 
 
 interface MyProps {
-  expense: ExpenseModel,
-  handleShow: ()=>void
+  expense: ExpenseModel
 }
 
-const SingleCard = ({expense, handleShow}: MyProps) => {
-  const dispatch = useAppDispatch();
+const SingleCard = ({expense}: MyProps) => {
   return (
     <Card className="mb-2">
         <Card.Body style={{display:"flex", justifyContent:"space-between", alignItems: "center"}}>
@@ -42,7 +40,6 @@ const SingleCard = ({expense, handleShow}: MyProps) => {
                 deleteItem={deleteExpense}
                 handleOpenEditItem={handleOpenEditExpense}
                 itemId={expense.id}
-                handleShow={handleShow}
               />
             }
             </div>

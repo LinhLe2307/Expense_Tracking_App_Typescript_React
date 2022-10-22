@@ -2,17 +2,6 @@
   "notes": [
     {
       "date": "Saturday, October 22, 2022",
-      "title": "laptop",
-      "amount": "23",
-      "description": "2",
-      "categories": [
-        "accommodation"
-      ],
-      "color": "#ca7272",
-      "id": 1
-    },
-    {
-      "date": "Saturday, October 22, 2022",
       "title": "Second",
       "amount": "23",
       "description": "second",
@@ -39,6 +28,22 @@
       "description": "123",
       "color": "#af7979",
       "id": 2
+    },
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "Income 4",
+      "amount": 0,
+      "description": "",
+      "color": "",
+      "id": 3
+    },
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "Income 6",
+      "amount": 0,
+      "description": "",
+      "color": "",
+      "id": 4
     }
   ],
   "categories": [

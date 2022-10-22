@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import { Button } from 'react-bootstrap'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { initializeCategories } from '../../features/categories/categoriesSlice';
+import { handleOpenForm } from '../../features/expense/expenseSlice';
 import { addNewIncome, editIncome, initializeIncome } from '../../features/income/incomeSlice';
 import { customDate } from '../../functions/reusableFunction';
 import { IncomeModel } from '../../models/reduxModels';
@@ -11,9 +12,6 @@ import IncomeCard from './IncomeCard';
 
 
 const Income = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const dispatch = useAppDispatch();
     const openEditIncome = useAppSelector((state) => state.income.openEditItem);
 
@@ -64,30 +62,13 @@ const Income = () => {
             incomeList.map(income => <IncomeCard 
                 key={nanoid()} 
                 income={income}
-                handleShow={handleShow}
             />)
         }
 
-        <Button 
-            variant="dark" 
-            onClick={handleShow} 
-            type="button" 
-            style={{
-                position:"absolute",
-                bottom: "3rem",
-                right: "3rem",
-                borderRadius: "50%"
-            }}
-        >
-            +
-        </Button>
-
         <FormModel 
-            handleShow={handleShow}
+            type="income"
             inputExpense={inputExpense}
             expenseId={expenseId}
-            show={show}
-            handleClose={handleClose}
             submitHandler={submitHandler}
             handleInputExpense={handleInputExpense}
             baseURL="http://localhost:3010/income"

@@ -3,7 +3,7 @@ import { AnyAction, PayloadAction } from '@reduxjs/toolkit';
 import { Dropdown } from 'react-bootstrap';
 import { useAppDispatch } from '../app/hooks';
 import { ExpenseModel } from '../models/reduxModels';
-
+import { handleOpenForm } from '../features/expense/expenseSlice';
 interface Action {
     action: {
         payload:number,
@@ -15,10 +15,9 @@ interface MyProps {
     deleteItem:(itemId: number)=> AnyAction,
     handleOpenEditItem:(itemId:number)=>AnyAction,
     itemId: number,
-    handleShow: ()=>void
 }
 
-const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId, handleShow}:MyProps) => {
+const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId}:MyProps) => {
     const dispatch = useAppDispatch();
     return (
         <>
@@ -43,7 +42,7 @@ const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId, handleShow}:MyP
                     <Dropdown.Item
                         onClick={()=> {
                             dispatch(handleOpenEditItem(itemId));
-                            handleShow()
+                            dispatch(handleOpenForm())
                         }}
                         >
                             Edit

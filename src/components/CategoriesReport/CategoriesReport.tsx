@@ -13,9 +13,6 @@ import CategoryDetails from './CategoryDetails'
 
 const CategoriesReport = () => {
   const [value, onChange] = useState(new Date());
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   
   const dispatch = useAppDispatch();
 
@@ -67,27 +64,10 @@ const CategoriesReport = () => {
         </Nav.Item>
       </Nav>
       <CategoryDetails />
-
-      {/* <Button
-            variant="dark" 
-            onClick={handleShow} 
-            type="button" 
-            style={{
-                position:"absolute",
-                bottom: "3rem",
-                right: "3rem",
-                borderRadius: "50%"
-            }}
-        >
-            +
-        </Button> */}
-
+      
         <FormModel 
-          handleShow={handleShow}
           inputExpense={inputCategory}
           expenseId={expenseId}
-          show={show} 
-          handleClose={handleClose}
           submitHandler={submitHandler}
           handleInputExpense={handleInputExpense}
           type="categories"

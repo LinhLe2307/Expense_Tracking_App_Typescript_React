@@ -6,10 +6,9 @@ import CustomDropdown from '../CustomDropdown'
 
 interface MyProps {
     income: IncomeModel,
-    handleShow: ()=>void
 }
 
-const IncomeCard = ({income, handleShow}: MyProps) => {
+const IncomeCard = ({income}: MyProps) => {
   return (
     <Card border="primary" style={{ width: '18rem' }}>
         <Card.Header>
@@ -20,7 +19,6 @@ const IncomeCard = ({income, handleShow}: MyProps) => {
               deleteItem={deleteIncome}
               handleOpenEditItem={handleOpenEditIncome}
               itemId={income.id}
-              handleShow={handleShow}
             />
 
           }
