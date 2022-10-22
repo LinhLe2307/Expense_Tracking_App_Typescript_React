@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
-import { Button, FloatingLabel, InputGroup, Modal, Row, Form } from 'react-bootstrap'
+import { Button, FloatingLabel, InputGroup, Modal, Row, Form, CloseButton } from 'react-bootstrap'
 import { useAppSelector } from '../app/hooks';
 import { customDate } from '../functions/reusableFunction';
 import { CategoriesModel, ExpenseModel, FormTypeModels, IncomeModel } from '../models/reduxModels'
@@ -18,27 +18,45 @@ function FormModel({
     selectedCategories,
     deleteCategory,
     baseURL, 
-    expenseId
+    expenseId,
+    handleShow
 }:FormTypeModels) {
+    
+    
     const [displayInput, setDisplayInput] = useState<CategoriesModel | ExpenseModel | IncomeModel>(inputExpense);
+
+    const onCloseForm = () => {
+        setDisplayInput(inputExpense)
+    }
 
     useEffect(() => {
         async function fetchData () {
-            const response = await axios.get(`${baseURL}/${expenseId}`)
-            
-            // console.log(response.data)
-            const resData:ExpenseModel = await response.data;
-            setDisplayInput(resData);
-
-            console.log(displayInput) 
+            if(expenseId !== 0) {
+                const response = await axios.get(`${baseURL}/${expenseId}`)
+                const resData:ExpenseModel = await response.data;
+                setDisplayInput(resData);
+            }
+                
         }
-            
         fetchData().catch(console.error)
 
     }, [expenseId, baseURL])
 
   return (
     <>
+    <Button 
+            variant="dark" 
+            onClick={handleShow} 
+            type="button" 
+            style={{
+                position:"absolute",
+                bottom: "3rem",
+                right: "3rem",
+                borderRadius: "50%"
+            }}
+        >
+            +
+        </Button>
     <Modal
         show={show}
         onHide={handleClose}
@@ -47,6 +65,12 @@ function FormModel({
     >
         <Modal.Header closeButton>
             <Modal.Title>Modal title</Modal.Title>
+            {/* <CloseButton 
+                onClick={() =>{
+                    onCloseForm();
+                    handleClose()
+                }}
+            /> */}
         </Modal.Header>
         <Modal.Body>
             <Form onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitHandler(e)}>
@@ -132,11 +156,6 @@ function FormModel({
 
             <Modal.Footer>
 
-            {/* <Button variant="primary" type="button" onClick={() =>{
-                closeForm();
-                handleClose()
-            }
-            }>Close</Button> */}
             <Button variant="primary" type="submit">Submit</Button>
             </Modal.Footer>
             </Row>

@@ -68,7 +68,7 @@ const CategoriesReport = () => {
       </Nav>
       <CategoryDetails />
 
-      <Button
+      {/* <Button
             variant="dark" 
             onClick={handleShow} 
             type="button" 
@@ -80,9 +80,10 @@ const CategoriesReport = () => {
             }}
         >
             +
-        </Button>
+        </Button> */}
 
         <FormModel 
+          handleShow={handleShow}
           inputExpense={inputCategory}
           expenseId={expenseId}
           show={show} 

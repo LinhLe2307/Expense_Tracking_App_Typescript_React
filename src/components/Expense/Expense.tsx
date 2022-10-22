@@ -77,7 +77,7 @@ const Expense = () => {
 
     return (
     <>
-        <Button 
+        {/* <Button 
             variant="dark" 
             onClick={handleShow} 
             type="button" 
@@ -89,7 +89,7 @@ const Expense = () => {
             }}
         >
             +
-        </Button>
+        </Button> */}
 
         
         <GraphDisplay />
@@ -134,10 +134,11 @@ const Expense = () => {
         }
 
         <FormModel 
+        show={show}
+        handleClose={handleClose}
+            handleShow={handleShow}
             inputExpense={inputExpense}
             expenseId={expenseId}
-            show={show}
-            handleClose={handleClose}
             submitHandler={submitHandler}
             handleInputExpense={handleInputExpense}
             selectedCategories={selectedCategories}

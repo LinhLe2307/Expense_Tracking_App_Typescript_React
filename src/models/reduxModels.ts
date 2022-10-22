@@ -30,6 +30,7 @@ export interface CategoryExpense {
 }
 
 export interface FormTypeModels extends CategoryExpense {
+    handleShow: ()=>void,
     inputExpense: DefaultModel | ExpenseModel | IncomeModel
     items?: DefaultModel[] | ExpenseModel[] | IncomeModel[],
     show: boolean,

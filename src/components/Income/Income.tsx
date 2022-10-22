@@ -83,6 +83,7 @@ const Income = () => {
         </Button>
 
         <FormModel 
+            handleShow={handleShow}
             inputExpense={inputExpense}
             expenseId={expenseId}
             show={show}
