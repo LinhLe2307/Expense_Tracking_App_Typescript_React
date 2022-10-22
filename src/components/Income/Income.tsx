@@ -17,6 +17,8 @@ const Income = () => {
     const dispatch = useAppDispatch();
     const openEditIncome = useAppSelector((state) => state.income.openEditItem);
 
+    const expenseId = useAppSelector((state) => state.income.editId);
+
     const incomeList = useAppSelector(state => state.income.inputLists);
 
     const [inputExpense, setInputExpense] = useState<IncomeModel>({
@@ -81,10 +83,13 @@ const Income = () => {
         </Button>
 
         <FormModel 
+            inputExpense={inputExpense}
+            expenseId={expenseId}
             show={show}
             handleClose={handleClose}
             submitHandler={submitHandler}
             handleInputExpense={handleInputExpense}
+            baseURL="http://localhost:3010/income"
         />
     </>
     )

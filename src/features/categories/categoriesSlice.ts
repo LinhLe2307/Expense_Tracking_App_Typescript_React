@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {ThunkDispatch as Dispatch} from 'redux-thunk';
-import { DefaultModel, ExpenseArrayModel } from "../../models/reduxModels";
+import { CategoriesModel, ExpenseArrayModel } from "../../models/reduxModels";
 import serviceAPI from "../../services/serviceAPI";
 
 const baseURL = "http://localhost:3010/categories";
 
-const initialCategoriesState:ExpenseArrayModel<DefaultModel> = {
+const initialCategoriesState:ExpenseArrayModel<CategoriesModel> = {
     inputLists: [],
     openEditItem: false,
     editId: 0,
@@ -15,17 +15,17 @@ export const categoriesSlice = createSlice({
     name: "categories",
     initialState: initialCategoriesState,
     reducers: {
-        getCategoriesList:(state, action:PayloadAction<DefaultModel[]>) =>{
+        getCategoriesList:(state, action:PayloadAction<CategoriesModel[]>) =>{
             state.inputLists = action.payload
         },
-        addNewCategory: (state, action:PayloadAction<DefaultModel>) => {
+        addNewCategory: (state, action:PayloadAction<CategoriesModel>) => {
             const newCategory = action.payload;
 
             state.inputLists = state.inputLists.concat(newCategory)
 
             serviceAPI.postSingle(baseURL, newCategory)
         },
-        editCategory:(state, action:PayloadAction<DefaultModel>):void => {
+        editCategory:(state, action:PayloadAction<CategoriesModel>):void => {
             const editIncome = action.payload;
             const findIndex = state.inputLists.find(expense => expense.id === state.editId)
             if(findIndex !== undefined) {
@@ -52,7 +52,7 @@ export const categoriesSlice = createSlice({
 
 export const initializeCategories = () => {
     return async(dispatch: Dispatch<any,any,any>)=>{
-        const response: DefaultModel[]= await serviceAPI.getAll(baseURL);
+        const response: CategoriesModel[]= await serviceAPI.getAll(baseURL);
         dispatch(getCategoriesList(response))
     }
 }

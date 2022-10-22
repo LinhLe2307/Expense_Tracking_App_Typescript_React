@@ -3,11 +3,12 @@ import React, {useEffect, useState} from 'react'
 import { Button, FloatingLabel, InputGroup, Modal, Row, Form } from 'react-bootstrap'
 import { useAppSelector } from '../app/hooks';
 import { customDate } from '../functions/reusableFunction';
-import { ExpenseModel, FormTypeModels } from '../models/reduxModels'
+import { CategoriesModel, ExpenseModel, FormTypeModels, IncomeModel } from '../models/reduxModels'
 import CategoryAddition from './Card/CategoryAddition';
 
 
 function FormModel({
+    inputExpense,
     show, 
     handleClose,
     submitHandler,
@@ -16,21 +17,26 @@ function FormModel({
     type,
     selectedCategories,
     deleteCategory,
+    baseURL, 
+    expenseId
 }:FormTypeModels) {
-    const [displayInput, setDisplayInput] = useState<ExpenseModel>({
-        date: customDate(new Date()),
-        title: "",
-        amount: 0,
-        description: "", 
-        categories: [],
-        color: ""
-    })
-    const expenseId = useAppSelector((state) => state.expense.editId);
+    const [displayInput, setDisplayInput] = useState<CategoriesModel | ExpenseModel | IncomeModel>(inputExpense);
 
     useEffect(() => {
-        axios.get(`http://localhost:3010/notes/${expenseId}`).then(res => setDisplayInput(res.data))
-    }, [expenseId]
-    )
+        async function fetchData () {
+            const response = await axios.get(`${baseURL}/${expenseId}`)
+            
+            // console.log(response.data)
+            const resData:ExpenseModel = await response.data;
+            setDisplayInput(resData);
+
+            console.log(displayInput) 
+        }
+            
+        fetchData().catch(console.error)
+
+    }, [expenseId, baseURL])
+
   return (
     <>
     <Modal
@@ -56,12 +62,14 @@ function FormModel({
                     type="text" 
                     placeholder="Enter Title"
                     defaultValue={displayInput.title}
+                    key={displayInput.title}
                     onChange={handleInputExpense}/>
                 </FloatingLabel>
             </Form.Group>
 
             {
                 type !== "categories" && 
+                typeof displayInput.amount !== undefined &&
                 <Form.Group className="mb-3">
                     <InputGroup className="mb-3">
                         <InputGroup.Text>$</InputGroup.Text>
@@ -74,7 +82,8 @@ function FormModel({
                         name="amount"  
                         type="number" 
                         placeholder="Enter Price"
-                        
+                        defaultValue={displayInput.amount}
+                        key={displayInput.amount}
                         onChange={handleInputExpense}/>
                     </FloatingLabel>
                     <InputGroup.Text>.00</InputGroup.Text>
@@ -93,6 +102,7 @@ function FormModel({
                     name="description"  
                     type="text" 
                     defaultValue={displayInput.description}
+                    key={displayInput.description}
                     placeholder="Enter Description"
                     onChange={handleInputExpense}/>
                 </FloatingLabel>
@@ -115,11 +125,18 @@ function FormModel({
                     type="color" 
                     name="color" 
                     title="Choose your color"
+                    defaultValue={displayInput.color}
+                    key={displayInput.color}
                     onChange={handleInputExpense}/>
                 </Form.Group>
 
             <Modal.Footer>
 
+            {/* <Button variant="primary" type="button" onClick={() =>{
+                closeForm();
+                handleClose()
+            }
+            }>Close</Button> */}
             <Button variant="primary" type="submit">Submit</Button>
             </Modal.Footer>
             </Row>

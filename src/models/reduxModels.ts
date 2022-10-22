@@ -13,6 +13,9 @@ export interface ExpenseModel extends DefaultModel {
 export interface IncomeModel extends DefaultModel {
     amount: number, 
 }
+export interface CategoriesModel extends DefaultModel {
+    amount?: number, 
+}
 export interface ExpenseArrayModel<T> {
     inputLists: T[],
     openEditItem: boolean,
@@ -27,10 +30,13 @@ export interface CategoryExpense {
 }
 
 export interface FormTypeModels extends CategoryExpense {
+    inputExpense: DefaultModel | ExpenseModel | IncomeModel
     items?: DefaultModel[] | ExpenseModel[] | IncomeModel[],
-    show: boolean, 
+    show: boolean,
+    expenseId: number,
     handleClose:()=>void,
     submitHandler:(e: React.FormEvent<HTMLFormElement>, typeForm?:string)=>void,
     handleInputExpense:(e: React.ChangeEvent<HTMLInputElement>)=>void,
     type?:string,
+    baseURL: string
 }

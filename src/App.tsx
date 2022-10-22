@@ -5,6 +5,7 @@ import DailyReport from './components/DailyReport/DailyReport';
 import HomePage from './components/HomePage';
 import CategoriesReport from './components/CategoriesReport/CategoriesReport';
 import Layout from './pages/Layout';
+import Income from './components/Income/Income';
 
 function App() {
   return (

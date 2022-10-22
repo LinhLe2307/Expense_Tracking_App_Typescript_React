@@ -21,6 +21,9 @@ const Expense = () => {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
+
+    const expenseId=useAppSelector((state) => state.expense.editId);
+
     const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
     const categoriesList = useAppSelector(state => state.categories.inputLists);
@@ -131,14 +134,17 @@ const Expense = () => {
         }
 
         <FormModel 
-        show={show}
-        handleClose={handleClose}
-        submitHandler={submitHandler}
-        handleInputExpense={handleInputExpense}
-        selectedCategories={selectedCategories}
-        deleteCategory={deleteCategory}
-        handleSelectedCategories={handleSelectedCategories}
-        type="expense"
+            inputExpense={inputExpense}
+            expenseId={expenseId}
+            show={show}
+            handleClose={handleClose}
+            submitHandler={submitHandler}
+            handleInputExpense={handleInputExpense}
+            selectedCategories={selectedCategories}
+            deleteCategory={deleteCategory}
+            handleSelectedCategories={handleSelectedCategories}
+            type="expense"
+            baseURL="http://localhost:3010/notes"
     />
     </>
   )

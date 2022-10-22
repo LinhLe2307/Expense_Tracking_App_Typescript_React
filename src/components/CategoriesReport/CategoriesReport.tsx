@@ -20,6 +20,7 @@ const CategoriesReport = () => {
   const dispatch = useAppDispatch();
 
   const openEditCategory = useAppSelector((state) => state.categories.openEditItem);
+  const expenseId = useAppSelector((state) => state.categories.editId);
 
   const [inputCategory, setInputCategory] = useState<DefaultModel>({
         date: customDate(new Date()),
@@ -82,11 +83,14 @@ const CategoriesReport = () => {
         </Button>
 
         <FormModel 
+          inputExpense={inputCategory}
+          expenseId={expenseId}
           show={show} 
           handleClose={handleClose}
           submitHandler={submitHandler}
           handleInputExpense={handleInputExpense}
           type="categories"
+          baseURL="http://localhost:3010/categories"
     />
     </div>
   )
