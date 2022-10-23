@@ -20,9 +20,9 @@ export interface ExpenseArrayModel<T> {
     inputLists: T[],
     openEditItem: boolean,
     editId: number,
-    show: boolean
+    show: boolean,
+    editCategory ?: string
 }
-
 
 export interface CategoryExpense {
     handleSelectedCategories?: (category: DefaultModel)=>void,

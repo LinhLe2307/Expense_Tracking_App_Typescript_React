@@ -2,25 +2,14 @@
   "notes": [
     {
       "date": "Sunday, October 23, 2022",
-      "title": "First",
-      "amount": "23",
-      "description": "227",
-      "categories": [
-        "Education"
-      ],
-      "color": "#b84242",
-      "id": 1
-    },
-    {
-      "date": "Sunday, October 23, 2022",
-      "title": "Second2",
-      "amount": "454",
-      "description": "22",
+      "title": "first",
+      "amount": "234",
+      "description": "2",
       "categories": [
         "Accommodation"
       ],
-      "color": "#3b9155",
-      "id": 2
+      "color": "#c06d6d",
+      "id": 1
     }
   ],
   "income": [
@@ -61,15 +50,15 @@
     {
       "date": "Sunday, October 23, 2022",
       "title": "Accommodation",
-      "description": "23",
-      "color": "#ca9191",
+      "description": "1",
+      "color": "#fbbcbc",
       "id": 1
     },
     {
       "date": "Sunday, October 23, 2022",
-      "title": "Education",
-      "description": "34",
-      "color": "#6ca783",
+      "title": "Household",
+      "description": "2",
+      "color": "#dea0a0",
       "id": 2
     }
   ]

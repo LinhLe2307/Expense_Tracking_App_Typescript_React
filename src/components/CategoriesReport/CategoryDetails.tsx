@@ -9,7 +9,8 @@ import { handleOpenForm } from '../../features/expense/expenseSlice';
 const CategoryDetails = () => {
   const categoriesList = useAppSelector(state => state.categories.inputLists);
   const expenseLists = useAppSelector((state) => state.expense.inputLists);
-  const categoriesTitles = categoriesList.map(category => category.title)
+  const categoriesTitles = categoriesList.map(category => category.title);
+  
 
   const dispatch = useAppDispatch()
 
@@ -54,6 +55,14 @@ const CategoryDetails = () => {
     }
   }
 
+  const handleEdit = (selectedItem:string) => {
+    const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
+
+    if(findIndex !== undefined && findIndex.id !== undefined) {  
+        dispatch(handleOpenEditCategory(selectedItem))
+    }
+  }
+
 
   return (
     <>
@@ -82,7 +91,7 @@ const CategoryDetails = () => {
 
                       <Dropdown.Item
                           onClick={()=> {
-                              dispatch(handleOpenEditCategory(list[0]));
+                              handleEdit(list[0]);
                               dispatch(handleOpenForm())
                           }}
                           >

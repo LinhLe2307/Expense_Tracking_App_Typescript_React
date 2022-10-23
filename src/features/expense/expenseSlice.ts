@@ -61,6 +61,7 @@ export const expenseSlice = createSlice({
             , selectedPosts.map(post => serviceAPI.postSingle(baseURL, post))
             ])
         },
+        
         handleOpenForm: (state) => {
             state.show = !state.show
         }
