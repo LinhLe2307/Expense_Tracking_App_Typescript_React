@@ -54,8 +54,6 @@ export const expenseSlice = createSlice({
             const selectedPosts = action.payload
             const postsIdsArray = action.payload.map(post => post.id);
 
-            console.log("postIdArray", postsIdsArray)
-
             Promise.all([postsIdsArray.map((id) => 
                 id && serviceAPI.deleteAxios(baseURL, id))
             , selectedPosts.map(post => serviceAPI.postSingle(baseURL, post))

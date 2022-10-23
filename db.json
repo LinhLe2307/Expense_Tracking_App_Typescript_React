@@ -3,10 +3,13 @@
     {
       "date": "Sunday, October 23, 2022",
       "title": "first",
-      "amount": "234",
-      "description": "2",
-      "categories": [],
-      "color": "#c06d6d",
+      "amount": "32",
+      "description": "3",
+      "categories": [
+        "edit d3",
+        "edit"
+      ],
+      "color": "#dd5f5f",
       "id": 1
     }
   ],
@@ -44,5 +47,20 @@
       "id": 4
     }
   ],
-  "categories": []
+  "categories": [
+    {
+      "date": "Sunday, October 23, 2022",
+      "title": "edit d3",
+      "description": "23",
+      "color": "#bc8080",
+      "id": 1
+    },
+    {
+      "date": "Sunday, October 23, 2022",
+      "title": "edit",
+      "description": "1",
+      "color": "#ff4242",
+      "id": 2
+    }
+  ]
 }

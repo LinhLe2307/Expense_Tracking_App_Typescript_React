@@ -55,13 +55,13 @@ const CategoryDetails = () => {
     }
   }
 
-  // const handleEdit = (selectedItem:string) => {
-  //   const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
+  const handleEdit = (selectedItem:string) => {
+    const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
 
-  //   if(findIndex !== undefined && findIndex.id !== undefined) {  
-  //       dispatch(handleOpenEditCategory(selectedItem))
-  //   }
-  // }
+    if(findIndex !== undefined && findIndex.id !== undefined) {  
+        dispatch(handleOpenEditCategory(selectedItem))
+    }
+  }
 
 
   return (
@@ -71,18 +71,42 @@ const CategoryDetails = () => {
         return (
           <Card border="primary" style={{ width: '18rem' }} key={nanoid()}>
             <Card.Header>
-              {list[0]} {list[1]} transaction(s)
+              {list[1]} transaction(s)
 
             { 
               (typeof list[0] === "string") &&
-              <CloseButton onClick={() => handleDelete(list[0])}/>
+              // <CloseButton onClick={() => handleDelete(list[0])}/>
+              <Dropdown>
+                <Dropdown.Toggle 
+                    variant="light" 
+                    id="dropdown-basic"
+                >
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu >
+                    <Dropdown.Item
+                            onClick={() => handleDelete(list[0])}
+                    >
+                            Delete
+                    </Dropdown.Item>
+
+                    <Dropdown.Item
+                        onClick={()=> {
+                            handleEdit(list[0]);
+                            dispatch(handleOpenForm())
+                        }}
+                        >
+                            Edit
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
             }
             </Card.Header>
 
         <Card.Body>
           <Card.Title>{list[0]}</Card.Title>
           <Card.Text>
-            "Hello"
+            {categoriesList[i]?.description}
           </Card.Text>
         </Card.Body>
       </Card>

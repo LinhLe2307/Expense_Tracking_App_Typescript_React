@@ -3,8 +3,8 @@ import React, {useState, useEffect} from 'react'
 import { Button, Nav } from 'react-bootstrap'
 import { Calendar } from 'react-calendar';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { addNewCategory, editCategory, initializeCategories } from '../../features/categories/categoriesSlice';
-import { initializeExpense } from "../../features/expense/expenseSlice";
+import { addNewCategory, editCategoryContent, initializeCategories } from '../../features/categories/categoriesSlice';
+import { deleteExpenseCategories, initializeExpense } from "../../features/expense/expenseSlice";
 import { customDate } from '../../functions/reusableFunction';
 import { DefaultModel } from '../../models/reduxModels';
 import FormModel from '../FormModel';
@@ -15,9 +15,10 @@ const CategoriesReport = () => {
   const [value, onChange] = useState(new Date());
   
   const dispatch = useAppDispatch();
-
+  const expenseLists = useAppSelector((state) => state.expense.inputLists);
   const openEditCategory = useAppSelector((state) => state.categories.openEditItem);
   const expenseId = useAppSelector((state) => state.categories.editId);
+  const editCategory = useAppSelector((state) => state.categories.editCategory);
 
   const [inputCategory, setInputCategory] = useState<DefaultModel>({
         date: customDate(new Date()),
@@ -38,7 +39,14 @@ const CategoriesReport = () => {
        if(!openEditCategory) {
             dispatch(addNewCategory(inputCategory)) 
         } else {
-            dispatch(editCategory(inputCategory))
+            const selectedCategory = expenseLists.map(expense => {
+              const newClone = expense.categories.map(category => category === editCategory ? inputCategory.title : category)
+              return {...expense, categories: newClone}
+            });
+            Promise.all([
+              dispatch(deleteExpenseCategories(selectedCategory)),
+              dispatch(editCategoryContent(inputCategory))
+            ])
         }
         window.location.reload()
     } 
