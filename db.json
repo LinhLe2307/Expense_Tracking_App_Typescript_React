@@ -1,22 +1,26 @@
 {
   "notes": [
     {
-      "date": "Saturday, October 22, 2022",
-      "title": "Second",
-      "amount": "23",
-      "description": "second",
-      "categories": [],
-      "color": "#cd8484",
-      "id": 2
+      "date": "Sunday, October 23, 2022",
+      "title": "First1",
+      "amount": "230",
+      "description": "22",
+      "categories": [
+        "Education"
+      ],
+      "color": "#fb8e8e",
+      "id": 1
     },
     {
-      "date": "Saturday, October 22, 2022",
-      "title": "second",
-      "amount": "234",
-      "description": "2nd",
-      "categories": [],
-      "color": "#d16b6b",
-      "id": 3
+      "date": "Sunday, October 23, 2022",
+      "title": "Second",
+      "amount": "45",
+      "description": "2",
+      "categories": [
+        "Education"
+      ],
+      "color": "#913b3b",
+      "id": 2
     }
   ],
   "income": [
@@ -55,11 +59,25 @@
   ],
   "categories": [
     {
-      "date": "Saturday, October 22, 2022",
+      "date": "Sunday, October 23, 2022",
       "title": "Accommodation",
-      "description": "23",
-      "color": "#4e3c3c",
+      "description": "1",
+      "color": "#c37f7f",
       "id": 1
+    },
+    {
+      "date": "Sunday, October 23, 2022",
+      "title": "Education",
+      "description": "2",
+      "color": "#d69595",
+      "id": 2
+    },
+    {
+      "date": "Sunday, October 23, 2022",
+      "title": "househols",
+      "description": "3",
+      "color": "#e30d0d",
+      "id": 3
     }
   ]
 }

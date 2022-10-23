@@ -26,7 +26,7 @@ const CategoriesReport = () => {
         color: ""
     });
 
-    const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    const handleInputCategory = (e:React.ChangeEvent<HTMLInputElement>):void => {
         setInputCategory({
             ...inputCategory,
             [e.target.name] : e.target.value
@@ -51,7 +51,7 @@ const CategoriesReport = () => {
 
   return (
     <div>
-      <Nav defaultActiveKey="/home" as="ul">
+      {/* <Nav defaultActiveKey="/home" as="ul">
         
         <Nav.Item as="li">
           <Nav.Link eventKey="link-1">October</Nav.Link>
@@ -62,14 +62,14 @@ const CategoriesReport = () => {
         <Nav.Item as="li">
           <Nav.Link eventKey="link-3">December</Nav.Link>
         </Nav.Item>
-      </Nav>
+      </Nav> */}
       <CategoryDetails />
       
         <FormModel 
           inputExpense={inputCategory}
           expenseId={expenseId}
           submitHandler={submitHandler}
-          handleInputExpense={handleInputExpense}
+          handleInputExpense={handleInputCategory}
           type="categories"
           baseURL="http://localhost:3010/categories"
     />

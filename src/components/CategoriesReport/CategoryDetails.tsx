@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid';
 import React from 'react'
-import { CloseButton } from 'react-bootstrap';
+import { Button, Card, CloseButton } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { deleteCategory } from '../../features/categories/categoriesSlice';
+import { deleteCategory, handleOpenEditCategory } from '../../features/categories/categoriesSlice';
 import { deleteExpenseCategories } from '../../features/expense/expenseSlice';
+import CustomDropdown from '../CustomDropdown';
 
 const CategoryDetails = () => {
   const categoriesList = useAppSelector(state => state.categories.inputLists);
@@ -59,10 +60,23 @@ const CategoryDetails = () => {
       {
         detailsDiv().map((list, i) => {
         return (
-          <div key={nanoid()}>
-            {list[0]}{list[1]}
+          // <div key={nanoid()}>
+          //   {list[0]}{list[1]}
+          //     <CloseButton onClick={()=>handleDelete(list[0])}/>
+          // </div>
+          <Card border="primary" style={{ width: '18rem' }}>
+            <Card.Header>
+              {list[0]}
               <CloseButton onClick={()=>handleDelete(list[0])}/>
-          </div>
+            </Card.Header>
+
+        <Card.Body>
+          <Card.Title>{list[0]}</Card.Title>
+          <Card.Text>
+            "Hello"
+          </Card.Text>
+        </Card.Body>
+      </Card>
         )})
       }
     </>

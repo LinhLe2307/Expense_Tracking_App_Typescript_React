@@ -1,8 +1,7 @@
 import React from 'react'
-import { AnyAction, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction } from '@reduxjs/toolkit';
 import { Dropdown } from 'react-bootstrap';
 import { useAppDispatch } from '../app/hooks';
-import { ExpenseModel } from '../models/reduxModels';
 import { handleOpenForm } from '../features/expense/expenseSlice';
 interface Action {
     action: {
@@ -14,7 +13,7 @@ interface Action {
 interface MyProps {
     deleteItem:(itemId: number)=> AnyAction,
     handleOpenEditItem:(itemId:number)=>AnyAction,
-    itemId: number,
+    itemId: number | string,
 }
 
 const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId}:MyProps) => {
@@ -29,7 +28,6 @@ const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId}:MyProps) => {
                     id="dropdown-basic"
                 >
                     </Dropdown.Toggle>
-
                     <Dropdown.Menu >
                     <Dropdown.Item
                             onClick={()=> {

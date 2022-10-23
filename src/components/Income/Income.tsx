@@ -27,7 +27,7 @@ const Income = () => {
         color: ""
     });
 
-    const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    const handleInputIncome = (e:React.ChangeEvent<HTMLInputElement>):void => {
         setInputExpense({
             ...inputExpense,
             [e.target.name] : e.target.value
@@ -70,7 +70,7 @@ const Income = () => {
             inputExpense={inputExpense}
             expenseId={expenseId}
             submitHandler={submitHandler}
-            handleInputExpense={handleInputExpense}
+            handleInputExpense={handleInputIncome}
             baseURL="http://localhost:3010/income"
         />
     </>
