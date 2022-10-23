@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
 import React from 'react'
-import { Button, Card, CloseButton } from 'react-bootstrap';
+import { Card, CloseButton, Dropdown } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { deleteCategory, handleOpenEditCategory } from '../../features/categories/categoriesSlice';
 import { deleteExpenseCategories } from '../../features/expense/expenseSlice';
-import CustomDropdown from '../CustomDropdown';
+import { handleOpenForm } from '../../features/expense/expenseSlice';
 
 const CategoryDetails = () => {
   const categoriesList = useAppSelector(state => state.categories.inputLists);
@@ -46,7 +46,7 @@ const CategoryDetails = () => {
         const newClone = expense.categories.filter(category => category !== selectedItem)
         return {...expense, categories: newClone}
       });
-      console.log(selectedCategory)
+  
       Promise.all([
         dispatch(deleteCategory(findIndex.id)),
         dispatch(deleteExpenseCategories(selectedCategory))
@@ -60,14 +60,37 @@ const CategoryDetails = () => {
       {
         detailsDiv().map((list, i) => {
         return (
-          // <div key={nanoid()}>
-          //   {list[0]}{list[1]}
-          //     <CloseButton onClick={()=>handleDelete(list[0])}/>
-          // </div>
-          <Card border="primary" style={{ width: '18rem' }}>
+          <Card border="primary" style={{ width: '18rem' }} key={nanoid()}>
             <Card.Header>
-              {list[0]}
-              <CloseButton onClick={()=>handleDelete(list[0])}/>
+              {list[0]} {list[1]} transaction(s)
+
+            { 
+              (typeof list[0] === "string") &&
+              <Dropdown>
+                  <Dropdown.Toggle 
+                      variant="light" 
+                      id="dropdown-basic"
+                  >
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu >
+                      <Dropdown.Item
+                              onClick={()=> handleDelete(list[0])}
+                      >
+                              Delete
+                      </Dropdown.Item>
+
+                      <Dropdown.Item
+                          onClick={()=> {
+                              dispatch(handleOpenEditCategory(list[0]));
+                              dispatch(handleOpenForm())
+                          }}
+                          >
+                              Edit
+                      </Dropdown.Item>
+                  </Dropdown.Menu>
+              </Dropdown>
+            }
             </Card.Header>
 
         <Card.Body>

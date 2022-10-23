@@ -13,7 +13,7 @@ interface Action {
 interface MyProps {
     deleteItem:(itemId: number)=> AnyAction,
     handleOpenEditItem:(itemId:number)=>AnyAction,
-    itemId: number | string,
+    itemId: number,
 }
 
 const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId}:MyProps) => {
@@ -28,6 +28,7 @@ const CustomDropdown = ({deleteItem, handleOpenEditItem, itemId}:MyProps) => {
                     id="dropdown-basic"
                 >
                     </Dropdown.Toggle>
+
                     <Dropdown.Menu >
                     <Dropdown.Item
                             onClick={()=> {
