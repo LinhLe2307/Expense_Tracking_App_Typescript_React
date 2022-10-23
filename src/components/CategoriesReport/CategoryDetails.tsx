@@ -55,13 +55,13 @@ const CategoryDetails = () => {
     }
   }
 
-  const handleEdit = (selectedItem:string) => {
-    const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
+  // const handleEdit = (selectedItem:string) => {
+  //   const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
 
-    if(findIndex !== undefined && findIndex.id !== undefined) {  
-        dispatch(handleOpenEditCategory(selectedItem))
-    }
-  }
+  //   if(findIndex !== undefined && findIndex.id !== undefined) {  
+  //       dispatch(handleOpenEditCategory(selectedItem))
+  //   }
+  // }
 
 
   return (
@@ -75,30 +75,7 @@ const CategoryDetails = () => {
 
             { 
               (typeof list[0] === "string") &&
-              <Dropdown>
-                  <Dropdown.Toggle 
-                      variant="light" 
-                      id="dropdown-basic"
-                  >
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu >
-                      <Dropdown.Item
-                              onClick={()=> handleDelete(list[0])}
-                      >
-                              Delete
-                      </Dropdown.Item>
-
-                      <Dropdown.Item
-                          onClick={()=> {
-                              handleEdit(list[0]);
-                              dispatch(handleOpenForm())
-                          }}
-                          >
-                              Edit
-                      </Dropdown.Item>
-                  </Dropdown.Menu>
-              </Dropdown>
+              <CloseButton onClick={() => handleDelete(list[0])}/>
             }
             </Card.Header>
 

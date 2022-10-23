@@ -5,9 +5,7 @@
       "title": "first",
       "amount": "234",
       "description": "2",
-      "categories": [
-        "Accommodation"
-      ],
+      "categories": [],
       "color": "#c06d6d",
       "id": 1
     }
@@ -46,20 +44,5 @@
       "id": 4
     }
   ],
-  "categories": [
-    {
-      "date": "Sunday, October 23, 2022",
-      "title": "Accommodation",
-      "description": "1",
-      "color": "#fbbcbc",
-      "id": 1
-    },
-    {
-      "date": "Sunday, October 23, 2022",
-      "title": "Household",
-      "description": "2",
-      "color": "#dea0a0",
-      "id": 2
-    }
-  ]
+  "categories": []
 }
