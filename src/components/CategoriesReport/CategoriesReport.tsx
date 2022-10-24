@@ -51,7 +51,7 @@ const CategoriesReport = () => {
               dispatch(editCategoryContent(inputCategory))
             ])
         }
-        setInterval(() => window.location.reload(), 500);
+        setTimeout(() => window.location.reload(), 500);
         //window.location.reload()
     } 
   

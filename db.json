@@ -6,8 +6,8 @@
       "amount": "1232",
       "description": "1232",
       "categories": [
-        "first 2",
-        "second 5",
+        "first 3",
+        "second 6",
         "third 2"
       ],
       "color": "#e76f6f",
@@ -19,7 +19,7 @@
       "amount": "34",
       "description": "43",
       "categories": [
-        "first 2",
+        "first 3",
         "third 2",
         "fourth 1"
       ],
@@ -33,7 +33,7 @@
       "description": "3455",
       "categories": [
         "third 2",
-        "second 5"
+        "second 6"
       ],
       "color": "#91a046",
       "id": 3
@@ -56,8 +56,8 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "first 2",
-        "second 5"
+        "first 3",
+        "second 6"
       ],
       "color": "#7b3737",
       "id": 5
@@ -100,16 +100,16 @@
   "categories": [
     {
       "date": "Monday, October 24, 2022",
-      "title": "first 2",
+      "title": "first 3",
       "description": "1",
-      "color": "#be8989",
+      "color": "#ae6565",
       "id": 1
     },
     {
       "date": "Monday, October 24, 2022",
-      "title": "second 5",
+      "title": "second 6",
       "description": "2",
-      "color": "#652424",
+      "color": "#22773e",
       "id": 2
     },
     {

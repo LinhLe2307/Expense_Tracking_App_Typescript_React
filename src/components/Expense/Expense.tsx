@@ -64,7 +64,7 @@ const Expense = () => {
             dispatch(editExpense(inputExpense))
         }
         // window.location.reload()
-        setInterval(() => window.location.reload(), 500);
+        setTimeout (() => window.location.reload(), 500);
     }
 
 
