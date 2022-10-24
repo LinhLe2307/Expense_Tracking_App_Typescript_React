@@ -2,15 +2,65 @@
   "notes": [
     {
       "date": "Monday, October 24, 2022",
-      "title": "first",
-      "amount": "23",
-      "description": "32",
+      "title": "first1",
+      "amount": "1232",
+      "description": "1232",
       "categories": [
-        "number ",
-        "Helsinki"
+        "first 2",
+        "second 5",
+        "third 2"
       ],
-      "color": "#f16a6a",
+      "color": "#e76f6f",
       "id": 1
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "second",
+      "amount": "34",
+      "description": "43",
+      "categories": [
+        "first 2",
+        "third 2",
+        "fourth 1"
+      ],
+      "color": "#e19494",
+      "id": 2
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "fourth45",
+      "amount": "4355",
+      "description": "3455",
+      "categories": [
+        "third 2",
+        "second 5"
+      ],
+      "color": "#91a046",
+      "id": 3
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "laptop",
+      "amount": "32",
+      "description": "3",
+      "categories": [
+        "third 2",
+        "fourth 1"
+      ],
+      "color": "#aa5050",
+      "id": 4
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "hu",
+      "amount": "045",
+      "description": "5",
+      "categories": [
+        "first 2",
+        "second 5"
+      ],
+      "color": "#7b3737",
+      "id": 5
     }
   ],
   "income": [
@@ -50,24 +100,31 @@
   "categories": [
     {
       "date": "Monday, October 24, 2022",
-      "title": "number ",
-      "description": "3",
-      "color": "#925d5d",
+      "title": "first 2",
+      "description": "1",
+      "color": "#be8989",
       "id": 1
     },
     {
       "date": "Monday, October 24, 2022",
-      "title": "Helsinki",
-      "description": "1",
-      "color": "#bd6b6b",
+      "title": "second 5",
+      "description": "2",
+      "color": "#652424",
       "id": 2
     },
     {
       "date": "Monday, October 24, 2022",
-      "title": "Key",
-      "description": "23",
-      "color": "#c25151",
+      "title": "third 2",
+      "description": "3",
+      "color": "#3dc754",
       "id": 3
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "fourth 1",
+      "description": "4",
+      "color": "#217340",
+      "id": 4
     }
   ]
 }

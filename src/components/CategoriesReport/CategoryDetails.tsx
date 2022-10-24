@@ -56,11 +56,12 @@ const CategoryDetails = () => {
   }
 
   const handleEdit = (selectedItem:string) => {
-    const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
+    // const findIndex = categoriesList.find(category => category.title === selectedItem)
 
-    if(findIndex !== undefined && findIndex.id !== undefined) {  
-        dispatch(handleOpenEditCategory(selectedItem))
-    }
+    // if(findIndex !== undefined && findIndex.id !== undefined) {  
+        console.log(selectedItem)
+        selectedItem && dispatch(handleOpenEditCategory(selectedItem))
+    // }
   }
 
 

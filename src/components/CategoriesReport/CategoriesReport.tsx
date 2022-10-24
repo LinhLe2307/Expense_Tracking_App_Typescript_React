@@ -42,7 +42,7 @@ const CategoriesReport = () => {
             const selectedCategory = expenseLists.map(expense => {
               // const newClone = expense.categories.map(category => category + "hi")
               
-              const newClone = expense.categories.map(category => editCategory && category.indexOf(editCategory) !== -1 ? inputCategory.title : category)
+              const newClone = expense.categories.map(category => editCategory && category === editCategory ? inputCategory.title : category)
               return {...expense, categories: newClone}
             });
             // console.log(selectedCategory)
@@ -51,7 +51,8 @@ const CategoriesReport = () => {
               dispatch(editCategoryContent(inputCategory))
             ])
         }
-        window.location.reload()
+        setInterval(() => window.location.reload(), 500);
+        //window.location.reload()
     } 
   
     useEffect(()=>{

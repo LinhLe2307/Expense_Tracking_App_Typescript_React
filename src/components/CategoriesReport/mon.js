@@ -1,3 +1,3 @@
-const a = "abc ";
-const b = a.indexOf("");
-console.log(b)
+const a = "abcghd";
+const b = a.indexOf("bc");
+console.log(a === "abc")

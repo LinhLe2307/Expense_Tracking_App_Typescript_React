@@ -41,7 +41,8 @@ const Income = () => {
         } else {
             dispatch(editIncome(inputExpense))
         }
-        window.location.reload()
+        // window.location.reload()
+        setInterval(() => window.location.reload(), 500);
     }
 
     useEffect(()=>{

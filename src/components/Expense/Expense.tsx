@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { DefaultModel, ExpenseModel } from '../../models/reduxModels';
 import GraphDisplay from './GraphDisplay';
 import { customDate } from '../../functions/reusableFunction';
-import { addNewExpense, editExpense, initializeExpense } from "../../features/expense/expenseSlice";
+import { addNewExpense, editExpense, handleOpenForm, initializeExpense } from "../../features/expense/expenseSlice";
 import { initializeCategories } from "../../features/categories/categoriesSlice";
 import FormModel from "../FormModel";
 
@@ -63,7 +63,8 @@ const Expense = () => {
         } else {
             dispatch(editExpense(inputExpense))
         }
-        window.location.reload()
+        // window.location.reload()
+        setInterval(() => window.location.reload(), 500);
     }
 
 

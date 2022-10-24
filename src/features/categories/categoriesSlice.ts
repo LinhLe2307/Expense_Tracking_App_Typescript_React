@@ -22,20 +22,26 @@ export const categoriesSlice = createSlice({
         },
         addNewCategory: (state, action:PayloadAction<CategoriesModel>) => {
             const newCategory = action.payload;
-
-            state.inputLists = state.inputLists.concat(newCategory)
+            const findIndex = state.inputLists.find(expense => expense.title === newCategory.title)
+            if(findIndex!==undefined) {
+                state.inputLists = state.inputLists.concat(newCategory)
+            }
 
             serviceAPI.postSingle(baseURL, newCategory)
         },
         editCategoryContent:(state, action:PayloadAction<CategoriesModel>):void => {
             const editItem = action.payload;
-            const findIndex = state.inputLists.find(expense => expense.title === state.editCategory)
-            if(findIndex !== undefined) {
-                const indexElement = state.inputLists.indexOf(findIndex);
-                console.log(indexElement)
-                state.inputLists.splice(indexElement, 0, editItem);
-                state.inputLists =  state.inputLists
-                findIndex.id && serviceAPI.putAxios(baseURL, findIndex.id, editItem)
+            if(state.editCategory && state.editCategory.length > 0) {
+                const findIndex = state.inputLists.find(expense => expense.title === state.editCategory)
+                // console.log(findIndex)
+                if(findIndex !== undefined) {
+                    const indexElement = state.inputLists.indexOf(findIndex);
+                    // console.log(indexElement)
+                    state.inputLists.splice(indexElement, 0, editItem);
+                    state.inputLists =  state.inputLists
+                    findIndex.id && serviceAPI.putAxios(baseURL, findIndex.id, editItem)
+                }
+
             }
         },
         deleteCategory: (state, action:PayloadAction<number>):void => {
@@ -45,7 +51,7 @@ export const categoriesSlice = createSlice({
             state.inputLists = state.inputLists.filter(expense => expense.id !== deleteItem)
         },
         
-        handleOpenEditCategory: (state, action):void => {
+        handleOpenEditCategory: (state, action:PayloadAction<string>):void => {
             state.editCategory = action.payload
             state.openEditItem = !state.openEditItem
         }
