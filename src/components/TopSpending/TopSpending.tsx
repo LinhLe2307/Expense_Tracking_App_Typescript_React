@@ -13,9 +13,23 @@ const TopSpending = () => {
     return (
         <div>
             <h4>Top Spending</h4>
-            {detailsDiv(categoriesList, expenseLists).map((list, i) => {
-                return list[1]
-            }).sort((a, b) => b-a)}
+            {
+                detailsDiv(categoriesList, expenseLists)
+                .map((list, i) => {
+                    if(typeof list[1] === "number" && typeof list[0] === "string") {
+                        return [list[1], list[0]]
+                    } else {
+                        return []
+                    }
+                })
+                .sort((a,b) => {
+                    if(typeof a[0] === "number" && typeof b[0] === "number") {
+                        return (b[0] - a[0])
+                    } else {
+                        return 0
+                    }
+                })
+            }
         </div>
     )
 }
