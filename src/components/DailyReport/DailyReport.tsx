@@ -6,6 +6,7 @@ import { initializeExpense } from '../../features/expense/expenseSlice';
 import { customDate } from '../../functions/reusableFunction';
 import SingleCard from '../Card/SingleCard';
 import { ExpenseModel } from '../../models/reduxModels';
+import 'react-calendar/dist/Calendar.css';
 
 const DailyReport = () => {
     const [value, onChange] = useState(new Date());
@@ -18,7 +19,13 @@ const DailyReport = () => {
 
   return (
     <div>
-        <Calendar onChange={onChange} value={value} />
+        <Calendar 
+            onChange={onChange} 
+            value={value} 
+            // onClickDay={(value, event) => console.log('Clicked month: ', value)} 
+            showDoubleView={true}
+            
+        />
         <h3>{customDate(value)}</h3>
         {
             expenseLists

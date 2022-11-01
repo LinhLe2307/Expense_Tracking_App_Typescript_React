@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Figure } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {detailsDiv} from "../../functions/reusableFunction"
 
@@ -28,7 +29,18 @@ const TopSpending = () => {
                     } else {
                         return 0
                     }
-                })
+                }).map((category, i) => <Figure key={i}>
+                    <Figure.Image
+                        width={171}
+                        height={180}
+                        alt="171x180"
+                        src="holder.js/171x180"
+                    />
+                    <Figure.Caption>
+                        {category[1]}
+                    </Figure.Caption>
+                    </Figure>
+                )
             }
         </div>
     )

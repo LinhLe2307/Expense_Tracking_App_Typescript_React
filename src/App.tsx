@@ -6,6 +6,7 @@ import CategoriesReport from './components/CategoriesReport/CategoriesReport';
 import Layout from './pages/Layout';
 import Income from './components/Income/Income';
 import Expense from './components/Expense/Expense';
+import MonthlyReport from './components/MonthlyReport/MonthlyReport';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/categories-report" element={<CategoriesReport />}/>
           <Route path="/income-report" element={<Income />}/>
           <Route path="/daily-report" element={<DailyReport />}/>
+          <Route path="/monthly-report" element={<MonthlyReport />}/>
         </ Route>
       </Routes>
     </BrowserRouter>

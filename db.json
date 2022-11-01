@@ -6,8 +6,8 @@
       "amount": "34",
       "description": "43",
       "categories": [
-        "first 5",
-        "third 3",
+        "first 8",
+        "third 4",
         "fourth 1"
       ],
       "color": "#e19494",
@@ -19,7 +19,7 @@
       "amount": "4355",
       "description": "3455",
       "categories": [
-        "third 3",
+        "third 4",
         "second 6"
       ],
       "color": "#91a046",
@@ -31,7 +31,7 @@
       "amount": "32",
       "description": "3",
       "categories": [
-        "third 3",
+        "third 4",
         "fourth 1"
       ],
       "color": "#aa5050",
@@ -43,7 +43,7 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "first 5",
+        "first 8",
         "second 6"
       ],
       "color": "#7b3737",
@@ -59,6 +59,28 @@
       ],
       "color": "#df6d6d",
       "id": 6
+    },
+    {
+      "date": "Tuesday, November 1, 2022",
+      "title": "buy laptop",
+      "amount": "33",
+      "description": "this is the first one",
+      "categories": [
+        "first 8"
+      ],
+      "color": "#d09090",
+      "id": 7
+    },
+    {
+      "date": "Tuesday, November 1, 2022",
+      "title": "hi",
+      "amount": "5",
+      "description": "55",
+      "categories": [
+        "first 8"
+      ],
+      "color": "#de9c9c",
+      "id": 8
     }
   ],
   "income": [
@@ -98,9 +120,9 @@
   "categories": [
     {
       "date": "Tuesday, November 1, 2022",
-      "title": "first 5",
-      "description": "343",
-      "color": "#957575",
+      "title": "first 8",
+      "description": "h",
+      "color": "#b96a6a",
       "id": 1
     },
     {
@@ -111,10 +133,10 @@
       "id": 2
     },
     {
-      "date": "Monday, October 24, 2022",
-      "title": "third 3",
-      "description": "3",
-      "color": "#c16c6c",
+      "date": "Tuesday, November 1, 2022",
+      "title": "third 4",
+      "description": "87",
+      "color": "#ab6363",
       "id": 3
     },
     {
