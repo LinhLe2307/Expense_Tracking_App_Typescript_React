@@ -6,41 +6,15 @@ import { deleteCategory, handleOpenEditCategory } from '../../features/categorie
 import { deleteExpenseCategories } from '../../features/expense/expenseSlice';
 import { handleOpenForm } from '../../features/expense/expenseSlice';
 
+import {detailsDiv} from "../../functions/reusableFunction"
+
 const CategoryDetails = () => {
   const categoriesList = useAppSelector(state => state.categories.inputLists);
-  const expenseLists = useAppSelector((state) => state.expense.inputLists);
-  const categoriesTitles = categoriesList.map(category => category.title);
-  
+  const expenseLists = useAppSelector((state) => state.expense.inputLists); 
 
   const dispatch = useAppDispatch()
 
-  const detailsDiv = () => {
-    let identity : Record<string, number> = {};
-    const transactionList = expenseLists
-    .map(expense => expense.categories)
-    .map(category => (category))
-    .flat(1)
-    .reduce((prev, curr)=> {
-      if(curr in prev) {
-        prev[curr]++
-      } else {
-        prev[curr] = 1
-      }
-      return prev
-    }, identity)
-
-    const cloneList = {...transactionList};
-    categoriesTitles.forEach(category => {
-        if(Object.keys(cloneList).indexOf(category) === -1) {
-          transactionList[category] = 0 
-        }
-    })
-  
-    return Object.entries(transactionList)
-  }
-
-  const handleDelete = (selectedItem:string) => {
-  
+  const handleDelete = (selectedItem:string) => { 
     const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
     if(findIndex !== undefined && findIndex.id !== undefined) {
       const selectedCategory = expenseLists.map(expense => {
@@ -68,7 +42,7 @@ const CategoryDetails = () => {
   return (
     <>
       {
-        detailsDiv().map((list, i) => {
+        detailsDiv(categoriesList, expenseLists).map((list, i) => {
         return (
           <Card border="primary" style={{ width: '18rem' }} key={nanoid()}>
             <Card.Header>

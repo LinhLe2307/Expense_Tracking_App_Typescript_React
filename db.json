@@ -2,25 +2,12 @@
   "notes": [
     {
       "date": "Monday, October 24, 2022",
-      "title": "first1",
-      "amount": "1232",
-      "description": "1232",
-      "categories": [
-        "first 3",
-        "second 6",
-        "third 2"
-      ],
-      "color": "#e76f6f",
-      "id": 1
-    },
-    {
-      "date": "Monday, October 24, 2022",
       "title": "second",
       "amount": "34",
       "description": "43",
       "categories": [
-        "first 3",
-        "third 2",
+        "first 5",
+        "third 3",
         "fourth 1"
       ],
       "color": "#e19494",
@@ -32,7 +19,7 @@
       "amount": "4355",
       "description": "3455",
       "categories": [
-        "third 2",
+        "third 3",
         "second 6"
       ],
       "color": "#91a046",
@@ -44,7 +31,7 @@
       "amount": "32",
       "description": "3",
       "categories": [
-        "third 2",
+        "third 3",
         "fourth 1"
       ],
       "color": "#aa5050",
@@ -56,11 +43,22 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "first 3",
+        "first 5",
         "second 6"
       ],
       "color": "#7b3737",
       "id": 5
+    },
+    {
+      "date": "Tuesday, November 1, 2022",
+      "title": "Buy food",
+      "amount": "23",
+      "description": "Hee",
+      "categories": [
+        "second 6"
+      ],
+      "color": "#df6d6d",
+      "id": 6
     }
   ],
   "income": [
@@ -99,10 +97,10 @@
   ],
   "categories": [
     {
-      "date": "Monday, October 24, 2022",
-      "title": "first 3",
-      "description": "1",
-      "color": "#ae6565",
+      "date": "Tuesday, November 1, 2022",
+      "title": "first 5",
+      "description": "343",
+      "color": "#957575",
       "id": 1
     },
     {
@@ -114,9 +112,9 @@
     },
     {
       "date": "Monday, October 24, 2022",
-      "title": "third 2",
+      "title": "third 3",
       "description": "3",
-      "color": "#3dc754",
+      "color": "#c16c6c",
       "id": 3
     },
     {

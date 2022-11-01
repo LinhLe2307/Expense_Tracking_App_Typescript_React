@@ -3,6 +3,9 @@
 // import { CategoryPriceModel } from "../models/reduxModels";
 // import categoriesServices from "../services/categoriesAPI";
 
+import { CategoriesModel, ExpenseModel } from "../models/reduxModels";
+
+
 // const categoryTransactions = (
 //     action: PayloadAction<CategoryPriceModel>, 
 //     state:RootState["categories"], 
@@ -35,4 +38,30 @@ const customDate = (selectedDate: Date) => {
     return selectedDate.toLocaleDateString("en-EU", options)
 }
 
-export { customDate}
+const detailsDiv = (categoriesList: CategoriesModel[], expenseLists: ExpenseModel[]) => {
+    const categoriesTitles = categoriesList.map(category => category.title);
+    let identity : Record<string, number> = {};
+    const transactionList = expenseLists
+        .map(expense => expense.categories)
+        .map(category => (category))
+        .flat(1)
+        .reduce((prev, curr)=> {
+            if(curr in prev) {
+                prev[curr]++
+            } else {
+                prev[curr] = 1
+            }
+            return prev
+            }, identity)
+
+        const cloneList = {...transactionList};
+        categoriesTitles.forEach(category => {
+            if(Object.keys(cloneList).indexOf(category) === -1) {
+                transactionList[category] = 0 
+            }
+        })
+    
+        return Object.entries(transactionList)
+    }
+
+export { customDate, detailsDiv }

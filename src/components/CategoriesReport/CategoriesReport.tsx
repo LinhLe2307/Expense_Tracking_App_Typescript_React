@@ -40,12 +40,11 @@ const CategoriesReport = () => {
             dispatch(addNewCategory(inputCategory)) 
         } else {
             const selectedCategory = expenseLists.map(expense => {
-              // const newClone = expense.categories.map(category => category + "hi")
-              
+
               const newClone = expense.categories.map(category => editCategory && category === editCategory ? inputCategory.title : category)
               return {...expense, categories: newClone}
             });
-            // console.log(selectedCategory)
+            
             Promise.all([
             dispatch(deleteExpenseCategories(selectedCategory)),
               dispatch(editCategoryContent(inputCategory))

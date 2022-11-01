@@ -10,6 +10,7 @@ import { customDate } from '../../functions/reusableFunction';
 import { addNewExpense, editExpense, handleOpenForm, initializeExpense } from "../../features/expense/expenseSlice";
 import { initializeCategories } from "../../features/categories/categoriesSlice";
 import FormModel from "../FormModel";
+import TopSpending from "../TopSpending/TopSpending";
 
 const Expense = () => {
     const [selectView, setSelectView] = useState("");
@@ -77,7 +78,7 @@ const Expense = () => {
     return (
     <>  
         <GraphDisplay />
-
+        <TopSpending />
         <h1>€{
             filterExpense.reduce((prev, curr) => prev + (+curr.amount), 0) 
         } spent today</h1>
