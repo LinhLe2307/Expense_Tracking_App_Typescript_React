@@ -15,9 +15,6 @@ const Header = () => {
       <Nav.Item>
         <Nav.Link href="/monthly-report">Monthly Report</Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="/categories-report">Categories Report</Nav.Link>
-      </Nav.Item>
     </Nav>
   )
 }

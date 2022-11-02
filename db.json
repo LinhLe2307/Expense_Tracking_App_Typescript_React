@@ -6,8 +6,7 @@
       "amount": "34",
       "description": "43",
       "categories": [
-        "first 8",
-        "third 4",
+        "third 5",
         "fourth 1"
       ],
       "color": "#e19494",
@@ -19,7 +18,7 @@
       "amount": "4355",
       "description": "3455",
       "categories": [
-        "third 4",
+        "third 5",
         "second 6"
       ],
       "color": "#91a046",
@@ -31,7 +30,7 @@
       "amount": "32",
       "description": "3",
       "categories": [
-        "third 4",
+        "third 5",
         "fourth 1"
       ],
       "color": "#aa5050",
@@ -43,7 +42,6 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "first 8",
         "second 6"
       ],
       "color": "#7b3737",
@@ -65,9 +63,7 @@
       "title": "buy laptop",
       "amount": "33",
       "description": "this is the first one",
-      "categories": [
-        "first 8"
-      ],
+      "categories": [],
       "color": "#d09090",
       "id": 7
     },
@@ -76,9 +72,7 @@
       "title": "hi",
       "amount": "5",
       "description": "55",
-      "categories": [
-        "first 8"
-      ],
+      "categories": [],
       "color": "#de9c9c",
       "id": 8
     }
@@ -119,13 +113,6 @@
   ],
   "categories": [
     {
-      "date": "Tuesday, November 1, 2022",
-      "title": "first 8",
-      "description": "h",
-      "color": "#b96a6a",
-      "id": 1
-    },
-    {
       "date": "Monday, October 24, 2022",
       "title": "second 6",
       "description": "2",
@@ -133,10 +120,10 @@
       "id": 2
     },
     {
-      "date": "Tuesday, November 1, 2022",
-      "title": "third 4",
-      "description": "87",
-      "color": "#ab6363",
+      "date": "Wednesday, November 2, 2022",
+      "title": "third 5",
+      "description": "4",
+      "color": "#a0642c",
       "id": 3
     },
     {
@@ -145,6 +132,13 @@
       "description": "4",
       "color": "#217340",
       "id": 4
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "fifth 1",
+      "description": "2",
+      "color": "#1e7638",
+      "id": 5
     }
   ]
 }

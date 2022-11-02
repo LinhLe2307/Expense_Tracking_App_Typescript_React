@@ -1,7 +1,5 @@
-import { nanoid } from 'nanoid';
+
 import React, {useState, useEffect} from 'react'
-import { Button, Nav } from 'react-bootstrap'
-import { Calendar } from 'react-calendar';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { addNewCategory, editCategoryContent, initializeCategories } from '../../features/categories/categoriesSlice';
 import { deleteExpenseCategories, initializeExpense } from "../../features/expense/expenseSlice";
@@ -9,13 +7,16 @@ import { customDate } from '../../functions/reusableFunction';
 import { DefaultModel } from '../../models/reduxModels';
 import FormModel from '../FormModel';
 import CategoryDetails from './CategoryDetails'
+import { ExpenseModel } from "../../models/reduxModels";
 
+interface MyProps {
+  filterExpenseList: ExpenseModel[]
+}
 
-const CategoriesReport = () => {
+const CategoriesReport = ({filterExpenseList}: MyProps) => {
   const [value, onChange] = useState(new Date());
   
   const dispatch = useAppDispatch();
-  const expenseLists = useAppSelector((state) => state.expense.inputLists);
   const openEditCategory = useAppSelector((state) => state.categories.openEditItem);
   const expenseId = useAppSelector((state) => state.categories.editId);
   const editCategory = useAppSelector((state) => state.categories.editCategory);
@@ -39,7 +40,7 @@ const CategoriesReport = () => {
        if(!openEditCategory) {
             dispatch(addNewCategory(inputCategory)) 
         } else {
-            const selectedCategory = expenseLists.map(expense => {
+            const selectedCategory = filterExpenseList.map(expense => {
 
               const newClone = expense.categories.map(category => editCategory && category === editCategory ? inputCategory.title : category)
               return {...expense, categories: newClone}
@@ -55,9 +56,8 @@ const CategoriesReport = () => {
     } 
   
     useEffect(()=>{
-    dispatch(initializeCategories());
-    dispatch(initializeExpense());
-    
+      dispatch(initializeCategories());
+      dispatch(initializeExpense());
   }, [dispatch]);
 
   return (

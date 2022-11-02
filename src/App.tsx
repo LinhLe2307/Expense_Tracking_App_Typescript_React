@@ -15,7 +15,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Expense />}/>
           <Route path="/:id" element={<DetailsInfo />}/>
-          <Route path="/categories-report" element={<CategoriesReport />}/>
           <Route path="/income-report" element={<Income />}/>
           <Route path="/daily-report" element={<DailyReport />}/>
           <Route path="/monthly-report" element={<MonthlyReport />}/>
