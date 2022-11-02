@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { addNewCategory, editCategoryContent, initializeCategories } from '../../features/categories/categoriesSlice';
@@ -37,7 +36,7 @@ const CategoriesReport = ({filterExpenseList}: MyProps) => {
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
-       if(!openEditCategory) {
+        if(!openEditCategory) {
             dispatch(addNewCategory(inputCategory)) 
         } else {
             const selectedCategory = filterExpenseList.map(expense => {
@@ -47,30 +46,23 @@ const CategoriesReport = ({filterExpenseList}: MyProps) => {
             });
             
             Promise.all([
-            dispatch(deleteExpenseCategories(selectedCategory)),
+              dispatch(deleteExpenseCategories(selectedCategory)),
               dispatch(editCategoryContent(inputCategory))
             ])
         }
         setTimeout(() => window.location.reload(), 500);
-        //window.location.reload()
     } 
-  
-    useEffect(()=>{
-      dispatch(initializeCategories());
-      dispatch(initializeExpense());
-  }, [dispatch]);
 
   return (
     <div>
-      <CategoryDetails />
-      
-        <FormModel 
-          inputExpense={inputCategory}
-          expenseId={expenseId}
-          submitHandler={submitHandler}
-          handleInputExpense={handleInputCategory}
-          type="categories"
-          baseURL="http://localhost:3010/categories"
+      <CategoryDetails filterExpenseList={filterExpenseList}/>
+      <FormModel 
+        inputExpense={inputCategory}
+        expenseId={expenseId}
+        submitHandler={submitHandler}
+        handleInputExpense={handleInputCategory}
+        type="categories"
+        baseURL="http://localhost:3010/categories"
     />
     </div>
   )

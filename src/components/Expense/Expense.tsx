@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Button, Dropdown } from 'react-bootstrap';
 import { nanoid } from 'nanoid';
+import React, { useEffect, useState } from "react";
+import { Button, Dropdown } from 'react-bootstrap';
 
-import SingleCard from '../Card/SingleCard';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { DefaultModel, ExpenseModel } from '../../models/reduxModels';
-import GraphDisplay from './GraphDisplay';
-import { customDate } from '../../functions/reusableFunction';
-import { addNewExpense, editExpense, handleOpenForm, initializeExpense } from "../../features/expense/expenseSlice";
 import { initializeCategories } from "../../features/categories/categoriesSlice";
+import { addNewExpense, editExpense, initializeExpense } from "../../features/expense/expenseSlice";
+import { customDate } from '../../functions/reusableFunction';
+import { DefaultModel, ExpenseModel } from '../../models/reduxModels';
+import SingleCard from '../Card/SingleCard';
 import FormModel from "../FormModel";
 import TopSpending from "../TopSpending/TopSpending";
+import GraphDisplay from './GraphDisplay';
 
 const Expense = () => {
     const [selectView, setSelectView] = useState("");
@@ -42,10 +42,10 @@ const Expense = () => {
     }
 
     const handleSelectedCategories = (category: DefaultModel) => {
-      const inputCategory = category.title;
-      if(selectedCategories.indexOf(inputCategory) === -1) {
-        setSelectedCategories(prev => prev.concat(category.title))
-      }
+        const inputCategory = category.title;
+        if(selectedCategories.indexOf(inputCategory) === -1) {
+            setSelectedCategories(prev => prev.concat(category.title))
+        }
     }
 
     const handleInputExpense = (e:React.ChangeEvent<HTMLInputElement>):void => {
@@ -67,7 +67,6 @@ const Expense = () => {
         // window.location.reload()
         setTimeout (() => window.location.reload(), 500);
     }
-
 
     useEffect(()=>{
         dispatch(initializeCategories());

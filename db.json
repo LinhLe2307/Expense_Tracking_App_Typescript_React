@@ -6,8 +6,8 @@
       "amount": "34",
       "description": "43",
       "categories": [
-        "third 5",
-        "fourth 1"
+        "third 6",
+        "fourth 3"
       ],
       "color": "#e19494",
       "id": 2
@@ -18,8 +18,8 @@
       "amount": "4355",
       "description": "3455",
       "categories": [
-        "third 5",
-        "second 6"
+        "third 6",
+        "second 8"
       ],
       "color": "#91a046",
       "id": 3
@@ -30,8 +30,8 @@
       "amount": "32",
       "description": "3",
       "categories": [
-        "third 5",
-        "fourth 1"
+        "third 6",
+        "fourth 3"
       ],
       "color": "#aa5050",
       "id": 4
@@ -42,7 +42,7 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "second 6"
+        "second 8"
       ],
       "color": "#7b3737",
       "id": 5
@@ -53,7 +53,7 @@
       "amount": "23",
       "description": "Hee",
       "categories": [
-        "second 6"
+        "second 8"
       ],
       "color": "#df6d6d",
       "id": 6
@@ -75,6 +75,18 @@
       "categories": [],
       "color": "#de9c9c",
       "id": 8
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "laptop",
+      "amount": "78",
+      "description": "7777",
+      "categories": [
+        "second 8",
+        "fifth 1"
+      ],
+      "color": "#c35050",
+      "id": 9
     }
   ],
   "income": [
@@ -113,24 +125,24 @@
   ],
   "categories": [
     {
-      "date": "Monday, October 24, 2022",
-      "title": "second 6",
-      "description": "2",
-      "color": "#22773e",
+      "date": "Wednesday, November 2, 2022",
+      "title": "second 8",
+      "description": "www",
+      "color": "#c08282",
       "id": 2
     },
     {
       "date": "Wednesday, November 2, 2022",
-      "title": "third 5",
-      "description": "4",
-      "color": "#a0642c",
+      "title": "third 6",
+      "description": "eee",
+      "color": "#c28080",
       "id": 3
     },
     {
-      "date": "Monday, October 24, 2022",
-      "title": "fourth 1",
-      "description": "4",
-      "color": "#217340",
+      "date": "Wednesday, November 2, 2022",
+      "title": "fourth 3",
+      "description": "3333",
+      "color": "#cd3c3c",
       "id": 4
     },
     {

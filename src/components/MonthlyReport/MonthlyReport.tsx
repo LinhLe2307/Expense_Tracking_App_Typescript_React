@@ -18,7 +18,6 @@ const MonthlyReport = () => {
     const [monthlyExpense, setMonthlyExpense] =  useState<ExpenseModel[]>([])
     
     const expenseLists = useAppSelector((state) => state.expense.inputLists);
-    const categoriesList = useAppSelector(state => state.categories.inputLists);
 
     const handleClick = (value:Date, event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -58,7 +57,7 @@ const MonthlyReport = () => {
                 <>
                     <h3>All</h3>
                     <CategoriesReport 
-                    filterExpenseList={expenseLists}
+                        filterExpenseList={expenseLists}
                     />
                 </>
         }

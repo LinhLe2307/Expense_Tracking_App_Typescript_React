@@ -1,14 +1,16 @@
 import { nanoid } from 'nanoid';
-import React from 'react'
-import { Card, CloseButton, Dropdown } from 'react-bootstrap';
+import { Card, Dropdown } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { deleteCategory, handleOpenEditCategory } from '../../features/categories/categoriesSlice';
-import { deleteExpenseCategories } from '../../features/expense/expenseSlice';
-import { handleOpenForm } from '../../features/expense/expenseSlice';
+import { deleteExpenseCategories, handleOpenForm } from '../../features/expense/expenseSlice';
 
-import {detailsDiv} from "../../functions/reusableFunction"
+import { detailsDiv } from "../../functions/reusableFunction";
+import { ExpenseModel } from '../../models/reduxModels';
+interface MyProps {
+  filterExpenseList: ExpenseModel[]
+}
 
-const CategoryDetails = () => {
+const CategoryDetails = ({filterExpenseList}: MyProps) => {
   const categoriesList = useAppSelector(state => state.categories.inputLists);
   const expenseLists = useAppSelector((state) => state.expense.inputLists); 
 
@@ -38,11 +40,10 @@ const CategoryDetails = () => {
     // }
   }
 
-
   return (
     <>
       {
-        detailsDiv(categoriesList, expenseLists).map((list, i) => {
+        detailsDiv(categoriesList, filterExpenseList).map((list, i) => {
         return (
           <Card border="primary" style={{ width: '18rem' }} key={nanoid()}>
             <Card.Header>
