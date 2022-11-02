@@ -19,7 +19,7 @@
       "description": "3455",
       "categories": [
         "third 6",
-        "second 8"
+        "second 9"
       ],
       "color": "#91a046",
       "id": 3
@@ -42,7 +42,7 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "second 8"
+        "second 9"
       ],
       "color": "#7b3737",
       "id": 5
@@ -53,7 +53,7 @@
       "amount": "23",
       "description": "Hee",
       "categories": [
-        "second 8"
+        "second 9"
       ],
       "color": "#df6d6d",
       "id": 6
@@ -82,11 +82,24 @@
       "amount": "78",
       "description": "7777",
       "categories": [
-        "second 8",
+        "second 9",
         "fifth 1"
       ],
       "color": "#c35050",
       "id": 9
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "buy lego",
+      "amount": "45",
+      "description": "4444",
+      "categories": [
+        "second 9",
+        "fifth 1",
+        "fourth 3"
+      ],
+      "color": "#fbb1b1",
+      "id": 10
     }
   ],
   "income": [
@@ -126,9 +139,9 @@
   "categories": [
     {
       "date": "Wednesday, November 2, 2022",
-      "title": "second 8",
-      "description": "www",
-      "color": "#c08282",
+      "title": "second 9",
+      "description": "ggggg",
+      "color": "#a65959",
       "id": 2
     },
     {
