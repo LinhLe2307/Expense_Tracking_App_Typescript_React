@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import { deleteIncome, handleOpenEditIncome } from '../../features/income/incomeSlice'
 import { IncomeModel } from '../../models/reduxModels'
-import CustomDropdown from '../CustomDropdown'
+import CustomDropdown from '../Card/CustomDropdown'
 
 interface MyProps {
     income: IncomeModel,

@@ -19,7 +19,7 @@
       "description": "3455",
       "categories": [
         "third 6",
-        "second 9"
+        "second 19"
       ],
       "color": "#91a046",
       "id": 3
@@ -42,7 +42,7 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "second 9"
+        "second 19"
       ],
       "color": "#7b3737",
       "id": 5
@@ -53,7 +53,7 @@
       "amount": "23",
       "description": "Hee",
       "categories": [
-        "second 9"
+        "second 19"
       ],
       "color": "#df6d6d",
       "id": 6
@@ -82,7 +82,7 @@
       "amount": "78",
       "description": "7777",
       "categories": [
-        "second 9",
+        "second 19",
         "fifth 1"
       ],
       "color": "#c35050",
@@ -94,12 +94,23 @@
       "amount": "45",
       "description": "4444",
       "categories": [
-        "second 9",
+        "second 19",
         "fifth 1",
         "fourth 3"
       ],
       "color": "#fbb1b1",
       "id": 10
+    },
+    {
+      "date": "Wednesday, November 9, 2022",
+      "title": "test",
+      "amount": "34",
+      "description": "3433",
+      "categories": [
+        "second 19"
+      ],
+      "color": "#ec8989",
+      "id": 11
     }
   ],
   "income": [
@@ -138,10 +149,10 @@
   ],
   "categories": [
     {
-      "date": "Wednesday, November 2, 2022",
-      "title": "second 9",
-      "description": "ggggg",
-      "color": "#a65959",
+      "date": "Wednesday, November 9, 2022",
+      "title": "second 19",
+      "description": "ddd",
+      "color": "#d57272",
       "id": 2
     },
     {

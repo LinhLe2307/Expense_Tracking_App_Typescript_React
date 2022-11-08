@@ -1,8 +1,8 @@
 import React from 'react'
 import { AnyAction } from '@reduxjs/toolkit';
 import { Dropdown } from 'react-bootstrap';
-import { useAppDispatch } from '../app/hooks';
-import { handleOpenForm } from '../features/expense/expenseSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { handleOpenForm } from '../../features/expense/expenseSlice';
 interface Action {
     action: {
         payload:number,
