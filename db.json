@@ -1,28 +1,180 @@
 {
   "notes": [
     {
-      "title": "1",
-      "price": "1",
-      "description": "1",
+      "date": "Monday, October 24, 2022",
+      "title": "second",
+      "amount": "34",
+      "description": "43",
       "categories": [
-        "Communication",
-        "Accomodation",
-        "Fuel"
+        "third 6",
+        "fourth 3"
       ],
-      "color": "#dda6a6",
+      "color": "#e19494",
+      "id": 2
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "fourth45",
+      "amount": "4355",
+      "description": "3455",
+      "categories": [
+        "third 6",
+        "second 19"
+      ],
+      "color": "#91a046",
+      "id": 3
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "laptop",
+      "amount": "32",
+      "description": "3",
+      "categories": [
+        "third 6",
+        "fourth 3"
+      ],
+      "color": "#aa5050",
+      "id": 4
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "hu",
+      "amount": "045",
+      "description": "5",
+      "categories": [
+        "second 19"
+      ],
+      "color": "#7b3737",
+      "id": 5
+    },
+    {
+      "date": "Tuesday, November 1, 2022",
+      "title": "Buy food",
+      "amount": "23",
+      "description": "Hee",
+      "categories": [
+        "second 19"
+      ],
+      "color": "#df6d6d",
+      "id": 6
+    },
+    {
+      "date": "Tuesday, November 1, 2022",
+      "title": "buy laptop",
+      "amount": "33",
+      "description": "this is the first one",
+      "categories": [],
+      "color": "#d09090",
+      "id": 7
+    },
+    {
+      "date": "Tuesday, November 1, 2022",
+      "title": "hi",
+      "amount": "5",
+      "description": "55",
+      "categories": [],
+      "color": "#de9c9c",
+      "id": 8
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "laptop",
+      "amount": "78",
+      "description": "7777",
+      "categories": [
+        "second 19",
+        "fifth 1"
+      ],
+      "color": "#c35050",
+      "id": 9
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "buy lego",
+      "amount": "45",
+      "description": "4444",
+      "categories": [
+        "second 19",
+        "fifth 1",
+        "fourth 3"
+      ],
+      "color": "#fbb1b1",
+      "id": 10
+    },
+    {
+      "date": "Wednesday, November 9, 2022",
+      "title": "test",
+      "amount": "34",
+      "description": "3433",
+      "categories": [
+        "second 19"
+      ],
+      "color": "#ec8989",
+      "id": 11
+    }
+  ],
+  "income": [
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "1",
+      "amount": "12",
+      "description": "1",
+      "color": "#a16363",
       "id": 1
     },
     {
-      "title": "2",
-      "price": "2",
-      "description": "2",
-      "categories": [
-        "Fuel"
-      ],
-      "color": "#c25656",
+      "date": "Saturday, October 22, 2022",
+      "title": "23",
+      "amount": "2",
+      "description": "123",
+      "color": "#af7979",
       "id": 2
+    },
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "Income 4",
+      "amount": 0,
+      "description": "",
+      "color": "",
+      "id": 3
+    },
+    {
+      "date": "Saturday, October 22, 2022",
+      "title": "Income 6",
+      "amount": 0,
+      "description": "",
+      "color": "",
+      "id": 4
     }
   ],
-  "income": [],
-  "categoriesLists": []
+  "categories": [
+    {
+      "date": "Wednesday, November 9, 2022",
+      "title": "second 19",
+      "description": "ddd",
+      "color": "#d57272",
+      "id": 2
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "third 6",
+      "description": "eee",
+      "color": "#c28080",
+      "id": 3
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "fourth 3",
+      "description": "3333",
+      "color": "#cd3c3c",
+      "id": 4
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "fifth 1",
+      "description": "2",
+      "color": "#1e7638",
+      "id": 5
+    }
+  ]
 }

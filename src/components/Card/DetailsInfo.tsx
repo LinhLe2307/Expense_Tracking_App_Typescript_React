@@ -1,8 +1,11 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 const DetailsInfo = () => {
+    const location = useLocation();
+    const expenseDetails = location.state.expenseDetails;
   return (
-    <div>DetailsInfo</div>
+    <div>{expenseDetails.title}</div>
   )
 }
 

@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import expenseReducer from '../features/expense/expenseSlice'
+import categoriesReducer from '../features/categories/categoriesSlice';
+import expenseReducer from '../features/expense/expenseSlice';
+import incomeReducer from '../features/income/incomeSlice'
 
 const store = configureStore({
   reducer: {
-    expense: expenseReducer
+    expense: expenseReducer,
+    income: incomeReducer,
+    categories: categoriesReducer
   }
 })
 

@@ -7,7 +7,13 @@ const Header = () => {
         <Nav.Link href="/">Home</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/monthly-billing">Monthly Billing</Nav.Link>
+        <Nav.Link href="/income-report">Income</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/daily-report">Daily Report</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/monthly-report">Monthly Report</Nav.Link>
       </Nav.Item>
     </Nav>
   )
