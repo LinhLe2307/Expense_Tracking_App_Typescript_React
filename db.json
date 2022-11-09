@@ -2,15 +2,15 @@
   "notes": [
     {
       "date": "Monday, October 24, 2022",
-      "title": "second",
-      "amount": "34",
-      "description": "43",
+      "title": "laptop",
+      "amount": "32",
+      "description": "3",
       "categories": [
-        "third 6",
-        "fourth 3"
+        "third 11",
+        "fourth 7"
       ],
-      "color": "#e19494",
-      "id": 2
+      "color": "#aa5050",
+      "id": 4
     },
     {
       "date": "Monday, October 24, 2022",
@@ -18,23 +18,11 @@
       "amount": "4355",
       "description": "3455",
       "categories": [
-        "third 6",
-        "second 19"
+        "third 11",
+        "content 4"
       ],
       "color": "#91a046",
       "id": 3
-    },
-    {
-      "date": "Monday, October 24, 2022",
-      "title": "laptop",
-      "amount": "32",
-      "description": "3",
-      "categories": [
-        "third 6",
-        "fourth 3"
-      ],
-      "color": "#aa5050",
-      "id": 4
     },
     {
       "date": "Monday, October 24, 2022",
@@ -42,10 +30,22 @@
       "amount": "045",
       "description": "5",
       "categories": [
-        "second 19"
+        "content 4"
       ],
       "color": "#7b3737",
       "id": 5
+    },
+    {
+      "date": "Wednesday, November 2, 2022",
+      "title": "laptop",
+      "amount": "78",
+      "description": "7777",
+      "categories": [
+        "content 4",
+        "fifth 4"
+      ],
+      "color": "#c35050",
+      "id": 9
     },
     {
       "date": "Tuesday, November 1, 2022",
@@ -53,10 +53,22 @@
       "amount": "23",
       "description": "Hee",
       "categories": [
-        "second 19"
+        "content 4"
       ],
       "color": "#df6d6d",
       "id": 6
+    },
+    {
+      "date": "Monday, October 24, 2022",
+      "title": "second",
+      "amount": "34",
+      "description": "43",
+      "categories": [
+        "third 11",
+        "fourth 7"
+      ],
+      "color": "#e19494",
+      "id": 2
     },
     {
       "date": "Tuesday, November 1, 2022",
@@ -68,6 +80,19 @@
       "id": 7
     },
     {
+      "date": "Wednesday, November 2, 2022",
+      "title": "buy lego",
+      "amount": "45",
+      "description": "4444",
+      "categories": [
+        "content 4",
+        "fifth 4",
+        "fourth 7"
+      ],
+      "color": "#fbb1b1",
+      "id": 10
+    },
+    {
       "date": "Tuesday, November 1, 2022",
       "title": "hi",
       "amount": "5",
@@ -77,37 +102,12 @@
       "id": 8
     },
     {
-      "date": "Wednesday, November 2, 2022",
-      "title": "laptop",
-      "amount": "78",
-      "description": "7777",
-      "categories": [
-        "second 19",
-        "fifth 1"
-      ],
-      "color": "#c35050",
-      "id": 9
-    },
-    {
-      "date": "Wednesday, November 2, 2022",
-      "title": "buy lego",
-      "amount": "45",
-      "description": "4444",
-      "categories": [
-        "second 19",
-        "fifth 1",
-        "fourth 3"
-      ],
-      "color": "#fbb1b1",
-      "id": 10
-    },
-    {
       "date": "Wednesday, November 9, 2022",
       "title": "test",
       "amount": "34",
       "description": "3433",
       "categories": [
-        "second 19"
+        "content 4"
       ],
       "color": "#ec8989",
       "id": 11
@@ -150,30 +150,30 @@
   "categories": [
     {
       "date": "Wednesday, November 9, 2022",
-      "title": "second 19",
-      "description": "ddd",
-      "color": "#d57272",
+      "title": "content 4",
+      "description": "content 4",
+      "color": "#2a9d3d",
       "id": 2
     },
     {
-      "date": "Wednesday, November 2, 2022",
-      "title": "third 6",
-      "description": "eee",
-      "color": "#c28080",
+      "date": "Wednesday, November 9, 2022",
+      "title": "third 11",
+      "description": "third 11",
+      "color": "#903131",
       "id": 3
     },
     {
-      "date": "Wednesday, November 2, 2022",
-      "title": "fourth 3",
-      "description": "3333",
-      "color": "#cd3c3c",
+      "date": "Wednesday, November 9, 2022",
+      "title": "fourth 7",
+      "description": "fourth 7",
+      "color": "#914646",
       "id": 4
     },
     {
-      "date": "Wednesday, November 2, 2022",
-      "title": "fifth 1",
-      "description": "2",
-      "color": "#1e7638",
+      "date": "Wednesday, November 9, 2022",
+      "title": "fifth 4",
+      "description": "fifth 4",
+      "color": "#33c16a",
       "id": 5
     }
   ]

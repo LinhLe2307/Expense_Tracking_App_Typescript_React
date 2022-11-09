@@ -1,95 +1,105 @@
-import { nanoid } from 'nanoid';
-import { Card, Dropdown } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { deleteCategory, handleOpenEditCategory } from '../../features/categories/categoriesSlice';
-import { deleteExpenseCategories, handleOpenForm } from '../../features/expense/expenseSlice';
+import { nanoid } from "nanoid";
+import { Card, Dropdown } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+  deleteCategory,
+  handleOpenEditCategory,
+} from "../../features/categories/categoriesSlice";
+import {
+  deleteExpenseCategories,
+  handleOpenForm,
+} from "../../features/expense/expenseSlice";
+import { CategoriesModel } from "../../models/reduxModels";
 
 import { detailsDiv } from "../../functions/reusableFunction";
-import { ExpenseModel } from '../../models/reduxModels';
+import { ExpenseModel } from "../../models/reduxModels";
 interface MyProps {
-  filterExpenseList: ExpenseModel[]
+  filterExpenseList: ExpenseModel[];
 }
 
-const CategoryDetails = ({filterExpenseList}: MyProps) => {
-  const categoriesList = useAppSelector(state => state.categories.inputLists);
-  const expenseLists = useAppSelector((state) => state.expense.inputLists); 
+const CategoryDetails = ({ filterExpenseList }: MyProps) => {
+  const categoriesList = useAppSelector((state) => state.categories.inputLists);
+  const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const handleDelete = (selectedItem:string) => { 
-    const findIndex = categoriesList.find(category => category.title.indexOf(selectedItem) !== -1)
-    if(findIndex !== undefined && findIndex.id !== undefined) {
-      const selectedCategory = expenseLists.map(expense => {
-        const newClone = expense.categories.filter(category => category !== selectedItem)
-        return {...expense, categories: newClone}
+  const handleDelete = (selectedItem: string) => {
+    const findIndex = categoriesList.find(
+      (category) => category.title.indexOf(selectedItem) !== -1
+    );
+    if (findIndex !== undefined && findIndex.id !== undefined) {
+      const selectedCategory = expenseLists.map((expense) => {
+        const newClone = expense.categories.filter(
+          (category) => category !== selectedItem
+        );
+        return { ...expense, categories: newClone };
       });
-  
+
       Promise.all([
         dispatch(deleteCategory(findIndex.id)),
-        dispatch(deleteExpenseCategories(selectedCategory))
-      ])
+        dispatch(deleteExpenseCategories(selectedCategory)),
+      ]);
     }
-  }
+  };
 
-  const handleEdit = (selectedItem:string) => {
+  const handleEdit = (selectedItem: string) => {
     // const findIndex = categoriesList.find(category => category.title === selectedItem)
 
-    // if(findIndex !== undefined && findIndex.id !== undefined) {  
-        console.log(selectedItem)
-        selectedItem && dispatch(handleOpenEditCategory(selectedItem))
+    // if(findIndex !== undefined && findIndex.id !== undefined) {
+    console.log(selectedItem);
+    selectedItem && dispatch(handleOpenEditCategory(selectedItem));
     // }
-  }
+  };
 
   return (
     <>
-      {
-        detailsDiv(categoriesList, filterExpenseList).map((list, i) => {
+      {detailsDiv(categoriesList, filterExpenseList).map((list, i) => {
         return (
-          <Card border="primary" style={{ width: '18rem' }} key={nanoid()}>
+          <Card border="primary" style={{ width: "18rem" }} key={nanoid()}>
             <Card.Header>
               {list[1]} transaction(s)
-
-            { 
-              (typeof list[0] === "string") &&
-              // <CloseButton onClick={() => handleDelete(list[0])}/>
-              <Dropdown>
-                <Dropdown.Toggle 
-                    variant="light" 
+              {typeof list[0] === "string" && (
+                // <CloseButton onClick={() => handleDelete(list[0])}/>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="light"
                     id="dropdown-basic"
-                >
-                    </Dropdown.Toggle>
+                  ></Dropdown.Toggle>
 
-                    <Dropdown.Menu >
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => handleDelete(list[0])}>
+                      Delete
+                    </Dropdown.Item>
+
                     <Dropdown.Item
-                            onClick={() => handleDelete(list[0])}
+                      onClick={() => {
+                        handleEdit(list[0]);
+                        dispatch(handleOpenForm());
+                      }}
                     >
-                            Delete
+                      Edit
                     </Dropdown.Item>
-
-                    <Dropdown.Item
-                        onClick={()=> {
-                            handleEdit(list[0]);
-                            dispatch(handleOpenForm())
-                        }}
-                        >
-                            Edit
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            }
+                  </Dropdown.Menu>
+                </Dropdown>
+              )}
             </Card.Header>
 
-        <Card.Body>
-          <Card.Title>{list[0]}</Card.Title>
-          <Card.Text>
-            {categoriesList[i]?.description}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-        )})
-      }
+            <Card.Body>
+              <Card.Title>{list[0]}</Card.Title>
+              <Card.Text>
+                {categoriesList
+                  .filter((cate: CategoriesModel) => cate.title === list[0])
+                  .map((cate) => (
+                    <p>{cate.description}</p>
+                  ))
+                }
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        );
+      })}
     </>
-  )
-}
+  );
+};
 
-export default CategoryDetails
+export default CategoryDetails;
