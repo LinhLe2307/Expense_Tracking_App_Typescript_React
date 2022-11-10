@@ -20,7 +20,9 @@ const Expense = () => {
   const [selectView, setSelectView] = useState("");
 
   const dispatch = useAppDispatch();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<
+    { target_id: string | number }[]
+  >([]);
 
   const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
 
@@ -30,41 +32,56 @@ const Expense = () => {
 
   const categoriesList = useAppSelector((state) => state.categories.inputLists);
 
-  const filterExpense: ExpenseModel[] = expenseLists.filter(
-    (expense: ExpenseModel) => expense.date === customDate(new Date())
-  );
+  // const filterExpense: ExpenseModel[] = expenseLists.filter(
+  //   (expense: ExpenseModel) => expense.date === customDate(new Date())
+  // );
 
   const [inputExpense, setInputExpense] = useState<ExpenseModel>({
-    date: customDate(new Date()),
+    field_date: [
+      {
+        value: customDate(new Date()),
+      },
+    ],
     title: [
       {
         value: "",
       },
     ],
-    field_amount: 0,
-    field_description: "",
-    categories: selectedCategories,
+    field_amount: [
+      {
+        value: 0,
+      },
+    ],
+    field_description: [
+      {
+        value: "",
+      },
+    ],
+    field_expense_categories: selectedCategories,
     color: "",
   });
 
   const deleteCategory = (deleteItem: string) => {
     setSelectedCategories((prev) =>
-      prev.filter((category) => category !== deleteItem)
+      prev.filter((category) => category.target_id !== deleteItem)
     );
   };
 
   const handleSelectedCategories = (category: DefaultModel) => {
-    const inputCategory = category.title[0].value;
-    if (selectedCategories.indexOf(inputCategory) === -1) {
-      setSelectedCategories((prev) => prev.concat(category.title[0].value));
-    }
+    //   const inputCategory = category.title[0].value;
+    //   if (
+    //     selectedCategories.find((category) => category.target_id === inputCategory) ===
+    //     undefined
+    //   ) {
+    //     setSelectedCategories((prev) => prev.concat(category.title[0].value));
+    //   }
   };
 
   const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputExpense({
       ...inputExpense,
       [e.target.name]: e.target.value,
-      categories: selectedCategories,
+      field_expense_categories: selectedCategories,
     });
   };
 
@@ -89,7 +106,11 @@ const Expense = () => {
       <GraphDisplay />
       <TopSpending />
       <h1>
-        €{filterExpense.reduce((prev, curr) => prev + +curr.field_amount, 0)}{" "}
+        €
+        {expenseLists.reduce(
+          (prev, curr) => prev + +curr.field_amount[0].value,
+          0
+        )}{" "}
         spent today
       </h1>
 
@@ -115,11 +136,14 @@ const Expense = () => {
 
       <h3>{selectView === "" ? "All" : selectView}</h3>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
-        {filterExpense
+        {expenseLists
           .filter((expense: ExpenseModel) => {
             return selectView === ""
               ? expense
-              : expense.categories.indexOf(selectView) !== -1;
+              : expense.new_expense_categories &&
+                  expense.new_expense_categories.find(
+                    (category) => category === selectView
+                  ) !== undefined;
           })
           .map((expense: ExpenseModel) => (
             <SingleCard expense={expense} key={nanoid()} />
@@ -130,7 +154,7 @@ const Expense = () => {
         expenseId={expenseId}
         submitHandler={submitHandler}
         handleInputExpense={handleInputExpense}
-        selectedCategories={selectedCategories}
+        // selectedCategories={selectedCategories}
         deleteCategory={deleteCategory}
         handleSelectedCategories={handleSelectedCategories}
         type="expense"

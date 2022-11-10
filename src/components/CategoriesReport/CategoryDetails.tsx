@@ -94,7 +94,7 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
                     (cate: CategoriesModel) => cate.title[0].value === list[0]
                   )
                   .map((cate) => (
-                    <p>{cate.field_description}</p>
+                    <p>{cate.field_description[0].value}</p>
                   ))}
               </Card.Text>
             </Card.Body>

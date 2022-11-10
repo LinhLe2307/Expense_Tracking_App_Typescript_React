@@ -40,7 +40,7 @@ const MonthlyReport = () => {
     // console.log('Clicked month: ', value)
     const selectedMonth = month[value.getMonth()];
     const newList = expenseLists.filter((expense) =>
-      expense.date.includes(selectedMonth)
+      expense.field_date[0].value.includes(selectedMonth)
     );
     const budget = newList.reduce((prev, curr) => prev + +curr.field_amount, 0);
     setMonthlyExpense(newList);

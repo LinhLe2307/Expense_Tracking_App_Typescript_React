@@ -48,14 +48,14 @@ const SingleCard = ({ expense }: MyProps) => {
             </Link>
             <div>
               <Card.Title>{expense.title[0].value}</Card.Title>
-              <Card.Title>-€{expense.field_amount}</Card.Title>
+              <Card.Title>-€{expense.field_amount[0].value}</Card.Title>
               <div
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 1fr)",
                 }}
               >
-                {/* {expense.categories?.map((category) => (
+                {expense.new_expense_categories?.map((category) => (
                   <Button
                     variant="primary"
                     key={category}
@@ -63,7 +63,7 @@ const SingleCard = ({ expense }: MyProps) => {
                   >
                     {category}
                   </Button>
-                ))} */}
+                ))}
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ const SingleCard = ({ expense }: MyProps) => {
               gap: "3rem",
             }}
           >
-            {/* <Card.Text>{expense.description}</Card.Text> */}
+            {/* <Card.Text>{expense.field_description[0].value}</Card.Text> */}
 
             {expense.id && (
               <CustomDropdown
@@ -86,7 +86,7 @@ const SingleCard = ({ expense }: MyProps) => {
           </div>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">{expense.date}</small>
+          <small className="text-muted">{expense.field_date[0].value}</small>
         </Card.Footer>
       </Card>
     </>

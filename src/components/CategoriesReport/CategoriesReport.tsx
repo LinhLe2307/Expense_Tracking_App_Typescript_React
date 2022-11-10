@@ -30,13 +30,21 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
   const editCategory = useAppSelector((state) => state.categories.editCategory);
 
   const [inputCategory, setInputCategory] = useState<DefaultModel>({
-    date: customDate(new Date()),
+    field_date: [
+      {
+        value: customDate(new Date()),
+      },
+    ],
     title: [
       {
         value: "",
       },
     ],
-    field_description: "",
+    field_description: [
+      {
+        value: "",
+      },
+    ],
     color: "",
   });
 
@@ -50,25 +58,25 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    if (!openEditCategory) {
-      dispatch(addNewCategory(inputCategory));
-    } else {
-      const selectedCategory = filterExpenseList.map((expense) => {
-        const newClone = expense.categories.map((category) =>
-          editCategory && category === editCategory
-            ? inputCategory.title[0].value
-            : category
-        );
-        return { ...expense, categories: newClone };
-      });
+  //   e.preventDefault();
+  //   if (!openEditCategory) {
+  //     dispatch(addNewCategory(inputCategory));
+  //   } else {
+  //     const selectedCategory = filterExpenseList.map((expense) => {
+  //       const newClone = expense.field_expense_categories.map((category) =>
+  //         editCategory && category.target_id === editCategory
+  //           ? inputCategory.title[0].value
+  //           : category
+  //       );
+  //       return { ...expense, categories: newClone };
+  //     });
 
-      Promise.all([
-        dispatch(deleteExpenseCategories(selectedCategory)),
-        dispatch(editCategoryContent(inputCategory)),
-      ]);
-    }
-    setTimeout(() => window.location.reload(), 500);
+  //     Promise.all([
+  //       dispatch(deleteExpenseCategories(selectedCategory)),
+  //       dispatch(editCategoryContent(inputCategory)),
+  //     ]);
+  //   }
+  //   setTimeout(() => window.location.reload(), 500);
   };
 
   return (

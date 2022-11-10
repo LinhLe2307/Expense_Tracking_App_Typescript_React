@@ -23,14 +23,26 @@ const Income = () => {
   const incomeList = useAppSelector((state) => state.income.inputLists);
 
   const [inputExpense, setInputExpense] = useState<IncomeModel>({
-    date: customDate(new Date()),
+    field_date: [
+      {
+        value: customDate(new Date()),
+      },
+    ],
     title: [
       {
         value: "",
       },
     ],
-    field_amount: 0,
-    field_description: "",
+    field_amount: [
+      {
+        value: 0,
+      },
+    ],
+    field_description: [
+      {
+        value: "",
+      },
+    ],
     color: "",
   });
 

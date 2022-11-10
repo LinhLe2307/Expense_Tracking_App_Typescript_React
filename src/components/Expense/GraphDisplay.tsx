@@ -7,12 +7,12 @@ const GraphDisplay = () => {
   const incomeList = useAppSelector((state) => state.income.inputLists);
 
   const totalExpense = expenseLists.reduce(
-    (prev, curr) => prev + curr.field_amount,
+    (prev, curr) => prev + curr.field_amount[0].value,
     0
   );
 
   const totalIncome = expenseLists.reduce(
-    (prev, curr) => prev + curr.field_amount,
+    (prev, curr) => prev + curr.field_amount[0].value,
     0
   );
 

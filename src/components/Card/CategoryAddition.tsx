@@ -38,12 +38,12 @@ const CategoryAddition = ({
               </Dropdown>
             </Form.Group>
 
-            {selectedCategories.map((category) => (
-              <div key={category}>
+            {/* {selectedCategories.map((category) => (
+              <div key={category.value}>
                 {category}
-                <CloseButton onClick={() => deleteCategory(category)} />
+                <CloseButton onClick={() => deleteCategory(category.value)} />
               </div>
-            ))}
+            ))} */}
           </>
         )}
     </>

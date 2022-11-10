@@ -51,14 +51,16 @@ const detailsDiv = (
   );
   let identity: Record<string, number> = {};
   const transactionList = expenseLists
-    .map((expense) => expense.categories)
+    .map((expense) => expense.new_expense_categories)
     .map((category) => category)
     .flat(1)
     .reduce((prev, curr) => {
-      if (curr in prev) {
-        prev[curr]++;
-      } else {
-        prev[curr] = 1;
+      if (curr) {
+        if (curr in prev) {
+          prev[curr]++;
+        } else {
+          prev[curr] = 1;
+        }
       }
       return prev;
     }, identity);

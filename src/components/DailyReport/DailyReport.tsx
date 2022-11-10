@@ -28,7 +28,7 @@ const DailyReport = () => {
         <h3>{customDate(value)}</h3>
         {
             expenseLists
-                .filter((expense:ExpenseModel) => expense.date === customDate(value))
+                .filter((expense:ExpenseModel) => expense.field_date[0].value === customDate(value))
                 .map((expense:ExpenseModel) => 
                     <SingleCard 
                         expense={expense} 

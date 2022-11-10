@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ThunkDispatch as Dispatch } from "redux-thunk";
 import serviceAPI from "../../services/serviceAPI";
-import { ExpenseModel, ExpenseArrayModel } from "../../models/reduxModels";
+import {
+  CategoriesModel,
+  ExpenseModel,
+  ExpenseArrayModel,
+} from "../../models/reduxModels";
 
 const baseURL = "node/expense";
 
@@ -71,9 +75,47 @@ export const expenseSlice = createSlice({
 
 export const initializeExpense = () => {
   return async (dispatch: Dispatch<any, any, any>) => {
-    const expense: ExpenseModel[] = await serviceAPI.getAll(baseURL);
-    console.log(expense);
-    dispatch(getExpenseList(expense));
+    const expenseList: ExpenseModel[] = await serviceAPI.getAll(baseURL);
+    const categoriesList: CategoriesModel[] = await serviceAPI.getAll(
+      "node/categories"
+    );
+
+    const newCategories: ([] | [number, string])[] = categoriesList.map(
+      (category) =>
+        category.nid ? [+category.nid[0].value, category.title[0].value] : []
+    );
+
+    const newExpense = expenseList
+      .map((expense) => expense.field_expense_categories)
+      .map((expense) => expense.map((item) => item.target_id));
+
+    const newExCateList: (string | undefined)[][] = [];
+
+    console.log("newCategories", newCategories);
+
+    for (let y = 0; y < newExpense.length; y++) {
+      const newSub: (string | undefined)[] = [];
+      for (let z = 0; z < newExpense[y].length; z++) {
+        for (let x = 0; x < newCategories.length; x++) {
+          if (
+            newCategories.length >= 1 &&
+            newCategories[x] !== undefined &&
+            +newExpense[y][z] === newCategories[x][0]
+          ) {
+            newSub.push(newCategories[x][1]);
+          }
+        }
+      }
+      newExCateList.push(newSub);
+    }
+    // console.log(newExCateList);
+
+    const newClone = [...expenseList];
+    const newExpenseList = newClone.map((expense, i) => {
+      return { ...expense, new_expense_categories: newExCateList[i] };
+    });
+
+    dispatch(getExpenseList(newExpenseList));
   };
 };
 
