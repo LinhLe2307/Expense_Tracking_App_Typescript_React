@@ -24,9 +24,9 @@ const IncomeCard = ({income}: MyProps) => {
           }
         </Card.Header>
         <Card.Body>
-          <Card.Title>{income.title}</Card.Title>
+          <Card.Title>{income.title[0].value}</Card.Title>
           <Card.Text>
-            {income.description}
+            {income.field_description}
           </Card.Text>
         </Card.Body>
       </Card>

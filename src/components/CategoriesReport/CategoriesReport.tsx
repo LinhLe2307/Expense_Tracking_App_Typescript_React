@@ -31,8 +31,12 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
 
   const [inputCategory, setInputCategory] = useState<DefaultModel>({
     date: customDate(new Date()),
-    title: "",
-    description: "",
+    title: [
+      {
+        value: "",
+      },
+    ],
+    field_description: "",
     color: "",
   });
 
@@ -53,7 +57,7 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
       const selectedCategory = filterExpenseList.map((expense) => {
         const newClone = expense.categories.map((category) =>
           editCategory && category === editCategory
-            ? inputCategory.title
+            ? inputCategory.title[0].value
             : category
         );
         return { ...expense, categories: newClone };

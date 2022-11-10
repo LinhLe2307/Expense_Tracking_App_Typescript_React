@@ -1,86 +1,89 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ThunkDispatch as Dispatch} from 'redux-thunk';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ThunkDispatch as Dispatch } from "redux-thunk";
 import serviceAPI from "../../services/serviceAPI";
-import {ExpenseModel, ExpenseArrayModel} from "../../models/reduxModels"
+import { ExpenseModel, ExpenseArrayModel } from "../../models/reduxModels";
 
-const baseURL = "http://localhost:3010/notes"
+const baseURL = "node/expense";
 
 const initialExpenseState: ExpenseArrayModel<ExpenseModel> = {
-    inputLists: [],
-    openEditItem: false,
-    editId: 0,
-    show: false,
-}
+  inputLists: [],
+  openEditItem: false,
+  editId: 0,
+  show: false,
+};
 
 export const expenseSlice = createSlice({
-    name: "expense",
-    initialState: initialExpenseState,
-    reducers: {
-        getExpenseList: (state, action: PayloadAction<ExpenseModel[]>):void => {
-            state.inputLists = action.payload
-        },
+  name: "expense",
+  initialState: initialExpenseState,
+  reducers: {
+    getExpenseList: (state, action: PayloadAction<ExpenseModel[]>): void => {
+      state.inputLists = action.payload;
+    },
 
-        addNewExpense : (state, action: PayloadAction<ExpenseModel>):void => {
-            serviceAPI.postSingle(baseURL,action.payload);
-            state.inputLists = state.inputLists.concat(action.payload)
-        },
+    addNewExpense: (state, action: PayloadAction<ExpenseModel>): void => {
+      serviceAPI.postSingle(baseURL, action.payload);
+      state.inputLists = state.inputLists.concat(action.payload);
+    },
 
-        editExpense:(state, action:PayloadAction<ExpenseModel>):void => {
-            const editExense = action.payload;
-            const findIndex = state.inputLists.find(expense => expense.id === state.editId)
-            if(findIndex !== undefined) {
-                const indexElement = state.inputLists.indexOf(findIndex);
-                state.inputLists.splice(indexElement, 0, editExense);
-                state.inputLists =  state.inputLists
+    editExpense: (state, action: PayloadAction<ExpenseModel>): void => {
+      const editExense = action.payload;
+      const findIndex = state.inputLists.find(
+        (expense) => expense.id === state.editId
+      );
+      if (findIndex !== undefined) {
+        const indexElement = state.inputLists.indexOf(findIndex);
+        state.inputLists.splice(indexElement, 0, editExense);
+        state.inputLists = state.inputLists;
+      }
+      serviceAPI.putAxios(baseURL, state.editId, editExense);
+    },
 
-            }
-            serviceAPI.putAxios(baseURL, state.editId, editExense)
-        },
+    deleteExpense: (state, action: PayloadAction<number>): void => {
+      const deleteId = action.payload;
+      state.inputLists = state.inputLists.filter(
+        (expense) => expense.id !== deleteId
+      );
 
-        deleteExpense: (state, action:PayloadAction<number>):void => {
-            const deleteId = action.payload;
-            state.inputLists = state.inputLists.filter(expense => expense.id !== deleteId)
-            
-            serviceAPI.deleteAxios(baseURL,deleteId)
-        },
+      serviceAPI.deleteAxios(baseURL, deleteId);
+    },
 
-        handleOpenEditExpense: (state, action):void => {
-            state.editId = action.payload
-            state.openEditItem = !state.openEditItem
-        },
+    handleOpenEditExpense: (state, action): void => {
+      state.editId = action.payload;
+      state.openEditItem = !state.openEditItem;
+    },
 
-        deleteExpenseCategories: (state, action:PayloadAction<ExpenseModel[]>) => {
-            state.inputLists = action.payload;
-            const selectedPosts = action.payload
-            const postsIdsArray = action.payload.map(post => post.id);
-            console.log(selectedPosts)
-            Promise.all([postsIdsArray.map((id) => 
-                id && serviceAPI.deleteAxios(baseURL, id))
-            , selectedPosts.map(post => serviceAPI.postSingle(baseURL, post))
-            ])
-        },
-        
-        handleOpenForm: (state) => {
-            state.show = !state.show
-        }
+    deleteExpenseCategories: (state, action: PayloadAction<ExpenseModel[]>) => {
+      state.inputLists = action.payload;
+      const selectedPosts = action.payload;
+      const postsIdsArray = action.payload.map((post) => post.id);
+      console.log(selectedPosts);
+      Promise.all([
+        postsIdsArray.map((id) => id && serviceAPI.deleteAxios(baseURL, id)),
+        selectedPosts.map((post) => serviceAPI.postSingle(baseURL, post)),
+      ]);
+    },
 
-    }
+    handleOpenForm: (state) => {
+      state.show = !state.show;
+    },
+  },
 });
 
 export const initializeExpense = () => {
-    return async (dispatch: Dispatch<any, any, any>) => {
-        const expense:ExpenseModel[] = await serviceAPI.getAll(baseURL);
-        dispatch(getExpenseList(expense))
-    }
-}
+  return async (dispatch: Dispatch<any, any, any>) => {
+    const expense: ExpenseModel[] = await serviceAPI.getAll(baseURL);
+    console.log(expense);
+    dispatch(getExpenseList(expense));
+  };
+};
 
 export const {
-    getExpenseList, 
-    addNewExpense, 
-    editExpense, 
-    deleteExpense, 
-    handleOpenEditExpense, 
-    deleteExpenseCategories,
-    handleOpenForm
+  getExpenseList,
+  addNewExpense,
+  editExpense,
+  deleteExpense,
+  handleOpenEditExpense,
+  deleteExpenseCategories,
+  handleOpenForm,
 } = expenseSlice.actions;
 export default expenseSlice.reducer;

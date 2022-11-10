@@ -1,9 +1,9 @@
-
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import {
-  deleteExpense, handleOpenEditExpense
+  deleteExpense,
+  handleOpenEditExpense,
 } from "../../features/expense/expenseSlice";
 import { ExpenseModel } from "../../models/reduxModels";
 import CustomDropdown from "./CustomDropdown";
@@ -47,15 +47,15 @@ const SingleCard = ({ expense }: MyProps) => {
               />
             </Link>
             <div>
-              <Card.Title>{expense.title}</Card.Title>
-              <Card.Title>-€{expense.amount}</Card.Title>
+              <Card.Title>{expense.title[0].value}</Card.Title>
+              <Card.Title>-€{expense.field_amount}</Card.Title>
               <div
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 1fr)",
                 }}
               >
-                {expense.categories?.map((category) => (
+                {/* {expense.categories?.map((category) => (
                   <Button
                     variant="primary"
                     key={category}
@@ -63,7 +63,7 @@ const SingleCard = ({ expense }: MyProps) => {
                   >
                     {category}
                   </Button>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>

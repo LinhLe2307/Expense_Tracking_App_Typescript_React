@@ -7,7 +7,7 @@ import { initializeCategories } from "../../features/categories/categoriesSlice"
 import {
   addNewExpense,
   editExpense,
-  initializeExpense
+  initializeExpense,
 } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
 import { DefaultModel, ExpenseModel } from "../../models/reduxModels";
@@ -36,9 +36,13 @@ const Expense = () => {
 
   const [inputExpense, setInputExpense] = useState<ExpenseModel>({
     date: customDate(new Date()),
-    title: "",
-    amount: 0,
-    description: "",
+    title: [
+      {
+        value: "",
+      },
+    ],
+    field_amount: 0,
+    field_description: "",
     categories: selectedCategories,
     color: "",
   });
@@ -50,9 +54,9 @@ const Expense = () => {
   };
 
   const handleSelectedCategories = (category: DefaultModel) => {
-    const inputCategory = category.title;
+    const inputCategory = category.title[0].value;
     if (selectedCategories.indexOf(inputCategory) === -1) {
-      setSelectedCategories((prev) => prev.concat(category.title));
+      setSelectedCategories((prev) => prev.concat(category.title[0].value));
     }
   };
 
@@ -85,8 +89,8 @@ const Expense = () => {
       <GraphDisplay />
       <TopSpending />
       <h1>
-        €{filterExpense.reduce((prev, curr) => prev + +curr.amount, 0)} spent
-        today
+        €{filterExpense.reduce((prev, curr) => prev + +curr.field_amount, 0)}{" "}
+        spent today
       </h1>
 
       <Dropdown>
@@ -97,11 +101,11 @@ const Expense = () => {
         <Dropdown.Menu>
           {categoriesList.map((item) => (
             <Dropdown.Item
-              eventKey={item.title}
+              eventKey={item.title[0].value}
               key={nanoid()}
-              onClick={() => setSelectView(item.title)}
+              onClick={() => setSelectView(item.title[0].value)}
             >
-              {item.title}
+              {item.title[0].value}
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>

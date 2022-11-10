@@ -82,15 +82,15 @@ function FormModel({
                     name="title" 
                     type="text" 
                     placeholder="Enter Title"
-                    defaultValue={displayInput.title}
-                    key={displayInput.title}
+                    defaultValue={displayInput.title[0].value}
+                    key={displayInput.title[0].value}
                     onChange={handleInputExpense}/>
                 </FloatingLabel>
             </Form.Group>
 
             {
                 type !== "categories" && 
-                typeof displayInput.amount !== undefined &&
+                typeof displayInput.field_amount !== undefined &&
                 <Form.Group className="mb-3">
                     <InputGroup className="mb-3">
                         <InputGroup.Text>$</InputGroup.Text>
@@ -103,8 +103,8 @@ function FormModel({
                         name="amount"  
                         type="number" 
                         placeholder="Enter Price"
-                        defaultValue={displayInput.amount}
-                        key={displayInput.amount}
+                        defaultValue={displayInput.field_amount}
+                        key={displayInput.field_amount}
                         onChange={handleInputExpense}/>
                     </FloatingLabel>
                     <InputGroup.Text>.00</InputGroup.Text>
@@ -122,8 +122,8 @@ function FormModel({
                     as="textarea"
                     name="description"  
                     type="text" 
-                    defaultValue={displayInput.description}
-                    key={displayInput.description}
+                    defaultValue={displayInput.field_description}
+                    key={displayInput.field_description}
                     placeholder="Enter Description"
                     onChange={handleInputExpense}/>
                 </FloatingLabel>

@@ -23,24 +23,24 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleDelete = (selectedItem: string) => {
-    const findIndex = categoriesList.find(
-      (category) => category.title.indexOf(selectedItem) !== -1
-    );
-    if (findIndex !== undefined && findIndex.id !== undefined) {
-      const selectedCategory = expenseLists.map((expense) => {
-        const newClone = expense.categories.filter(
-          (category) => category !== selectedItem
-        );
-        return { ...expense, categories: newClone };
-      });
+  // const handleDelete = (selectedItem: [{ value: string }]) => {
+  //   const findIndex = categoriesList.find(
+  //     (category) => category.title.indexOf(selectedItem[0].value) !== -1
+  //   );
+  //   if (findIndex !== undefined && findIndex.id !== undefined) {
+  //     const selectedCategory = expenseLists.map((expense) => {
+  //       const newClone = expense.categories.filter(
+  //         (category) => category !== selectedItem[0].value
+  //       );
+  //       return { ...expense, categories: newClone };
+  //     });
 
-      Promise.all([
-        dispatch(deleteCategory(findIndex.id)),
-        dispatch(deleteExpenseCategories(selectedCategory)),
-      ]);
-    }
-  };
+  //     Promise.all([
+  //       dispatch(deleteCategory(findIndex.id)),
+  //       dispatch(deleteExpenseCategories(selectedCategory)),
+  //     ]);
+  //   }
+  // };
 
   const handleEdit = (selectedItem: string) => {
     // const findIndex = categoriesList.find(category => category.title === selectedItem)
@@ -67,7 +67,9 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
                   ></Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => handleDelete(list[0])}>
+                    <Dropdown.Item
+                    // onClick={() => handleDelete(list[0])}
+                    >
                       Delete
                     </Dropdown.Item>
 
@@ -88,11 +90,12 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
               <Card.Title>{list[0]}</Card.Title>
               <Card.Text>
                 {categoriesList
-                  .filter((cate: CategoriesModel) => cate.title === list[0])
+                  .filter(
+                    (cate: CategoriesModel) => cate.title[0].value === list[0]
+                  )
                   .map((cate) => (
-                    <p>{cate.description}</p>
-                  ))
-                }
+                    <p>{cate.field_description}</p>
+                  ))}
               </Card.Text>
             </Card.Body>
           </Card>
