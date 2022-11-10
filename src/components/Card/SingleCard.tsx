@@ -1,51 +1,96 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { useAppDispatch } from '../../app/hooks';
-import { ExpenseModel } from '../../models/reduxModels';
-import {handleOpenEditExpense, deleteExpense, editExpense} from "../../features/expense/expenseSlice";
-import { Link } from 'react-router-dom';
-import CustomDropdown from './CustomDropdown';
 
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+import {
+  deleteExpense, handleOpenEditExpense
+} from "../../features/expense/expenseSlice";
+import { ExpenseModel } from "../../models/reduxModels";
+import CustomDropdown from "./CustomDropdown";
 
 interface MyProps {
-  expense: ExpenseModel
+  expense: ExpenseModel;
 }
 
-const SingleCard = ({expense}: MyProps) => {
+const SingleCard = ({ expense }: MyProps) => {
   return (
-    <Card className="mb-2">
-        <Card.Body style={{display:"flex", justifyContent:"space-between", alignItems: "center"}}>
-          <div>{expense.date}</div>
-            <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
-              <Link 
-                to={`${expense.id}`} 
-                state={{ expenseDetails: expense}}
-              >
-                <div style={{backgroundColor: `${expense.color}`, width: "5rem", height: "5rem"}}></div>
-              </Link>
+    <>
+      <Card className="mb-2" style={{ width: "40rem" }}>
+        <Card.Body
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "3rem",
+            }}
+          >
+            <Link to={`${expense.id}`} state={{ expenseDetails: expense }}>
+              {/* <div
+                style={{
+                  backgroundColor: `${expense.color}`,
+                  width: "5rem",
+                  height: "5rem",
+                }}
+              ></div> */}
+              <Card.Img
+                variant="top"
+                src="https://images.unsplash.com/photo-1664574653790-cee0e10a4242?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                style={{
+                  width: "250px",
+                }}
+              />
+            </Link>
             <div>
-              <Card.Text>{expense.title}</Card.Text>
-              <ButtonGroup  className="me-2" aria-label="Basic example">
-                {expense.categories?.map(category => <Button variant="secondary" key={category}>{category}</Button>)}
-              </ButtonGroup>
+              <Card.Title>{expense.title}</Card.Title>
+              <Card.Title>-€{expense.amount}</Card.Title>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(2, 1fr)",
+                }}
+              >
+                {expense.categories?.map((category) => (
+                  <Button
+                    variant="primary"
+                    key={category}
+                    style={{ margin: "0.25rem" }}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
             </div>
-            </div>
-            <div style={{display:"flex", justifyContent:"space-between", gap: "3rem"}}>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "3rem",
+            }}
+          >
             {/* <Card.Text>{expense.description}</Card.Text> */}
-            <Card.Title>-€{expense.amount}</Card.Title>
-            {
-              expense.id &&
-              <CustomDropdown 
+
+            {expense.id && (
+              <CustomDropdown
                 deleteItem={deleteExpense}
                 handleOpenEditItem={handleOpenEditExpense}
                 itemId={expense.id}
               />
-            }
-            </div>
+            )}
+          </div>
         </Card.Body>
-    </Card>
-  )
-}
+        <Card.Footer>
+          <small className="text-muted">{expense.date}</small>
+        </Card.Footer>
+      </Card>
+    </>
+  );
+};
 
-export default SingleCard
+export default SingleCard;

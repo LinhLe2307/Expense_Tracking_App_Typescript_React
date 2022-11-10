@@ -1,12 +1,15 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 
 const DetailsInfo = () => {
-    const location = useLocation();
-    const expenseDetails = location.state.expenseDetails;
+  const location = useLocation();
+  const expenseDetails = location.state.expenseDetails;
   return (
-    <div>{expenseDetails.title}</div>
-  )
-}
+    <>
+      <p>{expenseDetails.date}</p>
+      <div>{expenseDetails.title}</div>
+      <p>{expenseDetails.description}</p>
+    </>
+  );
+};
 
-export default DetailsInfo
+export default DetailsInfo;

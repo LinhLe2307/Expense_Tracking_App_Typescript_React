@@ -7,7 +7,7 @@
       "description": "3",
       "categories": [
         "third 11",
-        "fourth 7"
+        "fourth 8"
       ],
       "color": "#aa5050",
       "id": 4
@@ -65,7 +65,7 @@
       "description": "43",
       "categories": [
         "third 11",
-        "fourth 7"
+        "fourth 8"
       ],
       "color": "#e19494",
       "id": 2
@@ -87,10 +87,35 @@
       "categories": [
         "content 4",
         "fifth 4",
-        "fourth 7"
+        "fourth 8"
       ],
       "color": "#fbb1b1",
       "id": 10
+    },
+    {
+      "date": "Wednesday, November 9, 2022",
+      "title": "test",
+      "amount": "34",
+      "description": "3433",
+      "categories": [
+        "content 4"
+      ],
+      "color": "#ec8989",
+      "id": 11
+    },
+    {
+      "date": "Wednesday, November 9, 2022",
+      "title": "big big big",
+      "amount": "77",
+      "description": "helloo",
+      "categories": [
+        "content 4",
+        "third 11",
+        "fourth 8",
+        "fifth 4"
+      ],
+      "color": "#3acb3c",
+      "id": 13
     },
     {
       "date": "Tuesday, November 1, 2022",
@@ -103,14 +128,16 @@
     },
     {
       "date": "Wednesday, November 9, 2022",
-      "title": "test",
-      "amount": "34",
-      "description": "3433",
+      "title": "laptop",
+      "amount": "10000",
+      "description": "tutututu",
       "categories": [
-        "content 4"
+        "content 4",
+        "fourth 8",
+        "fifth 4"
       ],
-      "color": "#ec8989",
-      "id": 11
+      "color": "#1b5a4e",
+      "id": 14
     }
   ],
   "income": [
@@ -164,9 +191,9 @@
     },
     {
       "date": "Wednesday, November 9, 2022",
-      "title": "fourth 7",
-      "description": "fourth 7",
-      "color": "#914646",
+      "title": "fourth 8",
+      "description": "fourth 8",
+      "color": "#e68484",
       "id": 4
     },
     {
