@@ -138,6 +138,18 @@
       ],
       "color": "#1b5a4e",
       "id": 14
+    },
+    {
+      "date": "Friday, November 11, 2022",
+      "title": "j",
+      "amount": "8",
+      "description": "j",
+      "categories": [
+        "content 4",
+        "fourth 8"
+      ],
+      "color": "#301c1c",
+      "id": 15
     }
   ],
   "income": [

@@ -81,6 +81,7 @@ const SingleCard = ({ expense }: MyProps) => {
                 deleteItem={deleteExpense}
                 handleOpenEditItem={handleOpenEditExpense}
                 itemId={expense.nid[0].value}
+                
               />
             )}
           </div>

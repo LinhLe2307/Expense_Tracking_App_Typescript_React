@@ -11,7 +11,7 @@ import {
 } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
 import { DefaultModel } from "../../models/reduxModels";
-import FormModel from "../FormModel";
+import FormModel from "../Form/FormModel";
 import CategoryDetails from "./CategoryDetails";
 import { ExpenseModel } from "../../models/reduxModels";
 
@@ -51,7 +51,11 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
         value: "",
       },
     ],
-    // color: "",
+    field_color: [
+      {
+        value: "",
+      },
+    ],
   });
 
   const handleInputCategory = (

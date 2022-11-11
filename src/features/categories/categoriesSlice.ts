@@ -69,7 +69,6 @@ export const categoriesSlice = createSlice({
 export const initializeCategories = () => {
   return async (dispatch: Dispatch<any, any, any>) => {
     const response: CategoriesModel[] = await serviceAPI.getAll(baseURL);
-    console.log(response);
     dispatch(getCategoriesList(response));
   };
 };

@@ -18,7 +18,7 @@ export interface DefaultModel {
   field_date: DefaultValue["defaultString"];
   title: DefaultValue["defaultString"];
   field_description: DefaultValue["defaultString"];
-  //   color: string;
+  field_color: DefaultValue["defaultString"];
   id?: number;
   nid?: DefaultValue["defaultNumber"];
 }
@@ -29,6 +29,7 @@ export interface ExpenseModel extends DefaultModel {
 
   field_expense_categories: {
     target_id: number;
+    target_type: string;
   }[];
   new_expense_categories?: string[];
 }
@@ -55,6 +56,7 @@ export interface CategoryExpense {
   handleSelectedCategories?: (category: DefaultModel) => void;
   deleteCategory?: (deleteItem: number) => void;
   selectedCategories?: { target_id: number }[];
+  handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface FormTypeModels extends CategoryExpense {

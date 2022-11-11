@@ -11,7 +11,7 @@ import {
 } from "../../features/income/incomeSlice";
 import { customDate } from "../../functions/reusableFunction";
 import { IncomeModel } from "../../models/reduxModels";
-import FormModel from "../FormModel";
+import FormModel from "../Form/FormModel";
 import IncomeCard from "./IncomeCard";
 
 const Income = () => {
@@ -43,7 +43,11 @@ const Income = () => {
         value: "",
       },
     ],
-    // color: "",
+    field_color: [
+      {
+        value: "",
+      },
+    ],
   });
 
   const handleInputIncome = (e: React.ChangeEvent<HTMLInputElement>): void => {

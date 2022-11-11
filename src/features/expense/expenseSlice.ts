@@ -40,7 +40,7 @@ export const expenseSlice = createSlice({
         state.inputLists.splice(indexElement, 0, editExense);
         state.inputLists = state.inputLists;
       }
-      serviceAPI.putAxios(baseURL, state.editId, editExense);
+      serviceAPI.patchAxios(state.editId, editExense);
     },
 
     deleteExpense: (state, action: PayloadAction<number>): void => {
@@ -81,7 +81,6 @@ export const initializeExpense = () => {
     );
 
     const newExpenseList = convertIdToLabel(expenseList, categoriesList);
-
     dispatch(getExpenseList(newExpenseList));
   };
 };

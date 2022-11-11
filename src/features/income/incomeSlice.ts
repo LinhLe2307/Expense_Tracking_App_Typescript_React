@@ -33,7 +33,7 @@ export const incomeSlice = createSlice({
         state.inputLists.splice(indexElement, 0, editIncome);
         state.inputLists = state.inputLists;
       }
-      serviceAPI.putAxios(baseURL, state.editId, editIncome);
+      serviceAPI.patchAxios(state.editId, editIncome);
     },
     deleteIncome: (state, action: PayloadAction<number>): void => {
       const deleteId = action.payload;

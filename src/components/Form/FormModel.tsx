@@ -9,25 +9,25 @@ import {
   CloseButton,
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import ajax from "../ajax";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { handleOpenForm } from "../features/expense/expenseSlice";
-import { customDate } from "../functions/reusableFunction";
+import ajax from "../../ajax";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { handleOpenForm } from "../../features/expense/expenseSlice";
+import { customDate } from "../../functions/reusableFunction";
 import {
   CategoriesModel,
   ExpenseModel,
   FormTypeModels,
   IncomeModel,
-} from "../models/reduxModels";
-import CategoryAddition from "./Card/CategoryAddition";
+} from "../../models/reduxModels";
+import CategoryAddition from "./CategoryAddition";
 
 function FormModel({
   inputExpense,
   submitHandler,
   handleInputExpense,
-  handleSelectedCategories,
+  // handleSelectedCategories,
   type,
-  selectedCategories,
+  // selectedCategories,
   deleteCategory,
   expenseId,
 }: FormTypeModels) {
@@ -142,23 +142,24 @@ function FormModel({
               {type === "expense" && (
                 <CategoryAddition
                   deleteCategory={deleteCategory}
-                  handleSelectedCategories={handleSelectedCategories}
-                  selectedCategories={selectedCategories}
+                  // handleSelectedCategories={handleSelectedCategories}
+                  // selectedCategories={selectedCategories}
+                  handleInputExpense={handleInputExpense}
                 />
               )}
 
-              {/* <Form.Group className="mb-3">
+              <Form.Group className="mb-3">
                 <Form.Label>Color</Form.Label>
                 <Form.Control
                   required
                   type="color"
-                  name="color"
+                  name="field_color"
                   title="Choose your color"
-                  defaultValue={displayInput.color}
-                  key={displayInput.color}
+                  defaultValue={displayInput.field_color[0].value}
+                  key={displayInput.nid && displayInput.nid[0].value}
                   onChange={handleInputExpense}
                 />
-              </Form.Group> */}
+              </Form.Group>
 
               <Modal.Footer>
                 <Button variant="primary" type="submit">

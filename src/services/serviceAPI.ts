@@ -19,14 +19,10 @@ const postSingle = async (selectedItem: SelectedItem) => {
   }
 };
 
-const putAxios = async (
-  baseURL: string,
-  id: number,
-  selectedItem: SelectedItem
-) => {
+const patchAxios = async (id: number, selectedItem: SelectedItem) => {
   try {
     const axios = await ajax();
-    const response = await axios.put(`node/${id}`, selectedItem);
+    const response = await axios.patch(`node/${id}`, selectedItem);
     console.log(response.data);
   } catch (err) {
     console.error(err);
@@ -53,4 +49,4 @@ const postAll = async (baseURL: string, selectedItem: ExpenseModel[]) => {
   }
 };
 
-export default { getAll, postSingle, postAll, putAxios, deleteAxios };
+export default { getAll, postSingle, postAll, patchAxios, deleteAxios };

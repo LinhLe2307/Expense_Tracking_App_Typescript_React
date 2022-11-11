@@ -12,7 +12,7 @@ import {
 import { customDate } from "../../functions/reusableFunction";
 import { DefaultModel, ExpenseModel } from "../../models/reduxModels";
 import SingleCard from "../Card/SingleCard";
-import FormModel from "../FormModel";
+import FormModel from "../Form/FormModel";
 import TopSpending from "../TopSpending/TopSpending";
 import GraphDisplay from "./GraphDisplay";
 
@@ -21,9 +21,9 @@ const Expense = () => {
 
   const dispatch = useAppDispatch();
   // const selectedCategories: { target_id: number }[] = [];
-  const [selectedCategories, setSelectedCategories] = useState<
-    { target_id: number }[]
-  >([]);
+  // const [selectedCategories, setSelectedCategories] = useState<
+  //   { target_id: number }[]
+  // >([]);
 
   const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
 
@@ -44,6 +44,7 @@ const Expense = () => {
         target_type: "node_type",
       },
     ],
+    field_expense_categories: [],
     field_date: [
       {
         value: "2022-11-10T23:22:02+00:00",
@@ -64,50 +65,70 @@ const Expense = () => {
         value: "",
       },
     ],
-
-    field_expense_categories: selectedCategories,
-    // color: "",
+    field_color: [
+      {
+        value: "",
+      },
+    ],
   });
 
-  const deleteCategory = (deleteItem: number) => {
-    setSelectedCategories((prev) => {
-      return prev.filter((category) => category.target_id !== deleteItem);
-    });
-  };
+  // const deleteCategory = (deleteItem: number) => {
+  //   setSelectedCategories((prev) => {
+  //     return prev.filter((category) => category.target_id !== deleteItem);
+  //   });
+  // };
 
-  const handleSelectedCategories = (category: DefaultModel) => {
-    const inputCategory = category.nid && category.nid[0].value;
-    if (
-      selectedCategories.find(
-        (category) => category.target_id === inputCategory
-      ) === undefined
-    ) {
-      if (inputCategory) {
-        // selectedCategories.push({
-        //   target_id: inputCategory,
-        // });
-        // setSelectedCategories((prev) => {
-        //   return [...prev, { target_id: inputCategory }];
-        // });
-        setSelectedCategories((prev) =>
-          prev.concat({ target_id: inputCategory })
-        );
-      }
-    }
-    // console.log(selectedCategories);
-  };
+  // const handleSelectedCategories = (category: DefaultModel) => {
+  //   if (category.nid) {
+  //     const inputCategory = category.nid[0].value;
+  //     if (
+  //       selectedCategories.find(
+  //         (category) => category.target_id === inputCategory
+  //       ) === undefined
+  //     ) {
+  //       setSelectedCategories((prev) =>
+  //         prev.concat({ target_id: inputCategory })
+  //       );
+  //     }
+  //   }
+  // };
+  // console.log(selectedCategories);
 
   const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(selectedCategories);
-    setInputExpense({
-      ...inputExpense,
-      field_expense_categories: selectedCategories,
-      [e.target.name]: [
-        {
-          value: e.target.value,
-        },
-      ],
-    });
+    // console.log(selectedCategories);
+    const { field_expense_categories } = inputExpense;
+    const { checked, value, name } = e.target;
+
+    if (checked) {
+      console.log(`${value} is ${checked}`);
+      setInputExpense((prev) => ({
+        ...prev,
+        [name]: [
+          {
+            value: value,
+          },
+        ],
+        field_expense_categories: [
+          ...field_expense_categories,
+          {
+            target_id: +value,
+            target_type: "node",
+          },
+        ],
+      }));
+    } else {
+      setInputExpense((prev) => ({
+        ...prev,
+        [name]: [
+          {
+            value: value,
+          },
+        ],
+        field_expense_categories: field_expense_categories.filter(
+          (category) => category.target_id !== +value
+        ),
+      }));
+    }
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -127,10 +148,6 @@ const Expense = () => {
     dispatch(initializeCategories());
     dispatch(initializeExpense());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   console.log(selectedCategories);
-  // }, [selectedCategories]);
 
   return (
     <>
@@ -185,9 +202,9 @@ const Expense = () => {
         expenseId={expenseId}
         submitHandler={submitHandler}
         handleInputExpense={handleInputExpense}
-        selectedCategories={selectedCategories}
-        deleteCategory={deleteCategory}
-        handleSelectedCategories={handleSelectedCategories}
+        // selectedCategories={selectedCategories}
+        // deleteCategory={deleteCategory}
+        // handleSelectedCategories={handleSelectedCategories}
         type="expense"
       />
     </>
