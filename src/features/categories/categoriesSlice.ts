@@ -23,33 +23,33 @@ export const categoriesSlice = createSlice({
     addNewCategory: (state, action: PayloadAction<CategoriesModel>) => {
       const newCategory = action.payload;
       const findIndex = state.inputLists.find(
-        (expense) => expense.title === newCategory.title
+        (expense) => expense.title[0].value === newCategory.title[0].value
       );
-      if (findIndex !== undefined) {
+      if (findIndex === undefined) {
         state.inputLists = state.inputLists.concat(newCategory);
+        serviceAPI.postSingle(newCategory);
       }
-
-      serviceAPI.postSingle(newCategory);
     },
-    // editCategoryContent: (
-    //   state,
-    //   action: PayloadAction<CategoriesModel>
-    // ): void => {
-    //   const editItem = action.payload;
-    //   if (state.editCategory && state.editCategory.length > 0) {
-    //     const findIndex = state.inputLists.find(
-    //       (expense) => expense.title[0].value === state.editCategory
-    //     );
-    //     // console.log(findIndex)
-    //     if (findIndex !== undefined) {
-    //       const indexElement = state.inputLists.indexOf(findIndex);
-    //       // console.log(indexElement)
-    //       state.inputLists.splice(indexElement, 0, editItem);
-    //       state.inputLists = state.inputLists;
-    //       findIndex.id && serviceAPI.putAxios(baseURL, findIndex.id, editItem);
-    //     }
-    //   }
-    // },
+    editCategoryContent: (
+      state,
+      action: PayloadAction<CategoriesModel>
+    ): void => {
+      const editItem = action.payload;
+      if (state.editCategory && state.editCategory.length > 0) {
+        const findIndex = state.inputLists.find(
+          (expense) => expense.title[0].value === state.editCategory
+        );
+        if (findIndex !== undefined) {
+          const indexElement = state.inputLists.indexOf(findIndex);
+          console.log(indexElement);
+          state.inputLists.splice(indexElement, 0, editItem);
+          state.inputLists = state.inputLists;
+          findIndex.nid &&
+            findIndex.nid[0].value &&
+            serviceAPI.patchAxios(findIndex.nid[0].value, editItem);
+        }
+      }
+    },
     deleteCategory: (state, action: PayloadAction<number>): void => {
       const deleteItem = action.payload;
       serviceAPI.deleteAxios(deleteItem);
@@ -63,6 +63,11 @@ export const categoriesSlice = createSlice({
       state.editCategory = action.payload;
       state.openEditItem = !state.openEditItem;
     },
+
+    // handleOpenDeleteCategory: (state, action: PayloadAction<string>): void => {
+    //   state.deleteCategory = action.payload;
+    //   state.openItem = !state.openEditItem;
+    // },
   },
 });
 
@@ -76,8 +81,9 @@ export const initializeCategories = () => {
 export const {
   getCategoriesList,
   addNewCategory,
-  // editCategoryContent,
+  editCategoryContent,
   deleteCategory,
   handleOpenEditCategory,
+  // handleOpenDeleteCategory,
 } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

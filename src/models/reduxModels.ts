@@ -25,8 +25,6 @@ export interface DefaultModel {
 
 export interface ExpenseModel extends DefaultModel {
   field_amount: DefaultValue["defaultNumber"];
-  // field_expense_categories: string[] | [];
-
   field_expense_categories: {
     target_id: number;
     target_type: string;
@@ -42,7 +40,6 @@ export interface CategoriesModel extends DefaultModel {
       value: number;
     }
   ];
-  // nid?: DefaultValue["defaultNumber"];
 }
 export interface ExpenseArrayModel<T> {
   inputLists: T[];
@@ -68,6 +65,5 @@ export interface FormTypeModels extends CategoryExpense {
     typeForm?: string
   ) => void;
   handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }

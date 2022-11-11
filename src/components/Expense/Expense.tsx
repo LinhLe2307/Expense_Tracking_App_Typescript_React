@@ -7,10 +7,9 @@ import { initializeCategories } from "../../features/categories/categoriesSlice"
 import {
   addNewExpense,
   editExpense,
-  initializeExpense,
+  initializeExpense
 } from "../../features/expense/expenseSlice";
-import { customDate } from "../../functions/reusableFunction";
-import { DefaultModel, ExpenseModel } from "../../models/reduxModels";
+import { ExpenseModel } from "../../models/reduxModels";
 import SingleCard from "../Card/SingleCard";
 import FormModel from "../Form/FormModel";
 import TopSpending from "../TopSpending/TopSpending";
@@ -140,8 +139,7 @@ const Expense = () => {
       dispatch(editExpense(inputExpense));
     }
 
-    // window.location.reload()
-    // setTimeout(() => window.location.reload(), 500);
+    setTimeout(() => window.location.reload(), 500);
   };
 
   useEffect(() => {

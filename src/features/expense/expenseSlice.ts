@@ -57,16 +57,6 @@ export const expenseSlice = createSlice({
       state.openEditItem = !state.openEditItem;
     },
 
-    deleteExpenseCategories: (state, action: PayloadAction<ExpenseModel[]>) => {
-      state.inputLists = action.payload;
-      const selectedPosts = action.payload;
-      const postsIdsArray = action.payload.map((post) => post.id);
-      Promise.all([
-        postsIdsArray.map((id) => id && serviceAPI.deleteAxios(id)),
-        selectedPosts.map((post) => serviceAPI.postSingle(post)),
-      ]);
-    },
-
     handleOpenForm: (state) => {
       state.show = !state.show;
     },
@@ -91,7 +81,6 @@ export const {
   editExpense,
   deleteExpense,
   handleOpenEditExpense,
-  deleteExpenseCategories,
   handleOpenForm,
 } = expenseSlice.actions;
 export default expenseSlice.reducer;

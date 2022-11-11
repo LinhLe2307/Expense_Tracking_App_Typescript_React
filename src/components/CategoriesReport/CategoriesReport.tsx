@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   addNewCategory,
-  // editCategoryContent,
-  initializeCategories,
+  editCategoryContent
 } from "../../features/categories/categoriesSlice";
 import {
-  deleteExpenseCategories,
+  // deleteExpenseCategories,
   initializeExpense,
 } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
@@ -76,20 +75,7 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
     if (!openEditCategory) {
       dispatch(addNewCategory(inputCategory));
     } else {
-      const selectedCategory = filterExpenseList.map((expense) => {
-        const newClone =
-          expense.new_expense_categories &&
-          expense.new_expense_categories.map((category) =>
-            editCategory && category === editCategory
-              ? inputCategory.title[0].value
-              : category
-          );
-        return { ...expense, categories: newClone };
-      });
-      Promise.all([
-        dispatch(deleteExpenseCategories(selectedCategory)),
-        // dispatch(editCategoryContent(inputCategory)),
-      ]);
+      dispatch(editCategoryContent(inputCategory));
     }
     setTimeout(() => window.location.reload(), 500);
   };

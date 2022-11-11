@@ -2,13 +2,10 @@ import { nanoid } from "nanoid";
 import { Card, Dropdown } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
-  deleteCategory,
   handleOpenEditCategory,
+  deleteCategory,
 } from "../../features/categories/categoriesSlice";
-import {
-  deleteExpenseCategories,
-  handleOpenForm,
-} from "../../features/expense/expenseSlice";
+import { handleOpenForm } from "../../features/expense/expenseSlice";
 import { CategoriesModel } from "../../models/reduxModels";
 
 import { detailsDiv } from "../../functions/reusableFunction";
@@ -19,34 +16,22 @@ interface MyProps {
 
 const CategoryDetails = ({ filterExpenseList }: MyProps) => {
   const categoriesList = useAppSelector((state) => state.categories.inputLists);
-  const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
   const dispatch = useAppDispatch();
 
-  // const handleDelete = (selectedItem: [{ value: string }]) => {
-  //   const findIndex = categoriesList.find(
-  //     (category) => category.title.indexOf(selectedItem[0].value) !== -1
-  //   );
-  //   if (findIndex !== undefined && findIndex.id !== undefined) {
-  //     const selectedCategory = expenseLists.map((expense) => {
-  //       const newClone = expense.categories.filter(
-  //         (category) => category !== selectedItem[0].value
-  //       );
-  //       return { ...expense, categories: newClone };
-  //     });
-
-  //     Promise.all([
-  //       dispatch(deleteCategory(findIndex.id)),
-  //       dispatch(deleteExpenseCategories(selectedCategory)),
-  //     ]);
-  //   }
-  // };
+  const handleDelete = (selectedItem: string) => {
+    const findIndex = categoriesList.find(
+      (category) => category.title[0].value.indexOf(selectedItem) !== -1
+    );
+    if (window.confirm("Do you want to delete this?")) {
+      if (findIndex !== undefined) {
+        findIndex.nid && dispatch(deleteCategory(findIndex.nid[0].value));
+      }
+    }
+    setTimeout(() => window.location.reload(), 500);
+  };
 
   const handleEdit = (selectedItem: string) => {
-    // const findIndex = categoriesList.find(category => category.title === selectedItem)
-
-    // if(findIndex !== undefined && findIndex.id !== undefined) {
-    console.log(selectedItem);
     selectedItem && dispatch(handleOpenEditCategory(selectedItem));
     // }
   };
@@ -67,9 +52,7 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
                   ></Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item
-                    // onClick={() => handleDelete(list[0])}
-                    >
+                    <Dropdown.Item onClick={() => handleDelete(list[0])}>
                       Delete
                     </Dropdown.Item>
 

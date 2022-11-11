@@ -7,7 +7,7 @@ import { useAppSelector } from "../../app/hooks";
 const CategoryAddition = ({
   // selectedCategories,
   // handleSelectedCategories,
-  deleteCategory,
+  // deleteCategory,
   handleInputExpense,
 }: CategoryExpense) => {
   const categoriesList = useAppSelector((state) => state.categories.inputLists);
@@ -15,7 +15,7 @@ const CategoryAddition = ({
     <>
       {categoriesList !== undefined &&
         // handleSelectedCategories !== undefined &&
-        deleteCategory !== undefined && (
+        // deleteCategory !== undefined && (
           // selectedCategories !== undefined &&
           <>
             <Form.Group className="mb-3">
@@ -67,7 +67,7 @@ const CategoryAddition = ({
               </div>
             ))} */}
           </>
-        )}
+        }
     </>
   );
 };

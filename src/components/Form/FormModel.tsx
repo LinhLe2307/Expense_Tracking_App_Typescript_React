@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   FloatingLabel,
+  Form,
   InputGroup,
   Modal,
   Row,
-  Form,
-  CloseButton,
 } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import ajax from "../../ajax";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleOpenForm } from "../../features/expense/expenseSlice";
-import { customDate } from "../../functions/reusableFunction";
 import {
   CategoriesModel,
   ExpenseModel,
@@ -25,9 +22,7 @@ function FormModel({
   inputExpense,
   submitHandler,
   handleInputExpense,
-  // handleSelectedCategories,
   type,
-  // selectedCategories,
   deleteCategory,
   expenseId,
 }: FormTypeModels) {
@@ -62,7 +57,7 @@ function FormModel({
           borderRadius: "50%",
         }}
       >
-        +
+        + 
       </Button>
       <Modal
         show={show}
@@ -141,7 +136,7 @@ function FormModel({
 
               {type === "expense" && (
                 <CategoryAddition
-                  deleteCategory={deleteCategory}
+                  // deleteCategory={deleteCategory}
                   // handleSelectedCategories={handleSelectedCategories}
                   // selectedCategories={selectedCategories}
                   handleInputExpense={handleInputExpense}
