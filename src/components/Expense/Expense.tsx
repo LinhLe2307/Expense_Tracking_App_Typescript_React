@@ -20,6 +20,7 @@ const Expense = () => {
   const [selectView, setSelectView] = useState("");
 
   const dispatch = useAppDispatch();
+  // const selectedCategories: { target_id: number }[] = [];
   const [selectedCategories, setSelectedCategories] = useState<
     { target_id: number }[]
   >([]);
@@ -68,10 +69,10 @@ const Expense = () => {
     // color: "",
   });
 
-  const deleteCategory = (deleteItem: string) => {
-    //   setSelectedCategories((prev) =>
-    //     prev.filter((category) => category.target_id !== deleteItem)
-    //   );
+  const deleteCategory = (deleteItem: number) => {
+    setSelectedCategories((prev) => {
+      return prev.filter((category) => category.target_id !== deleteItem);
+    });
   };
 
   const handleSelectedCategories = (category: DefaultModel) => {
@@ -82,25 +83,30 @@ const Expense = () => {
       ) === undefined
     ) {
       if (inputCategory) {
-        setSelectedCategories((prev) => [
-          ...prev,
-          {
-            target_id: inputCategory,
-          },
-        ]);
+        // selectedCategories.push({
+        //   target_id: inputCategory,
+        // });
+        // setSelectedCategories((prev) => {
+        //   return [...prev, { target_id: inputCategory }];
+        // });
+        setSelectedCategories((prev) =>
+          prev.concat({ target_id: inputCategory })
+        );
       }
     }
+    // console.log(selectedCategories);
   };
 
   const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log(selectedCategories);
     setInputExpense({
       ...inputExpense,
+      field_expense_categories: selectedCategories,
       [e.target.name]: [
         {
           value: e.target.value,
         },
       ],
-      field_expense_categories: selectedCategories,
     });
   };
 
@@ -112,6 +118,7 @@ const Expense = () => {
     } else {
       dispatch(editExpense(inputExpense));
     }
+
     // window.location.reload()
     // setTimeout(() => window.location.reload(), 500);
   };
@@ -120,6 +127,10 @@ const Expense = () => {
     dispatch(initializeCategories());
     dispatch(initializeExpense());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   console.log(selectedCategories);
+  // }, [selectedCategories]);
 
   return (
     <>
@@ -174,7 +185,7 @@ const Expense = () => {
         expenseId={expenseId}
         submitHandler={submitHandler}
         handleInputExpense={handleInputExpense}
-        // selectedCategories={selectedCategories}
+        selectedCategories={selectedCategories}
         deleteCategory={deleteCategory}
         handleSelectedCategories={handleSelectedCategories}
         type="expense"

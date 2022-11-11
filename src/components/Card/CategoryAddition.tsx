@@ -25,12 +25,12 @@ const CategoryAddition = ({
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {categoriesList.map((item) => (
+                  {categoriesList.map((item, i) => (
                     <Dropdown.Item
-                      onClick={() =>
-                        handleSelectedCategories(item)
-                      }
+                      onClick={() => handleSelectedCategories(item)}
                       eventKey={item.nid && item.nid[0].value}
+                      // eventKey={item.nid && item.nid[0].value}
+                      // eventKey={i}
                       key={nanoid()}
                     >
                       {item.title[0].value}
@@ -40,12 +40,14 @@ const CategoryAddition = ({
               </Dropdown>
             </Form.Group>
 
-            {/* {selectedCategories.map((category) => (
-              <div key={category.value}>
-                {category}
-                <CloseButton onClick={() => deleteCategory(category.value)} />
+            {selectedCategories.map((category) => (
+              <div key={category.target_id}>
+                {category.target_id}
+                <CloseButton
+                  onClick={() => deleteCategory(category.target_id)}
+                />
               </div>
-            ))} */}
+            ))}
           </>
         )}
     </>

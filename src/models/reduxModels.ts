@@ -11,6 +11,10 @@ interface DefaultValue {
   ];
 }
 export interface DefaultModel {
+  type?: {
+    target_id: string;
+    target_type: string;
+  }[];
   field_date: DefaultValue["defaultString"];
   title: DefaultValue["defaultString"];
   field_description: DefaultValue["defaultString"];
@@ -20,10 +24,6 @@ export interface DefaultModel {
 }
 
 export interface ExpenseModel extends DefaultModel {
-  type?: {
-    target_id: string;
-    target_type: string;
-  }[];
   field_amount: DefaultValue["defaultNumber"];
   // field_expense_categories: string[] | [];
 
@@ -38,7 +38,7 @@ export interface IncomeModel extends DefaultModel {
 export interface CategoriesModel extends DefaultModel {
   field_amount?: [
     {
-      value?: number;
+      value: number;
     }
   ];
   // nid?: DefaultValue["defaultNumber"];
@@ -53,8 +53,8 @@ export interface ExpenseArrayModel<T> {
 
 export interface CategoryExpense {
   handleSelectedCategories?: (category: DefaultModel) => void;
-  deleteCategory?: (deleteItem: string) => void;
-  selectedCategories?: string[];
+  deleteCategory?: (deleteItem: number) => void;
+  selectedCategories?: { target_id: number }[];
 }
 
 export interface FormTypeModels extends CategoryExpense {
@@ -66,5 +66,6 @@ export interface FormTypeModels extends CategoryExpense {
     typeForm?: string
   ) => void;
   handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }

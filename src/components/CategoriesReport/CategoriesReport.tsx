@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   addNewCategory,
-  editCategoryContent,
+  // editCategoryContent,
   initializeCategories,
 } from "../../features/categories/categoriesSlice";
 import {
@@ -30,9 +30,15 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
   const editCategory = useAppSelector((state) => state.categories.editCategory);
 
   const [inputCategory, setInputCategory] = useState<DefaultModel>({
+    type: [
+      {
+        target_id: "categories",
+        target_type: "node_type",
+      },
+    ],
     field_date: [
       {
-        value: customDate(new Date()),
+        value: "2022-11-10T23:22:02+00:00",
       },
     ],
     title: [
@@ -53,29 +59,35 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
   ): void => {
     setInputCategory({
       ...inputCategory,
-      [e.target.name]: e.target.value,
+      [e.target.name]: [
+        {
+          value: e.target.value,
+        },
+      ],
     });
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    //   e.preventDefault();
-    //   if (!openEditCategory) {
-    //     dispatch(addNewCategory(inputCategory));
-    //   } else {
-    //     const selectedCategory = filterExpenseList.map((expense) => {
-    //       const newClone = expense.field_expense_categories.map((category) =>
-    //         editCategory && category.target_id === editCategory
-    //           ? inputCategory.title[0].value
-    //           : category
-    //       );
-    //       return { ...expense, categories: newClone };
-    //     });
-    //     Promise.all([
-    //       dispatch(deleteExpenseCategories(selectedCategory)),
-    //       dispatch(editCategoryContent(inputCategory)),
-    //     ]);
-    //   }
-    //   setTimeout(() => window.location.reload(), 500);
+    e.preventDefault();
+    if (!openEditCategory) {
+      dispatch(addNewCategory(inputCategory));
+    } else {
+      const selectedCategory = filterExpenseList.map((expense) => {
+        const newClone =
+          expense.new_expense_categories &&
+          expense.new_expense_categories.map((category) =>
+            editCategory && category === editCategory
+              ? inputCategory.title[0].value
+              : category
+          );
+        return { ...expense, categories: newClone };
+      });
+      Promise.all([
+        dispatch(deleteExpenseCategories(selectedCategory)),
+        // dispatch(editCategoryContent(inputCategory)),
+      ]);
+    }
+    setTimeout(() => window.location.reload(), 500);
   };
 
   return (

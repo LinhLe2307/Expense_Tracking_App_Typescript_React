@@ -6,6 +6,7 @@ import {
   ExpenseModel,
   ExpenseArrayModel,
 } from "../../models/reduxModels";
+import { convertIdToLabel } from "../../functions/reusableFunction";
 
 const baseURL = "node/expense";
 
@@ -25,7 +26,7 @@ export const expenseSlice = createSlice({
     },
 
     addNewExpense: (state, action: PayloadAction<ExpenseModel>): void => {
-      serviceAPI.postSingle("node/", action.payload);
+      serviceAPI.postSingle(action.payload);
       state.inputLists = state.inputLists.concat(action.payload);
     },
 
@@ -45,10 +46,10 @@ export const expenseSlice = createSlice({
     deleteExpense: (state, action: PayloadAction<number>): void => {
       const deleteId = action.payload;
       state.inputLists = state.inputLists.filter(
-        (expense) => expense.id !== deleteId
+        (expense) => expense.nid && expense.nid[0].value !== deleteId
       );
 
-      serviceAPI.deleteAxios(baseURL, deleteId);
+      serviceAPI.deleteAxios(deleteId);
     },
 
     handleOpenEditExpense: (state, action): void => {
@@ -61,8 +62,8 @@ export const expenseSlice = createSlice({
       const selectedPosts = action.payload;
       const postsIdsArray = action.payload.map((post) => post.id);
       Promise.all([
-        postsIdsArray.map((id) => id && serviceAPI.deleteAxios(baseURL, id)),
-        selectedPosts.map((post) => serviceAPI.postSingle(baseURL, post)),
+        postsIdsArray.map((id) => id && serviceAPI.deleteAxios(id)),
+        selectedPosts.map((post) => serviceAPI.postSingle(post)),
       ]);
     },
 
@@ -79,42 +80,7 @@ export const initializeExpense = () => {
       "node/categories"
     );
 
-    const newCategories: ([] | [number, string])[] = categoriesList.map(
-      (category) =>
-        category.nid ? [+category.nid[0].value, category.title[0].value] : []
-    );
-
-    const newExpense = expenseList
-      .map((expense) => expense.field_expense_categories)
-      .map((expense) => expense && expense.map((item) => item.target_id));
-
-    const newExCateList: string[][] = [];
-
-    console.log("newCategories", newCategories);
-
-    for (let y = 0; y < newExpense.length; y++) {
-      const newSub: string[] = [];
-      if (newExpense[y] !== undefined) {
-        for (let z = 0; z < newExpense[y].length; z++) {
-          for (let x = 0; x < newCategories?.length; x++) {
-            if (
-              newCategories.length !== 0 &&
-              newCategories[x].length !== 0 &&
-              +newExpense[y][z] === newCategories[x][0]
-            ) {
-              newSub.push(newCategories[x][1]!);
-            }
-          }
-        }
-      }
-      newExCateList.push(newSub);
-    }
-    // console.log(newExCateList);
-
-    const newClone = [...expenseList];
-    const newExpenseList = newClone.map((expense, i) => {
-      return { ...expense, new_expense_categories: newExCateList[i] };
-    });
+    const newExpenseList = convertIdToLabel(expenseList, categoriesList);
 
     dispatch(getExpenseList(newExpenseList));
   };

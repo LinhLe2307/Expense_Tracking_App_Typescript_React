@@ -20,7 +20,7 @@ export const incomeSlice = createSlice({
       state.inputLists = action.payload;
     },
     addNewIncome: (state, action: PayloadAction<IncomeModel>) => {
-      serviceAPI.postSingle(baseURL, action.payload);
+      serviceAPI.postSingle(action.payload);
       state.inputLists = state.inputLists.concat(action.payload);
     },
     editIncome: (state, action: PayloadAction<IncomeModel>): void => {
@@ -41,7 +41,7 @@ export const incomeSlice = createSlice({
         (expense) => expense.id !== deleteId
       );
 
-      serviceAPI.deleteAxios(baseURL, deleteId);
+      serviceAPI.deleteAxios(deleteId);
     },
 
     handleOpenEditIncome: (state, action): void => {

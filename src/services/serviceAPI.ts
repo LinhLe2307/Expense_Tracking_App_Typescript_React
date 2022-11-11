@@ -9,10 +9,10 @@ const getAll = async (baseURL: string) => {
   return response.data;
 };
 
-const postSingle = async (baseURL: string, selectedItem: SelectedItem) => {
+const postSingle = async (selectedItem: SelectedItem) => {
   try {
     const axios = await ajax();
-    const response = await axios.post(baseURL, selectedItem);
+    const response = await axios.post("node/", selectedItem);
     console.log(response.data);
   } catch (err) {
     console.error(err);
@@ -26,17 +26,17 @@ const putAxios = async (
 ) => {
   try {
     const axios = await ajax();
-    const response = await axios.put(`${baseURL}/${id}`, selectedItem);
+    const response = await axios.put(`node/${id}`, selectedItem);
     console.log(response.data);
   } catch (err) {
     console.error(err);
   }
 };
 
-const deleteAxios = async (baseURL: string, id: number) => {
+const deleteAxios = async (id: number) => {
   try {
     const axios = await ajax();
-    const response = await axios.delete(`${baseURL}/${id}`);
+    const response = await axios.delete(`node/${id}`);
     console.log(response.data);
   } catch (err) {
     console.error(err);

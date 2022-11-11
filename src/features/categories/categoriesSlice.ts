@@ -29,30 +29,30 @@ export const categoriesSlice = createSlice({
         state.inputLists = state.inputLists.concat(newCategory);
       }
 
-      serviceAPI.postSingle(baseURL, newCategory);
+      serviceAPI.postSingle(newCategory);
     },
-    editCategoryContent: (
-      state,
-      action: PayloadAction<CategoriesModel>
-    ): void => {
-      const editItem = action.payload;
-      if (state.editCategory && state.editCategory.length > 0) {
-        const findIndex = state.inputLists.find(
-          (expense) => expense.title[0].value === state.editCategory
-        );
-        // console.log(findIndex)
-        if (findIndex !== undefined) {
-          const indexElement = state.inputLists.indexOf(findIndex);
-          // console.log(indexElement)
-          state.inputLists.splice(indexElement, 0, editItem);
-          state.inputLists = state.inputLists;
-          findIndex.id && serviceAPI.putAxios(baseURL, findIndex.id, editItem);
-        }
-      }
-    },
+    // editCategoryContent: (
+    //   state,
+    //   action: PayloadAction<CategoriesModel>
+    // ): void => {
+    //   const editItem = action.payload;
+    //   if (state.editCategory && state.editCategory.length > 0) {
+    //     const findIndex = state.inputLists.find(
+    //       (expense) => expense.title[0].value === state.editCategory
+    //     );
+    //     // console.log(findIndex)
+    //     if (findIndex !== undefined) {
+    //       const indexElement = state.inputLists.indexOf(findIndex);
+    //       // console.log(indexElement)
+    //       state.inputLists.splice(indexElement, 0, editItem);
+    //       state.inputLists = state.inputLists;
+    //       findIndex.id && serviceAPI.putAxios(baseURL, findIndex.id, editItem);
+    //     }
+    //   }
+    // },
     deleteCategory: (state, action: PayloadAction<number>): void => {
       const deleteItem = action.payload;
-      serviceAPI.deleteAxios(baseURL, deleteItem);
+      serviceAPI.deleteAxios(deleteItem);
 
       state.inputLists = state.inputLists.filter(
         (expense) => expense.id !== deleteItem
@@ -77,7 +77,7 @@ export const initializeCategories = () => {
 export const {
   getCategoriesList,
   addNewCategory,
-  editCategoryContent,
+  // editCategoryContent,
   deleteCategory,
   handleOpenEditCategory,
 } = categoriesSlice.actions;

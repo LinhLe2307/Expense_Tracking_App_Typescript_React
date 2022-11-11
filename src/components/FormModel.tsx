@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -10,6 +9,7 @@ import {
   CloseButton,
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import ajax from "../ajax";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { handleOpenForm } from "../features/expense/expenseSlice";
 import { customDate } from "../functions/reusableFunction";
@@ -40,6 +40,7 @@ function FormModel({
   useEffect(() => {
     async function fetchData() {
       if (expenseId !== 0) {
+        const axios = await ajax();
         const response = await axios.get(`node/${expenseId}`);
         const resData: ExpenseModel = await response.data;
         setDisplayInput(resData);
@@ -91,8 +92,8 @@ function FormModel({
                     type="text"
                     placeholder="Enter Title"
                     defaultValue={displayInput.title[0].value}
-                    key={displayInput.title[0].value}
                     onChange={handleInputExpense}
+                    key={displayInput.title[0].value}
                   />
                 </FloatingLabel>
               </Form.Group>

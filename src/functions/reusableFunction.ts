@@ -75,4 +75,45 @@ const detailsDiv = (
   return Object.entries(transactionList);
 };
 
-export { customDate, detailsDiv };
+const convertIdToLabel = (
+  expenseList: ExpenseModel[],
+  categoriesList: CategoriesModel[]
+) => {
+  const newCategories: ([] | [number, string])[] = categoriesList.map(
+    (category) =>
+      category.nid ? [+category.nid[0].value, category.title[0].value] : []
+  );
+
+  const newExpense = expenseList
+    .map((expense) => expense.field_expense_categories)
+    .map((expense) => expense && expense.map((item) => item.target_id));
+
+  const newExCateList: string[][] = [];
+
+  for (let y = 0; y < newExpense.length; y++) {
+    const newSub: string[] = [];
+    if (newExpense[y] !== undefined) {
+      for (let z = 0; z < newExpense[y].length; z++) {
+        for (let x = 0; x < newCategories?.length; x++) {
+          if (
+            newCategories.length !== 0 &&
+            newCategories[x].length !== 0 &&
+            +newExpense[y][z] === newCategories[x][0]
+          ) {
+            newSub.push(newCategories[x][1]!);
+          }
+        }
+      }
+    }
+    newExCateList.push(newSub);
+  }
+  // console.log(newExCateList);
+
+  const newClone = [...expenseList];
+  const newExpenseList = newClone.map((expense, i) => {
+    return { ...expense, new_expense_categories: newExCateList[i] };
+  });
+  return newExpenseList;
+};
+
+export { customDate, detailsDiv, convertIdToLabel };
