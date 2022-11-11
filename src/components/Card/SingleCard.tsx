@@ -76,11 +76,11 @@ const SingleCard = ({ expense }: MyProps) => {
           >
             {/* <Card.Text>{expense.field_description[0].value}</Card.Text> */}
 
-            {expense.id && (
+            {expense.nid && expense.nid[0].value && (
               <CustomDropdown
                 deleteItem={deleteExpense}
                 handleOpenEditItem={handleOpenEditExpense}
-                itemId={expense.id}
+                itemId={expense.nid[0].value}
               />
             )}
           </div>

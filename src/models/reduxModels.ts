@@ -14,17 +14,23 @@ export interface DefaultModel {
   field_date: DefaultValue["defaultString"];
   title: DefaultValue["defaultString"];
   field_description: DefaultValue["defaultString"];
-  color: string;
+  //   color: string;
   id?: number;
+  nid?: DefaultValue["defaultNumber"];
 }
 
 export interface ExpenseModel extends DefaultModel {
-  field_amount: DefaultValue["defaultNumber"];
-  //   field_expense_categories: string[] | [];
-  field_expense_categories: {
-    target_id: string | number;
+  type?: {
+    target_id: string;
+    target_type: string;
   }[];
-  new_expense_categories?: (string | undefined)[];
+  field_amount: DefaultValue["defaultNumber"];
+  // field_expense_categories: string[] | [];
+
+  field_expense_categories: {
+    target_id: number;
+  }[];
+  new_expense_categories?: string[];
 }
 export interface IncomeModel extends DefaultModel {
   field_amount: DefaultValue["defaultNumber"];
@@ -35,9 +41,7 @@ export interface CategoriesModel extends DefaultModel {
       value?: number;
     }
   ];
-  nid?: DefaultValue["defaultNumber"];
-  0?: number;
-  1?: string | undefined;
+  // nid?: DefaultValue["defaultNumber"];
 }
 export interface ExpenseArrayModel<T> {
   inputLists: T[];
@@ -63,5 +67,4 @@ export interface FormTypeModels extends CategoryExpense {
   ) => void;
   handleInputExpense: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
-  baseURL: string;
 }

@@ -29,7 +29,6 @@ function FormModel({
   type,
   selectedCategories,
   deleteCategory,
-  baseURL,
   expenseId,
 }: FormTypeModels) {
   const dispatch = useAppDispatch();
@@ -41,13 +40,13 @@ function FormModel({
   useEffect(() => {
     async function fetchData() {
       if (expenseId !== 0) {
-        const response = await axios.get(`${baseURL}/${expenseId}`);
+        const response = await axios.get(`node/${expenseId}`);
         const resData: ExpenseModel = await response.data;
         setDisplayInput(resData);
       }
     }
     fetchData().catch(console.error);
-  }, [expenseId, baseURL]);
+  }, [expenseId]);
 
   return (
     <>
@@ -98,8 +97,8 @@ function FormModel({
                 </FloatingLabel>
               </Form.Group>
 
-              {/* {type !== "categories" &&
-                typeof displayInput.field_amount !== undefined &&
+              {type !== "categories" &&
+                displayInput.field_amount !== undefined &&
                 typeof displayInput.field_amount[0].value !== undefined && (
                   <Form.Group className="mb-3">
                     <InputGroup className="mb-3">
@@ -107,7 +106,7 @@ function FormModel({
                       <FloatingLabel controlId="priceInput" label="Enter Price">
                         <Form.Control
                           required
-                          name="amount"
+                          name="field_amount"
                           type="number"
                           placeholder="Enter Price"
                           defaultValue={displayInput.field_amount[0].value}
@@ -118,7 +117,7 @@ function FormModel({
                       <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
                   </Form.Group>
-                )} */}
+                )}
 
               <Form.Group className="mb-3">
                 <InputGroup className="mb-3">
@@ -128,7 +127,7 @@ function FormModel({
                   >
                     <Form.Control
                       as="textarea"
-                      name="description"
+                      name="field_description"
                       type="text"
                       defaultValue={displayInput.field_description[0].value}
                       key={displayInput.field_description[0].value}
@@ -147,7 +146,7 @@ function FormModel({
                 />
               )}
 
-              <Form.Group className="mb-3">
+              {/* <Form.Group className="mb-3">
                 <Form.Label>Color</Form.Label>
                 <Form.Control
                   required
@@ -158,7 +157,7 @@ function FormModel({
                   key={displayInput.color}
                   onChange={handleInputExpense}
                 />
-              </Form.Group>
+              </Form.Group> */}
 
               <Modal.Footer>
                 <Button variant="primary" type="submit">

@@ -12,7 +12,7 @@ const getAll = async (baseURL: string) => {
 const postSingle = async (baseURL: string, selectedItem: SelectedItem) => {
   try {
     const axios = await ajax();
-    const response = await axios.post(`node/`, selectedItem);
+    const response = await axios.post(baseURL, selectedItem);
     console.log(response.data);
   } catch (err) {
     console.error(err);

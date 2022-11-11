@@ -45,7 +45,7 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
         value: "",
       },
     ],
-    color: "",
+    // color: "",
   });
 
   const handleInputCategory = (
@@ -58,25 +58,24 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-  //   e.preventDefault();
-  //   if (!openEditCategory) {
-  //     dispatch(addNewCategory(inputCategory));
-  //   } else {
-  //     const selectedCategory = filterExpenseList.map((expense) => {
-  //       const newClone = expense.field_expense_categories.map((category) =>
-  //         editCategory && category.target_id === editCategory
-  //           ? inputCategory.title[0].value
-  //           : category
-  //       );
-  //       return { ...expense, categories: newClone };
-  //     });
-
-  //     Promise.all([
-  //       dispatch(deleteExpenseCategories(selectedCategory)),
-  //       dispatch(editCategoryContent(inputCategory)),
-  //     ]);
-  //   }
-  //   setTimeout(() => window.location.reload(), 500);
+    //   e.preventDefault();
+    //   if (!openEditCategory) {
+    //     dispatch(addNewCategory(inputCategory));
+    //   } else {
+    //     const selectedCategory = filterExpenseList.map((expense) => {
+    //       const newClone = expense.field_expense_categories.map((category) =>
+    //         editCategory && category.target_id === editCategory
+    //           ? inputCategory.title[0].value
+    //           : category
+    //       );
+    //       return { ...expense, categories: newClone };
+    //     });
+    //     Promise.all([
+    //       dispatch(deleteExpenseCategories(selectedCategory)),
+    //       dispatch(editCategoryContent(inputCategory)),
+    //     ]);
+    //   }
+    //   setTimeout(() => window.location.reload(), 500);
   };
 
   return (
@@ -88,7 +87,6 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
         submitHandler={submitHandler}
         handleInputExpense={handleInputCategory}
         type="categories"
-        baseURL="http://localhost:3010/categories"
       />
     </div>
   );

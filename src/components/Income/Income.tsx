@@ -43,7 +43,7 @@ const Income = () => {
         value: "",
       },
     ],
-    color: "",
+    // color: "",
   });
 
   const handleInputIncome = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -88,7 +88,6 @@ const Income = () => {
         expenseId={expenseId}
         submitHandler={submitHandler}
         handleInputExpense={handleInputIncome}
-        baseURL="http://localhost:3010/income"
       />
     </>
   );

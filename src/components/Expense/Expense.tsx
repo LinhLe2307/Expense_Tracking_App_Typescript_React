@@ -21,7 +21,7 @@ const Expense = () => {
 
   const dispatch = useAppDispatch();
   const [selectedCategories, setSelectedCategories] = useState<
-    { target_id: string | number }[]
+    { target_id: number }[]
   >([]);
 
   const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
@@ -37,9 +37,15 @@ const Expense = () => {
   // );
 
   const [inputExpense, setInputExpense] = useState<ExpenseModel>({
+    type: [
+      {
+        target_id: "expense",
+        target_type: "node_type",
+      },
+    ],
     field_date: [
       {
-        value: customDate(new Date()),
+        value: "2022-11-10T23:22:02+00:00",
       },
     ],
     title: [
@@ -57,43 +63,57 @@ const Expense = () => {
         value: "",
       },
     ],
+
     field_expense_categories: selectedCategories,
-    color: "",
+    // color: "",
   });
 
   const deleteCategory = (deleteItem: string) => {
-    setSelectedCategories((prev) =>
-      prev.filter((category) => category.target_id !== deleteItem)
-    );
+    //   setSelectedCategories((prev) =>
+    //     prev.filter((category) => category.target_id !== deleteItem)
+    //   );
   };
 
   const handleSelectedCategories = (category: DefaultModel) => {
-    //   const inputCategory = category.title[0].value;
-    //   if (
-    //     selectedCategories.find((category) => category.target_id === inputCategory) ===
-    //     undefined
-    //   ) {
-    //     setSelectedCategories((prev) => prev.concat(category.title[0].value));
-    //   }
+    const inputCategory = category.nid && category.nid[0].value;
+    if (
+      selectedCategories.find(
+        (category) => category.target_id === inputCategory
+      ) === undefined
+    ) {
+      if (inputCategory) {
+        setSelectedCategories((prev) => [
+          ...prev,
+          {
+            target_id: inputCategory,
+          },
+        ]);
+      }
+    }
   };
 
   const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputExpense({
       ...inputExpense,
-      [e.target.name]: e.target.value,
+      [e.target.name]: [
+        {
+          value: e.target.value,
+        },
+      ],
       field_expense_categories: selectedCategories,
     });
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+
     if (!openEditExpense) {
       dispatch(addNewExpense(inputExpense));
     } else {
       dispatch(editExpense(inputExpense));
     }
     // window.location.reload()
-    setTimeout(() => window.location.reload(), 500);
+    // setTimeout(() => window.location.reload(), 500);
   };
 
   useEffect(() => {
@@ -158,7 +178,6 @@ const Expense = () => {
         deleteCategory={deleteCategory}
         handleSelectedCategories={handleSelectedCategories}
         type="expense"
-        baseURL="http://localhost:3010/notes"
       />
     </>
   );

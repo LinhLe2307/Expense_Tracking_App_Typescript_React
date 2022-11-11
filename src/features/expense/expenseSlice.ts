@@ -25,14 +25,14 @@ export const expenseSlice = createSlice({
     },
 
     addNewExpense: (state, action: PayloadAction<ExpenseModel>): void => {
-      serviceAPI.postSingle(baseURL, action.payload);
+      serviceAPI.postSingle("node/", action.payload);
       state.inputLists = state.inputLists.concat(action.payload);
     },
 
     editExpense: (state, action: PayloadAction<ExpenseModel>): void => {
       const editExense = action.payload;
       const findIndex = state.inputLists.find(
-        (expense) => expense.id === state.editId
+        (expense) => expense.nid && expense.nid[0].value === state.editId
       );
       if (findIndex !== undefined) {
         const indexElement = state.inputLists.indexOf(findIndex);
@@ -60,7 +60,6 @@ export const expenseSlice = createSlice({
       state.inputLists = action.payload;
       const selectedPosts = action.payload;
       const postsIdsArray = action.payload.map((post) => post.id);
-      console.log(selectedPosts);
       Promise.all([
         postsIdsArray.map((id) => id && serviceAPI.deleteAxios(baseURL, id)),
         selectedPosts.map((post) => serviceAPI.postSingle(baseURL, post)),
@@ -87,22 +86,24 @@ export const initializeExpense = () => {
 
     const newExpense = expenseList
       .map((expense) => expense.field_expense_categories)
-      .map((expense) => expense.map((item) => item.target_id));
+      .map((expense) => expense && expense.map((item) => item.target_id));
 
-    const newExCateList: (string | undefined)[][] = [];
+    const newExCateList: string[][] = [];
 
     console.log("newCategories", newCategories);
 
     for (let y = 0; y < newExpense.length; y++) {
-      const newSub: (string | undefined)[] = [];
-      for (let z = 0; z < newExpense[y].length; z++) {
-        for (let x = 0; x < newCategories.length; x++) {
-          if (
-            newCategories.length >= 1 &&
-            newCategories[x] !== undefined &&
-            +newExpense[y][z] === newCategories[x][0]
-          ) {
-            newSub.push(newCategories[x][1]);
+      const newSub: string[] = [];
+      if (newExpense[y] !== undefined) {
+        for (let z = 0; z < newExpense[y].length; z++) {
+          for (let x = 0; x < newCategories?.length; x++) {
+            if (
+              newCategories.length !== 0 &&
+              newCategories[x].length !== 0 &&
+              +newExpense[y][z] === newCategories[x][0]
+            ) {
+              newSub.push(newCategories[x][1]!);
+            }
           }
         }
       }

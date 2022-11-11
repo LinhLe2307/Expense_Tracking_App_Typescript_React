@@ -27,8 +27,10 @@ const CategoryAddition = ({
                 <Dropdown.Menu>
                   {categoriesList.map((item) => (
                     <Dropdown.Item
-                      onClick={() => handleSelectedCategories(item)}
-                      eventKey={item.title[0].value}
+                      onClick={() =>
+                        handleSelectedCategories(item)
+                      }
+                      eventKey={item.nid && item.nid[0].value}
                       key={nanoid()}
                     >
                       {item.title[0].value}
