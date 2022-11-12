@@ -33,7 +33,6 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
 
   const handleEdit = (selectedItem: string) => {
     selectedItem && dispatch(handleOpenEditCategory(selectedItem));
-    // }
   };
 
   return (

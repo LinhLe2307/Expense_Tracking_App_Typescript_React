@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
-import Calendar from 'react-calendar';
+import { useEffect } from "react";
 
 import { Tab } from 'react-bootstrap';
-import Expense from './Expense/Expense';
-import Income from "./Income/Income";
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
+import Expense from './Expense/Expense';
+import Income from "./Income/Income";
 
 import { useAppDispatch } from '../app/hooks';
 import { initializeExpense } from "../features/expense/expenseSlice";
-import {customDate} from "../functions/reusableFunction"
+import { customDate } from "../functions/reusableFunction";
 
 const HomePage = () => {
     const dispatch = useAppDispatch();

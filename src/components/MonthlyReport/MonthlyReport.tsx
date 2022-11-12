@@ -1,13 +1,10 @@
-import { nanoid } from "nanoid";
-import React, { useState, useEffect } from "react";
-import { Card, Dropdown } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { Calendar } from "react-calendar";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { initializeCategories } from "../../features/categories/categoriesSlice";
 import { initializeExpense } from "../../features/expense/expenseSlice";
-import { detailsDiv } from "../../functions/reusableFunction";
+import { customDate } from "../../functions/reusableFunction";
 import { ExpenseModel } from "../../models/reduxModels";
-import SingleCard from "../Card/SingleCard";
 import CategoriesReport from "../CategoriesReport/CategoriesReport";
 
 const MonthlyReport = () => {
@@ -40,9 +37,14 @@ const MonthlyReport = () => {
     // console.log('Clicked month: ', value)
     const selectedMonth = month[value.getMonth()];
     const newList = expenseLists.filter((expense) =>
-      expense.field_date[0].value.includes(selectedMonth)
+      customDate(new Date(expense.field_date[0].value.slice(0, 10))).includes(
+        selectedMonth
+      )
     );
-    const budget = newList.reduce((prev, curr) => prev + +curr.field_amount, 0);
+    const budget = newList.reduce(
+      (prev, curr) => prev + +curr.field_amount[0].value,
+      0
+    );
     setMonthlyExpense(newList);
     setSpendingBudget(budget);
     setIsClicking(true);

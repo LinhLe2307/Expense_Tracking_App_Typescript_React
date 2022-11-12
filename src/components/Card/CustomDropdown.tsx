@@ -33,7 +33,9 @@ const CustomDropdown = ({
           <Dropdown.Menu>
             <Dropdown.Item
               onClick={() => {
-                dispatch(deleteItem(itemId));
+                if (window.confirm("Do you want to delete this?")) {
+                  dispatch(deleteItem(itemId));
+                }
               }}
             >
               Delete

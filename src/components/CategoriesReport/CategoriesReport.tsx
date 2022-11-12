@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   addNewCategory,
-  editCategoryContent
+  editCategoryContent,
 } from "../../features/categories/categoriesSlice";
-import {
-  // deleteExpenseCategories,
-  initializeExpense,
-} from "../../features/expense/expenseSlice";
-import { customDate } from "../../functions/reusableFunction";
-import { DefaultModel } from "../../models/reduxModels";
+import { DefaultModel, ExpenseModel } from "../../models/reduxModels";
 import FormModel from "../Form/FormModel";
 import CategoryDetails from "./CategoryDetails";
-import { ExpenseModel } from "../../models/reduxModels";
-
 interface MyProps {
   filterExpenseList: ExpenseModel[];
 }
@@ -26,7 +19,6 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
     (state) => state.categories.openEditItem
   );
   const expenseId = useAppSelector((state) => state.categories.editId);
-  const editCategory = useAppSelector((state) => state.categories.editCategory);
 
   const [inputCategory, setInputCategory] = useState<DefaultModel>({
     type: [
@@ -37,7 +29,7 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
     ],
     field_date: [
       {
-        value: "2022-11-10T23:22:02+00:00",
+        value: "2022-11-12T23:22:02+00:00",
       },
     ],
     title: [

@@ -1,9 +1,7 @@
 import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { initializeCategories } from "../../features/categories/categoriesSlice";
-import { handleOpenForm } from "../../features/expense/expenseSlice";
 import {
   addNewIncome,
   editIncome,
@@ -64,7 +62,6 @@ const Income = () => {
     } else {
       dispatch(editIncome(inputExpense));
     }
-    // window.location.reload()
     setTimeout(() => window.location.reload(), 500);
   };
 

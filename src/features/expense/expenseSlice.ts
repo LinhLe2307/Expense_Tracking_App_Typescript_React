@@ -48,7 +48,6 @@ export const expenseSlice = createSlice({
       state.inputLists = state.inputLists.filter(
         (expense) => expense.nid && expense.nid[0].value !== deleteId
       );
-
       serviceAPI.deleteAxios(deleteId);
     },
 

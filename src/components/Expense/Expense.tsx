@@ -7,8 +7,9 @@ import { initializeCategories } from "../../features/categories/categoriesSlice"
 import {
   addNewExpense,
   editExpense,
-  initializeExpense
+  initializeExpense,
 } from "../../features/expense/expenseSlice";
+import { customDate } from "../../functions/reusableFunction";
 import { ExpenseModel } from "../../models/reduxModels";
 import SingleCard from "../Card/SingleCard";
 import FormModel from "../Form/FormModel";
@@ -19,11 +20,6 @@ const Expense = () => {
   const [selectView, setSelectView] = useState("");
 
   const dispatch = useAppDispatch();
-  // const selectedCategories: { target_id: number }[] = [];
-  // const [selectedCategories, setSelectedCategories] = useState<
-  //   { target_id: number }[]
-  // >([]);
-
   const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
 
   const expenseId = useAppSelector((state) => state.expense.editId);
@@ -32,9 +28,12 @@ const Expense = () => {
 
   const categoriesList = useAppSelector((state) => state.categories.inputLists);
 
-  // const filterExpense: ExpenseModel[] = expenseLists.filter(
-  //   (expense: ExpenseModel) => expense.date === customDate(new Date())
-  // );
+  const filterExpense: ExpenseModel[] = expenseLists.filter(
+    (expense: ExpenseModel) => {
+      const newDate = new Date(expense.field_date[0].value.slice(0, 10));
+      return customDate(newDate) === customDate(new Date());
+    }
+  );
 
   const [inputExpense, setInputExpense] = useState<ExpenseModel>({
     type: [
@@ -46,7 +45,8 @@ const Expense = () => {
     field_expense_categories: [],
     field_date: [
       {
-        value: "2022-11-10T23:22:02+00:00",
+        value: "2022-11-12T23:22:02+00:00",
+        // value: new Date().format("Y-m-dTH:i:sP"),
       },
     ],
     title: [
@@ -71,30 +71,7 @@ const Expense = () => {
     ],
   });
 
-  // const deleteCategory = (deleteItem: number) => {
-  //   setSelectedCategories((prev) => {
-  //     return prev.filter((category) => category.target_id !== deleteItem);
-  //   });
-  // };
-
-  // const handleSelectedCategories = (category: DefaultModel) => {
-  //   if (category.nid) {
-  //     const inputCategory = category.nid[0].value;
-  //     if (
-  //       selectedCategories.find(
-  //         (category) => category.target_id === inputCategory
-  //       ) === undefined
-  //     ) {
-  //       setSelectedCategories((prev) =>
-  //         prev.concat({ target_id: inputCategory })
-  //       );
-  //     }
-  //   }
-  // };
-  // console.log(selectedCategories);
-
   const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    // console.log(selectedCategories);
     const { field_expense_categories } = inputExpense;
     const { checked, value, name } = e.target;
 
@@ -153,13 +130,13 @@ const Expense = () => {
       <TopSpending />
       <h1>
         €
-        {expenseLists.reduce(
+        {filterExpense.reduce(
           (prev, curr) => prev + +curr.field_amount[0].value,
           0
         )}{" "}
         spent today
       </h1>
-
+      <h4>{customDate(new Date())}</h4>
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Default View
@@ -182,7 +159,7 @@ const Expense = () => {
 
       <h3>{selectView === "" ? "All" : selectView}</h3>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
-        {expenseLists
+        {filterExpense
           .filter((expense: ExpenseModel) => {
             return selectView === ""
               ? expense
@@ -200,9 +177,6 @@ const Expense = () => {
         expenseId={expenseId}
         submitHandler={submitHandler}
         handleInputExpense={handleInputExpense}
-        // selectedCategories={selectedCategories}
-        // deleteCategory={deleteCategory}
-        // handleSelectedCategories={handleSelectedCategories}
         type="expense"
       />
     </>
