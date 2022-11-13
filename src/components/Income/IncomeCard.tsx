@@ -1,8 +1,9 @@
 import { Card } from "react-bootstrap";
 import {
   deleteIncome,
-  handleOpenEditIncome
+  handleOpenEditIncome,
 } from "../../features/income/incomeSlice";
+import { customDate } from "../../functions/reusableFunction";
 import { IncomeModel } from "../../models/reduxModels";
 import CustomDropdown from "../Card/CustomDropdown";
 
@@ -14,12 +15,12 @@ const IncomeCard = ({ income }: MyProps) => {
   return (
     <Card border="primary" style={{ width: "18rem" }}>
       <Card.Header>
-        {income.field_date[0].value}
-        {income.id && (
+        {customDate(new Date(income.field_date[0].value.slice(0, 10)))}
+        {income.nid && income.nid[0].value && (
           <CustomDropdown
             deleteItem={deleteIncome}
             handleOpenEditItem={handleOpenEditIncome}
-            itemId={income.id}
+            itemId={income.nid[0].value}
           />
         )}
       </Card.Header>

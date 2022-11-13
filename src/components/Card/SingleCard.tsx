@@ -5,6 +5,7 @@ import {
   deleteExpense,
   handleOpenEditExpense,
 } from "../../features/expense/expenseSlice";
+import { customDate } from "../../functions/reusableFunction";
 import { ExpenseModel } from "../../models/reduxModels";
 import CustomDropdown from "./CustomDropdown";
 
@@ -30,7 +31,10 @@ const SingleCard = ({ expense }: MyProps) => {
               gap: "3rem",
             }}
           >
-            <Link to={`${expense.id}`} state={{ expenseDetails: expense }}>
+            <Link
+              to={`${expense.nid && expense.nid[0].value}`}
+              state={{ expenseDetails: expense }}
+            >
               {/* <div
                 style={{
                   backgroundColor: `${expense.color}`,
@@ -81,13 +85,14 @@ const SingleCard = ({ expense }: MyProps) => {
                 deleteItem={deleteExpense}
                 handleOpenEditItem={handleOpenEditExpense}
                 itemId={expense.nid[0].value}
-                
               />
             )}
           </div>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">{expense.field_date[0].value}</small>
+          <small className="text-muted">
+            {customDate(new Date(expense.field_date[0].value.slice(0, 10)))}
+          </small>
         </Card.Footer>
       </Card>
     </>

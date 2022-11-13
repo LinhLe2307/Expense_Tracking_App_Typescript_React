@@ -7,14 +7,12 @@ import { initializeCategories } from "../../features/categories/categoriesSlice"
 import {
   addNewExpense,
   editExpense,
-  initializeExpense,
+  initializeExpense
 } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
 import { ExpenseModel } from "../../models/reduxModels";
 import SingleCard from "../Card/SingleCard";
 import FormModel from "../Form/FormModel";
-import TopSpending from "../TopSpending/TopSpending";
-import GraphDisplay from "./GraphDisplay";
 
 const Expense = () => {
   const [selectView, setSelectView] = useState("");
@@ -45,7 +43,7 @@ const Expense = () => {
     field_expense_categories: [],
     field_date: [
       {
-        value: "2022-11-12T23:22:02+00:00",
+        value: "2022-11-14T23:22:02+00:00",
         // value: new Date().format("Y-m-dTH:i:sP"),
       },
     ],
@@ -126,8 +124,6 @@ const Expense = () => {
 
   return (
     <>
-      <GraphDisplay />
-      <TopSpending />
       <h1>
         €
         {filterExpense.reduce(

@@ -7,7 +7,6 @@ import {
   editIncome,
   initializeIncome,
 } from "../../features/income/incomeSlice";
-import { customDate } from "../../functions/reusableFunction";
 import { IncomeModel } from "../../models/reduxModels";
 import FormModel from "../Form/FormModel";
 import IncomeCard from "./IncomeCard";
@@ -20,10 +19,16 @@ const Income = () => {
 
   const incomeList = useAppSelector((state) => state.income.inputLists);
 
-  const [inputExpense, setInputExpense] = useState<IncomeModel>({
+  const [inputIncome, setInputIncome] = useState<IncomeModel>({
+    type: [
+      {
+        target_id: "income",
+        target_type: "node_type",
+      },
+    ],
     field_date: [
       {
-        value: customDate(new Date()),
+        value: "2022-11-14T23:22:02+00:00",
       },
     ],
     title: [
@@ -49,18 +54,22 @@ const Income = () => {
   });
 
   const handleInputIncome = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setInputExpense({
-      ...inputExpense,
-      [e.target.name]: e.target.value,
+    setInputIncome({
+      ...inputIncome,
+      [e.target.name]: [
+        {
+          value: e.target.value,
+        },
+      ],
     });
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!openEditIncome) {
-      dispatch(addNewIncome(inputExpense));
+      dispatch(addNewIncome(inputIncome));
     } else {
-      dispatch(editIncome(inputExpense));
+      dispatch(editIncome(inputIncome));
     }
     setTimeout(() => window.location.reload(), 500);
   };
@@ -75,7 +84,7 @@ const Income = () => {
       <h1>
         Total earn:{" "}
         {incomeList.reduce((prev, curr) => {
-          return prev + +curr.field_amount;
+          return prev + +curr.field_amount[0].value;
         }, 0)}
       </h1>
 
@@ -85,7 +94,7 @@ const Income = () => {
 
       <FormModel
         type="income"
-        inputExpense={inputExpense}
+        inputExpense={inputIncome}
         expenseId={expenseId}
         submitHandler={submitHandler}
         handleInputExpense={handleInputIncome}

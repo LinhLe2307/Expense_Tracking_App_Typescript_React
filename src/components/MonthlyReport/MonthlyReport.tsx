@@ -34,7 +34,6 @@ const MonthlyReport = () => {
       "November",
       "December",
     ];
-    // console.log('Clicked month: ', value)
     const selectedMonth = month[value.getMonth()];
     const newList = expenseLists.filter((expense) =>
       customDate(new Date(expense.field_date[0].value.slice(0, 10))).includes(

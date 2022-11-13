@@ -26,7 +26,7 @@ export const incomeSlice = createSlice({
     editIncome: (state, action: PayloadAction<IncomeModel>): void => {
       const editIncome = action.payload;
       const findIndex = state.inputLists.find(
-        (expense) => expense.id === state.editId
+        (expense) => expense.nid && expense.nid[0].value === state.editId
       );
       if (findIndex !== undefined) {
         const indexElement = state.inputLists.indexOf(findIndex);
@@ -38,7 +38,7 @@ export const incomeSlice = createSlice({
     deleteIncome: (state, action: PayloadAction<number>): void => {
       const deleteId = action.payload;
       state.inputLists = state.inputLists.filter(
-        (expense) => expense.id !== deleteId
+        (expense) => expense.nid && expense.nid[0].value !== deleteId
       );
 
       serviceAPI.deleteAxios(deleteId);

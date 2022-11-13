@@ -11,7 +11,7 @@ interface DefaultValue {
   ];
 }
 export interface DefaultModel {
-  type?: {
+  type: {
     target_id: string;
     target_type: string;
   }[];
@@ -19,7 +19,6 @@ export interface DefaultModel {
   title: DefaultValue["defaultString"];
   field_description: DefaultValue["defaultString"];
   field_color: DefaultValue["defaultString"];
-  id?: number;
   nid?: DefaultValue["defaultNumber"];
 }
 

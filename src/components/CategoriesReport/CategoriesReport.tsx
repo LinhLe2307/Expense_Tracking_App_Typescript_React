@@ -29,7 +29,7 @@ const CategoriesReport = ({ filterExpenseList }: MyProps) => {
     ],
     field_date: [
       {
-        value: "2022-11-12T23:22:02+00:00",
+        value: "2022-11-14T23:22:02+00:00",
       },
     ],
     title: [
