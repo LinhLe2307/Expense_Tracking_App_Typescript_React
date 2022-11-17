@@ -43,7 +43,7 @@ const Expense = () => {
     field_expense_categories: [],
     field_date: [
       {
-        value: "2022-11-14T23:22:02+00:00",
+        value: "2022-11-17T23:22:02+00:00",
         // value: new Date().format("Y-m-dTH:i:sP"),
       },
     ],
