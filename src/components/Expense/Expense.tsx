@@ -5,16 +5,17 @@ import { Button, Dropdown } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleOpenForm } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
-import { ExpenseModel } from "../../models/reduxModels";
+import { CategoriesModel, ExpenseModel } from "../../models/reduxModels";
 import ExpenseInfo from "../DailyReport/ExpenseInfo";
 
-const Expense = () => {
+interface MyProps {
+  categoriesList: CategoriesModel[];
+  expenseLists: ExpenseModel[];
+}
+const Expense = ({ categoriesList, expenseLists }: MyProps) => {
   const [selectView, setSelectView] = useState("");
 
   const dispatch = useAppDispatch();
-  const expenseLists = useAppSelector((state) => state.expense.inputLists);
-
-  const categoriesList = useAppSelector((state) => state.categories.inputLists);
 
   const filterExpense: ExpenseModel[] = expenseLists.filter(
     (expense: ExpenseModel) => {

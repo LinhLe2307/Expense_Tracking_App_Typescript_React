@@ -8,6 +8,7 @@ import Income from "./components/Income/Income";
 import Expense from "./components/Expense/Expense";
 import MonthlyReport from "./components/MonthlyReport/MonthlyReport";
 import HomePage from "./components/HomePage";
+import History from "./components/History/History";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/income-report" element={<Income />} />
           <Route path="/daily-report" element={<DailyReport />} />
           <Route path="/monthly-report" element={<MonthlyReport />} />
+          <Route path="/history" element={<History />} />
         </Route>
       </Routes>
     </BrowserRouter>
