@@ -63,18 +63,12 @@ export const categoriesSlice = createSlice({
       state.editCategory = action.payload;
       state.openEditItem = !state.openEditItem;
     },
-
-    // handleOpenDeleteCategory: (state, action: PayloadAction<string>): void => {
-    //   state.deleteCategory = action.payload;
-    //   state.openItem = !state.openEditItem;
-    // },
   },
 });
 
 export const initializeCategories = () => {
   return async (dispatch: Dispatch<any, any, any>) => {
     const response: CategoriesModel[] = await serviceAPI.getAll(baseURL);
-    console.log(response);
     dispatch(getCategoriesList(response));
   };
 };
@@ -85,6 +79,5 @@ export const {
   editCategoryContent,
   deleteCategory,
   handleOpenEditCategory,
-  // handleOpenDeleteCategory,
 } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

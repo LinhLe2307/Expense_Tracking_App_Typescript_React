@@ -46,19 +46,7 @@ function FormModel({
 
   return (
     <>
-      <Button
-        variant="dark"
-        onClick={() => dispatch(handleOpenForm())}
-        type="button"
-        style={{
-          position: "absolute",
-          bottom: "3rem",
-          right: "3rem",
-          borderRadius: "50%",
-        }}
-      >
-        + 
-      </Button>
+      
       <Modal
         show={show}
         onHide={() => dispatch(handleOpenForm())}

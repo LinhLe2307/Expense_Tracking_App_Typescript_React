@@ -6,10 +6,9 @@ import {
   deleteCategory,
 } from "../../features/categories/categoriesSlice";
 import { handleOpenForm } from "../../features/expense/expenseSlice";
-import { CategoriesModel } from "../../models/reduxModels";
+import { CategoriesModel, ExpenseModel } from "../../models/reduxModels";
 
 import { detailsDiv } from "../../functions/reusableFunction";
-import { ExpenseModel } from "../../models/reduxModels";
 interface MyProps {
   filterExpenseList: ExpenseModel[];
 }
@@ -51,14 +50,21 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
                   ></Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => handleDelete(list[0])}>
+                    <Dropdown.Item
+                      onClick={() => {
+                        if (window.confirm("Do you want to delete this?")) {
+                          handleDelete(list[0]);
+                        }
+                      }}
+                    >
                       Delete
                     </Dropdown.Item>
 
                     <Dropdown.Item
+                      as="button"
                       onClick={() => {
-                        handleEdit(list[0]);
                         dispatch(handleOpenForm());
+                        // handleEdit(list[0]);
                       }}
                     >
                       Edit

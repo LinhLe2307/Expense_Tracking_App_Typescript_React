@@ -2,13 +2,13 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { Dropdown } from "react-bootstrap";
 import { useAppDispatch } from "../../app/hooks";
 import { handleOpenForm } from "../../features/expense/expenseSlice";
+import FormModel from "../Form/FormModel";
 interface Action {
   action: {
     payload: number;
     type: string;
   };
 }
-
 interface MyProps {
   deleteItem: (itemId: number) => AnyAction;
   handleOpenEditItem: (itemId: number) => AnyAction;
@@ -42,6 +42,7 @@ const CustomDropdown = ({
             </Dropdown.Item>
 
             <Dropdown.Item
+              as="button"
               onClick={() => {
                 dispatch(handleOpenEditItem(itemId));
                 dispatch(handleOpenForm());

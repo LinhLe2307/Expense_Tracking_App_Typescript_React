@@ -1,27 +1,17 @@
 import { nanoid } from "nanoid";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { initializeCategories } from "../../features/categories/categoriesSlice";
-import {
-  addNewExpense,
-  editExpense,
-  initializeExpense
-} from "../../features/expense/expenseSlice";
+import { handleOpenForm } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
 import { ExpenseModel } from "../../models/reduxModels";
-import SingleCard from "../Card/SingleCard";
-import FormModel from "../Form/FormModel";
+import ExpenseInfo from "../DailyReport/ExpenseInfo";
 
 const Expense = () => {
   const [selectView, setSelectView] = useState("");
 
   const dispatch = useAppDispatch();
-  const openEditExpense = useAppSelector((state) => state.expense.openEditItem);
-
-  const expenseId = useAppSelector((state) => state.expense.editId);
-
   const expenseLists = useAppSelector((state) => state.expense.inputLists);
 
   const categoriesList = useAppSelector((state) => state.categories.inputLists);
@@ -32,95 +22,6 @@ const Expense = () => {
       return customDate(newDate) === customDate(new Date());
     }
   );
-
-  const [inputExpense, setInputExpense] = useState<ExpenseModel>({
-    type: [
-      {
-        target_id: "expense",
-        target_type: "node_type",
-      },
-    ],
-    field_expense_categories: [],
-    field_date: [
-      {
-        value: "2022-11-17T23:22:02+00:00",
-        // value: new Date().format("Y-m-dTH:i:sP"),
-      },
-    ],
-    title: [
-      {
-        value: "",
-      },
-    ],
-    field_amount: [
-      {
-        value: 0,
-      },
-    ],
-    field_description: [
-      {
-        value: "",
-      },
-    ],
-    field_color: [
-      {
-        value: "",
-      },
-    ],
-  });
-
-  const handleInputExpense = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { field_expense_categories } = inputExpense;
-    const { checked, value, name } = e.target;
-
-    if (checked) {
-      console.log(`${value} is ${checked}`);
-      setInputExpense((prev) => ({
-        ...prev,
-        [name]: [
-          {
-            value: value,
-          },
-        ],
-        field_expense_categories: [
-          ...field_expense_categories,
-          {
-            target_id: +value,
-            target_type: "node",
-          },
-        ],
-      }));
-    } else {
-      setInputExpense((prev) => ({
-        ...prev,
-        [name]: [
-          {
-            value: value,
-          },
-        ],
-        field_expense_categories: field_expense_categories.filter(
-          (category) => category.target_id !== +value
-        ),
-      }));
-    }
-  };
-
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
-    if (!openEditExpense) {
-      dispatch(addNewExpense(inputExpense));
-    } else {
-      dispatch(editExpense(inputExpense));
-    }
-
-    setTimeout(() => window.location.reload(), 500);
-  };
-
-  useEffect(() => {
-    dispatch(initializeCategories());
-    dispatch(initializeExpense());
-  }, [dispatch]);
 
   return (
     <>
@@ -154,27 +55,20 @@ const Expense = () => {
       <Button onClick={() => setSelectView("")}>Reset</Button>
 
       <h3>{selectView === "" ? "All" : selectView}</h3>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
-        {filterExpense
-          .filter((expense: ExpenseModel) => {
-            return selectView === ""
-              ? expense
-              : expense.new_expense_categories &&
-                  expense.new_expense_categories.find(
-                    (category) => category === selectView
-                  ) !== undefined;
-          })
-          .map((expense: ExpenseModel) => (
-            <SingleCard expense={expense} key={nanoid()} />
-          ))}
-      </div>
-      <FormModel
-        inputExpense={inputExpense}
-        expenseId={expenseId}
-        submitHandler={submitHandler}
-        handleInputExpense={handleInputExpense}
-        type="expense"
-      />
+      <Button
+        variant="dark"
+        onClick={() => dispatch(handleOpenForm())}
+        type="button"
+        style={{
+          position: "absolute",
+          bottom: "3rem",
+          right: "3rem",
+          borderRadius: "50%",
+        }}
+      >
+        +
+      </Button>
+      <ExpenseInfo expenseLists={filterExpense} />
     </>
   );
 };
