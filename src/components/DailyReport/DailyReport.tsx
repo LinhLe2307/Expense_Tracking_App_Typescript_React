@@ -9,6 +9,7 @@ import { ExpenseModel } from "../../models/reduxModels";
 import ExpenseInfo from "./ExpenseInfo";
 
 const DailyReport = () => {
+
   const [value, onChange] = useState(new Date());
   const dispatch = useAppDispatch();
   const expenseLists = useAppSelector((state) => state.expense.inputLists);
@@ -18,6 +19,7 @@ const DailyReport = () => {
       customDate(new Date(expense.field_date[0].value.slice(0, 10))) ===
       customDate(value)
   );
+
 
   return (
     <div>

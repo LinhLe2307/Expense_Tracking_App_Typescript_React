@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import DetailsInfo from "./components/Card/DetailsInfo";
 import DailyReport from "./components/DailyReport/DailyReport";
@@ -20,7 +20,12 @@ function App() {
           <Route path="/income-report" element={<Income />} />
           <Route path="/daily-report" element={<DailyReport />} />
           <Route path="/monthly-report" element={<MonthlyReport />} />
+          {/* <Route path="/history" element={<History />} /> */}
+          {/* <Navigate exact from="/history" to "history/daily-report" /> */}
+          <Route path="/history/:page" element={<History />} />
           <Route path="/history" element={<History />} />
+
+
         </Route>
       </Routes>
     </BrowserRouter>
