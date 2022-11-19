@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { Button } from "react-bootstrap";
 import { Calendar } from "react-calendar";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -13,9 +13,8 @@ import {
 } from "../../features/expense/expenseSlice";
 import { customDate } from "../../functions/reusableFunction";
 import { DefaultModel, ExpenseModel } from "../../models/reduxModels";
-import CategoryDetails from "./CategoryDetails";
-import CategoriesReport from "./CategoryDetails";
 import FormModel from "../Form/FormModel";
+import CategoryDetails from "./CategoryDetails";
 
 const MonthlyReport = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +37,7 @@ const MonthlyReport = () => {
     ],
     field_date: [
       {
-        value: "2022-11-18T23:22:02+00:00",
+        value: "2022-11-20T23:22:02+00:00",
       },
     ],
     title: [
@@ -79,6 +78,7 @@ const MonthlyReport = () => {
       dispatch(editCategoryContent(inputCategory));
     }
     setTimeout(() => window.location.reload(), 500);
+
   };
 
   const handleClick = (
@@ -128,19 +128,7 @@ const MonthlyReport = () => {
           onClickMonth={(value, event) => handleClick(value, event)}
           view="year"
         />
-        <Button
-          variant="dark"
-          onClick={() => dispatch(handleOpenForm())}
-          type="button"
-          style={{
-            position: "absolute",
-            bottom: "3rem",
-            right: "3rem",
-            borderRadius: "50%",
-          }}
-        >
-          +
-        </Button>
+        
         {isClicking ? (
           <>
             <h3>Spending Budget: €{spendingBudget}</h3>
@@ -164,4 +152,4 @@ const MonthlyReport = () => {
   );
 };
 
-export default MonthlyReport;
+export default memo(MonthlyReport);

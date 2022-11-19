@@ -5,6 +5,7 @@ import { initializeCategories } from "../../features/categories/categoriesSlice"
 import {
   addNewExpense,
   editExpense,
+  handleOpenForm,
   initializeExpense,
 } from "../../features/expense/expenseSlice";
 import { ExpenseModel } from "../../models/reduxModels";
@@ -29,7 +30,7 @@ const ExpenseInfo = ({ expenseLists }: MyProps) => {
     field_expense_categories: [],
     field_date: [
       {
-        value: "2022-11-18T23:22:02+00:00",
+        value: "2022-11-20T23:22:02+00:00",
         // value: new Date().format("Y-m-dTH:i:sP"),
       },
     ],
@@ -101,6 +102,7 @@ const ExpenseInfo = ({ expenseLists }: MyProps) => {
     }
 
     setTimeout(() => window.location.reload(), 500);
+    // dispatch(handleOpenForm())
   };
 
   const dispatch = useAppDispatch();

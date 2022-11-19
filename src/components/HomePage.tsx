@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import Expense from "./Expense/Expense";
-import { initializeExpense } from "../features/expense/expenseSlice";
-import GraphDisplay from "./Expense/GraphDisplay";
-import TopSpending from "./TopSpending/TopSpending";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { initializeExpense } from "../features/expense/expenseSlice";
+import Expense from "./Expense/Expense";
+import TopSpending from "./TopSpending/TopSpending";
 
 const HomePage = () => {
   const categoriesList = useAppSelector((state) => state.categories.inputLists);
@@ -23,7 +21,7 @@ const HomePage = () => {
         categoriesList={categoriesList}
         expenseLists={expenseLists}
       />
-      <Link to="/history">All</Link>
+      <Link to="/history/daily-report">All</Link>
       <Expense categoriesList={categoriesList} expenseLists={expenseLists} />
     </div>
   );

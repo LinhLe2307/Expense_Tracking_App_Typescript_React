@@ -56,19 +56,7 @@ const Expense = ({ categoriesList, expenseLists }: MyProps) => {
       <Button onClick={() => setSelectView("")}>Reset</Button>
 
       <h3>{selectView === "" ? "All" : selectView}</h3>
-      <Button
-        variant="dark"
-        onClick={() => dispatch(handleOpenForm())}
-        type="button"
-        style={{
-          position: "absolute",
-          bottom: "3rem",
-          right: "3rem",
-          borderRadius: "50%",
-        }}
-      >
-        +
-      </Button>
+
       <ExpenseInfo expenseLists={filterExpense} />
     </>
   );

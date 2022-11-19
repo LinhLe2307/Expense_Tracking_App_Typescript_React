@@ -27,7 +27,7 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
         findIndex.nid && dispatch(deleteCategory(findIndex.nid[0].value));
       }
     }
-    setTimeout(() => window.location.reload(), 500);
+    // setTimeout(() => window.location.reload(), 500);
   };
 
   const handleEdit = (selectedItem: string) => {
@@ -51,11 +51,9 @@ const CategoryDetails = ({ filterExpenseList }: MyProps) => {
 
                   <Dropdown.Menu>
                     <Dropdown.Item
-                      onClick={() => {
-                        if (window.confirm("Do you want to delete this?")) {
-                          handleDelete(list[0]);
-                        }
-                      }}
+                      onClick={() =>
+                        handleDelete(list[0])
+                      }
                     >
                       Delete
                     </Dropdown.Item>
