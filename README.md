@@ -1,17 +1,8 @@
-# Getting Started with Create React App
+## This is a simple expense app using React, TypeScript, Redux and Drupal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Steps to run the application:
 
-## Available Scripts
+1. `npm install`
+2. `npm start`
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-<code>npm i --save-dev @types/react-calendar</code>
+#### NOTE: This application is in developing process so some features may not working at the moment
